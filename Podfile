@@ -15,5 +15,6 @@ target '2HRGroceryCustomerApp' do
   pod 'SDWebImage'
   pod 'Stripe'
   pod 'Alamofire'
+  pod 'ObjectMapper'
 
 end

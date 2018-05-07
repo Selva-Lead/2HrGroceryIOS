@@ -50,6 +50,10 @@
 		84691D7C209C402800F574E3 /* ProductsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84691D7A209C402800F574E3 /* ProductsCell.xib */; };
 		847330E920A0304B009FDBD5 /* OrderConformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847330E820A0304B009FDBD5 /* OrderConformationViewController.swift */; };
 		8473312520A052F3009FDBD5 /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473312420A052F3009FDBD5 /* MyAPIClient.swift */; };
+		8473312A20A08C49009FDBD5 /* FirePathConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473312920A08C49009FDBD5 /* FirePathConstant.swift */; };
+		8473312C20A08D3E009FDBD5 /* FIRUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473312B20A08D3E009FDBD5 /* FIRUtils.swift */; };
+		8473312E20A09102009FDBD5 /* FireAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473312D20A09102009FDBD5 /* FireAuthModel.swift */; };
+		8473313120A09203009FDBD5 /* saveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473313020A09203009FDBD5 /* saveCard.swift */; };
 		8480173F209AEA5B007DFEE4 /* EmailSigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480173E209AEA5B007DFEE4 /* EmailSigninView.swift */; };
 		84801741209AFE5E007DFEE4 /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 84801740209AFE5D007DFEE4 /* banner.png */; };
 		848544FD20971E550072CA21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848544FC20971E550072CA21 /* AppDelegate.swift */; };
@@ -138,6 +142,10 @@
 		84691D7A209C402800F574E3 /* ProductsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsCell.xib; sourceTree = "<group>"; };
 		847330E820A0304B009FDBD5 /* OrderConformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConformationViewController.swift; sourceTree = "<group>"; };
 		8473312420A052F3009FDBD5 /* MyAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
+		8473312920A08C49009FDBD5 /* FirePathConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirePathConstant.swift; sourceTree = "<group>"; };
+		8473312B20A08D3E009FDBD5 /* FIRUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRUtils.swift; sourceTree = "<group>"; };
+		8473312D20A09102009FDBD5 /* FireAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAuthModel.swift; sourceTree = "<group>"; };
+		8473313020A09203009FDBD5 /* saveCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveCard.swift; sourceTree = "<group>"; };
 		8480173E209AEA5B007DFEE4 /* EmailSigninView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSigninView.swift; sourceTree = "<group>"; };
 		84801740209AFE5D007DFEE4 /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
 		848544F920971E550072CA21 /* 2HRGroceryCustomerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2HRGroceryCustomerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,6 +269,24 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		8473312820A08C15009FDBD5 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				8473312920A08C49009FDBD5 /* FirePathConstant.swift */,
+				8473312B20A08D3E009FDBD5 /* FIRUtils.swift */,
+				8473312D20A09102009FDBD5 /* FireAuthModel.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		8473312F20A091E5009FDBD5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8473313020A09203009FDBD5 /* saveCard.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		848544F020971E550072CA21 = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +312,8 @@
 		848544FB20971E550072CA21 /* 2HRGroceryCustomerApp */ = {
 			isa = PBXGroup;
 			children = (
+				8473312F20A091E5009FDBD5 /* Models */,
+				8473312820A08C15009FDBD5 /* Firebase */,
 				8441831D209DEBDC00BFE745 /* utils */,
 				8441830A209DEBC800BFE745 /* Controllers */,
 				842FBE1F209D8364005D8EC0 /* Objects */,
@@ -567,6 +595,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -581,6 +610,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -617,6 +647,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84684AD720982B5600269619 /* FirstViewController.swift in Sources */,
+				8473312E20A09102009FDBD5 /* FireAuthModel.swift in Sources */,
 				8473312520A052F3009FDBD5 /* MyAPIClient.swift in Sources */,
 				84B3820B209C861300C54E59 /* GroceryDetailView.swift in Sources */,
 				84418308209DB60100BFE745 /* HomeViewCell.swift in Sources */,
@@ -627,6 +658,7 @@
 				848544FD20971E550072CA21 /* AppDelegate.swift in Sources */,
 				8480173F209AEA5B007DFEE4 /* EmailSigninView.swift in Sources */,
 				84515211209B3A2800D982B7 /* FacebookAuthenController.swift in Sources */,
+				8473312A20A08C49009FDBD5 /* FirePathConstant.swift in Sources */,
 				84418319209DEBC900BFE745 /* MainCartTableViewCell.swift in Sources */,
 				84691D7B209C402800F574E3 /* ProductsCell.swift in Sources */,
 				84062DB920998255003C65A5 /* DeliveryaddressViewController.swift in Sources */,
@@ -642,6 +674,8 @@
 				84418314209DEBC900BFE745 /* AddressListTableViewCell.swift in Sources */,
 				8441831A209DEBC900BFE745 /* PaymentDetailsViewController.swift in Sources */,
 				84691D73209C3A6300F574E3 /* GroceryViewController.swift in Sources */,
+				8473313120A09203009FDBD5 /* saveCard.swift in Sources */,
+				8473312C20A08D3E009FDBD5 /* FIRUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

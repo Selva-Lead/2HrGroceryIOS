@@ -7,13 +7,34 @@
 //
 
 import UIKit
+import Stripe
 
 class CreditCardViewController: UIViewController {
-
+    
+    @IBOutlet weak var btnCardSave: UIButton!
+    let paymentCardTextField = STPPaymentCardTextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      //  paymentCardTextField.delegate = self
+      //  view.addSubview(paymentCardTextField)
         // Do any additional setup after loading the view.
+    }
+    func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
+        // Toggle buy button state
+//        //btnCardSave.isEnabled = textField.isValid
+//        let stCard = STPCar
+////        if self.expireDateTextField.text.isEmpty == false {
+////            let expirationDate = self.expireDateTextField.text.componentsSeparatedByString("/")
+////            let expMonth = UInt(expirationDate[0].toInt()!)
+////            let expYear = UInt(expirationDate[1].toInt()!)
+////
+//            // Send the card info to Strip to get the token
+//            stripCard.number = "4242 42424 24242 4242"
+//            stripCard.cvc = "123"
+//            stripCard.expMonth = "10"
+//            stripCard.expYear = "20"
+        //}
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +43,9 @@ class CreditCardViewController: UIViewController {
     }
     
     @IBAction func CardUsingFunction(_ sender: Any) {
+        let textField : STPPaymentCardTextField
+        //textField = "4545454545454544545 02/05 789"
+       // paymentCardTextFieldDidChange(textField)
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "OrderConformationViewController") as! OrderConformationViewController
@@ -38,4 +62,7 @@ class CreditCardViewController: UIViewController {
     }
     */
 
+}
+extension CreditCardViewController: STPPaymentCardTextFieldDelegate {
+    
 }

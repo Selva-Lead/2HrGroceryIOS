@@ -9,6 +9,7 @@
 import UIKit
 import Stripe
 
+
 class PaymentDetailsViewController: UIViewController {
 
     @IBOutlet weak var tblView: UITableView!
@@ -54,12 +55,12 @@ class PaymentDetailsViewController: UIViewController {
     func handleAddPaymentMethodButtonTapped() {
         // Setup add card view controller
         let addCardViewController = STPAddCardViewController()
-        addCardViewController.delegate = self as? STPAddCardViewControllerDelegate
-        
+        addCardViewController.delegate = self
         // Present add card view controller
         let navigationController = UINavigationController(rootViewController: addCardViewController)
         present(navigationController, animated: true)
     }
+   
     
     // MARK: STPAddCardViewControllerDelegate
     
@@ -69,6 +70,19 @@ class PaymentDetailsViewController: UIViewController {
     }
     
     func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
+        submitTokenToBack(token: token, completion: {(error) in
+            if  error  == nil{
+                // Show error in add card view controller
+                completion(error)
+            }
+            else {
+                // Notify add card view controller that token creation was handled successfully
+                completion(nil)
+                
+                // Dismiss add card view controller
+                dismiss(animated: true)
+            }
+        })
 //        submitTokenToBackend(token, completion: { (error: Error?) in
 //            if let error = error {
 //                // Show error in add card view controller
@@ -83,8 +97,16 @@ class PaymentDetailsViewController: UIViewController {
 //            }
 //        })
     }
-
+    func submitTokenToBack(token : STPToken, completion: (_ Error:NSError?) -> ())   {
+        let tokenValue = token.allResponseFields
+        print("token value \(token.allResponseFields) and \(tokenValue)")
+        
+    }
 }
+extension PaymentDetailsViewController: STPAddCardViewControllerDelegate {
+    
+}
+
 extension PaymentDetailsViewController: UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
          return 4

@@ -54,6 +54,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - ObjectMapper (3.1.0)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
@@ -68,6 +69,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - IQKeyboardManagerSwift (= 5.0.0)
+  - ObjectMapper
   - SDWebImage
   - Stripe
 
@@ -88,6 +90,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - leveldb-library
     - nanopb
+    - ObjectMapper
     - SDWebImage
     - Stripe
 
@@ -107,9 +110,10 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   Stripe: 542f2c4493ce31a99fa041fe4973206e8c868f29
 
-PODFILE CHECKSUM: 72434f9ca9652ac567f0b38bf74f3350b0724bfe
+PODFILE CHECKSUM: e70e11344adc3e502d734f69e74bfa6e2ec4ae4a
 
 COCOAPODS: 1.5.0

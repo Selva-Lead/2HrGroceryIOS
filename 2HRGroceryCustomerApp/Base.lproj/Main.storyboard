@@ -3330,6 +3330,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="btnCardSave" destination="kfN-R2-QrX" id="nZk-35-zaW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLX-fZ-G06" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
