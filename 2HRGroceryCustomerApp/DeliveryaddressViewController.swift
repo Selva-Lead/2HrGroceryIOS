@@ -23,6 +23,7 @@ class DeliveryaddressViewController: UIViewController {
     var Address: DatabaseReference!
     var appDelegate = AppDelegate()
     var numberofaddress :String!
+    var isdeviveryaddress: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +106,7 @@ class DeliveryaddressViewController: UIViewController {
             
             self.continuebtn.layer.cornerRadius = 10
             self.continuebtn.clipsToBounds = true
+            
         }
         else
         {
@@ -181,93 +183,250 @@ class DeliveryaddressViewController: UIViewController {
             
             self.continuebtn.layer.cornerRadius = 20
             self.continuebtn.clipsToBounds = true
+            
+            let backbutton = UIButton(type: .custom)
+            backbutton.setImage(UIImage(named: "back.png"), for: .normal)
+            backbutton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            backbutton.addTarget(self, action: #selector(popvc), for: .touchUpInside)
+            let backbuttonitem = UIBarButtonItem(customView: backbutton)
+            self.navigationItem.leftBarButtonItem = backbuttonitem
         }
         
-        Address = Database.database().reference().child("Customer-List").child(useruid)
-      
-        Address.observe(DataEventType.value, with: { (snapshot) in
+        if isdeviveryaddress == false
+        {
+            self.navigationItem.setHidesBackButton(true, animated:true);
+
+            Address = Database.database().reference().child("Customer-List").child(useruid)
             
-            if snapshot.hasChild("address")
-            {
-                let ref = Database.database().reference().child("Customer-List").child(useruid).child("address")
+            Address.observe(DataEventType.value, with: { (snapshot) in
                 
-                ref.observe(.value, with: { (snapshot: DataSnapshot!) in
+                if snapshot.hasChild("address")
+                {
+                    let ref = Database.database().reference().child("Customer-List").child(useruid).child("address")
                     
-                    print(snapshot.childrenCount)
-                    print(snapshot)
-                    self.numberofaddress = String(snapshot.childrenCount)
-                })
-            }
-            else
-            {
-                self.numberofaddress = "Not Exsist"
-            }
-        })
+                    ref.observe(.value, with: { (snapshot: DataSnapshot!) in
+                        
+                        print(snapshot.childrenCount)
+                        print(snapshot)
+                        self.numberofaddress = String(snapshot.childrenCount)
+                    })
+                }
+                else
+                {
+                    self.numberofaddress = "Not Exsist"
+                }
+            })
+        }
+        else
+        {
+            self.navigationItem.setHidesBackButton(false, animated:true);
+            
+            let backbutton = UIButton(type: .custom)
+            backbutton.setImage(UIImage(named: "back.png"), for: .normal)
+            backbutton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            backbutton.addTarget(self, action: #selector(popvc), for: .touchUpInside)
+            let backbuttonitem = UIBarButtonItem(customView: backbutton)
+            self.navigationItem.leftBarButtonItem = backbuttonitem
+        }
         // Do any additional setup after loading the view.
     }
 
+    @objc func popvc(sender: UIButton)
+    {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func continueaction(_ sender: Any) {
-        
-        if addressTF.text == ""
+
+        if isdeviveryaddress == false
         {
-            let alert = UIAlertController(title: "Alert", message: "Please Enter Your address.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(defaultAction)
-            present(alert, animated: true, completion: nil)
-        }
-        else if address2TF.text == ""
-        {
-            let alert = UIAlertController(title: "Alert", message: "Please Enter Your addressline 2.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(defaultAction)
-            present(alert, animated: true, completion: nil)
-            
-        }
-        else if cityTF.text == ""
-        {
-            let alert = UIAlertController(title: "Alert", message: "Please Enter Your city.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(defaultAction)
-            present(alert, animated: true, completion: nil)
-        }
-        else if stateTF.text == ""
-        {
-            let alert = UIAlertController(title: "Alert", message: "Please Enter Your state.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(defaultAction)
-            present(alert, animated: true, completion: nil)
-        }
-        else if zipTF.text == ""
-        {
-            let alert = UIAlertController(title: "Alert", message: "Please Enter Your zip.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(defaultAction)
-            present(alert, animated: true, completion: nil)
-        }
-        else if countryTF.text == ""
-        {
-            let alert = UIAlertController(title: "Alert", message: "Please Enter Your country.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(defaultAction)
-            present(alert, animated: true, completion: nil)
+            if addressTF.text == ""
+            {
+                let alert = UIAlertController(title: "Alert", message: "Please Enter Your address.", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(defaultAction)
+                present(alert, animated: true, completion: nil)
+            }
+            else if address2TF.text == ""
+            {
+                let alert = UIAlertController(title: "Alert", message: "Please Enter Your addressline 2.", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(defaultAction)
+                present(alert, animated: true, completion: nil)
+                
+            }
+            else if cityTF.text == ""
+            {
+                let alert = UIAlertController(title: "Alert", message: "Please Enter Your city.", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(defaultAction)
+                present(alert, animated: true, completion: nil)
+            }
+            else if stateTF.text == ""
+            {
+                let alert = UIAlertController(title: "Alert", message: "Please Enter Your state.", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(defaultAction)
+                present(alert, animated: true, completion: nil)
+            }
+            else if zipTF.text == ""
+            {
+                let alert = UIAlertController(title: "Alert", message: "Please Enter Your zip.", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(defaultAction)
+                present(alert, animated: true, completion: nil)
+            }
+            else if countryTF.text == ""
+            {
+                let alert = UIAlertController(title: "Alert", message: "Please Enter Your country.", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(defaultAction)
+                present(alert, animated: true, completion: nil)
+            }
+            else
+            {
+                emailpreference = "NO"
+                smspreference = "NO"
+                if numberofaddress == "Not Exsist"
+                {
+                    let Addressdetails = ["address":self.addressTF.text! as String,
+                                          "address2": self.address2TF.text! as String,
+                                          "city": self.cityTF.text! as String,
+                                          "country": self.countryTF.text! as String,
+                                          "state": self.stateTF.text! as String,
+                                          "zip": self.zipTF.text! as String
+                    ]
+                    
+                    self.Address.child("address").child("0").setValue(Addressdetails)
+                    
+                    if UIDevice.current.userInterfaceIdiom == .phone
+                    {
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        
+                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Preference") as! EmailPreferenceView
+                        self.navigationController?.pushViewController(nextViewController, animated: true)
+                    }
+                    else
+                    {
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
+                        
+                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Preference") as! EmailPreferenceView
+                        self.navigationController?.pushViewController(nextViewController, animated: true)
+                    }
+                }
+                else
+                {
+                    let customerdetails = ["address":self.addressTF.text! as String,
+                                           "address2": self.address2TF.text! as String,
+                                           "city": self.cityTF.text! as String,
+                                           "country": self.countryTF.text! as String,
+                                           "state": self.stateTF.text! as String,
+                                           "zip": self.zipTF.text! as String
+                    ]
+                    
+                    //adding the artist inside the generated unique key
+                    self.Address.child("address").child(numberofaddress).setValue(customerdetails)
+                    
+                    if UIDevice.current.userInterfaceIdiom == .phone
+                    {
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            
+                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Preference") as! EmailPreferenceView
+                        self.navigationController?.pushViewController(nextViewController, animated: true)
+                    }
+                    else
+                    {
+                       let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
+                            
+                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Preference") as! EmailPreferenceView
+                        self.navigationController?.pushViewController(nextViewController, animated: true)
+                    }
+                }
+            }
         }
         else
         {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DeliveryDateTimeViewController") as! DeliveryDateTimeViewController
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
+    }
+
+ /*   func isValidation() -> Bool {
+                if addressTF.text == ""
+                {
+                    let alert = UIAlertController(title: "Alert", message: "Please Enter Your address.", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alert.addAction(defaultAction)
+                    present(alert, animated: true, completion: nil)
+                    return false
+                }
+                else if address2TF.text == ""
+                {
+                    let alert = UIAlertController(title: "Alert", message: "Please Enter Your addressline 2.", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alert.addAction(defaultAction)
+                    present(alert, animated: true, completion: nil)
+                    return false
+        
+                }
+                else if cityTF.text == ""
+                {
+                    let alert = UIAlertController(title: "Alert", message: "Please Enter Your city.", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alert.addAction(defaultAction)
+                    present(alert, animated: true, completion: nil)
+                    return false
+                }
+                else if stateTF.text == ""
+                {
+                    let alert = UIAlertController(title: "Alert", message: "Please Enter Your state.", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alert.addAction(defaultAction)
+                    present(alert, animated: true, completion: nil)
+                    return false
+                }
+                else if zipTF.text == ""
+                {
+                    let alert = UIAlertController(title: "Alert", message: "Please Enter Your zip.", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alert.addAction(defaultAction)
+                    present(alert, animated: true, completion: nil)
+                    return false
+                }
+                else if countryTF.text == ""
+                {
+                    let alert = UIAlertController(title: "Alert", message: "Please Enter Your country.", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alert.addAction(defaultAction)
+                    present(alert, animated: true, completion: nil)
+                    return false
+                }
+        return true
+        
+        
+    } */
+/*    @IBAction func continueaction(_ sender: Any) {
+        
+        
+        if isValidation() {
+            
             emailpreference = "NO"
             smspreference = "NO"
             if numberofaddress == "Not Exsist"
             {
                 let Addressdetails = ["address":self.addressTF.text! as String,
-                                       "address2": self.address2TF.text! as String,
-                                       "city": self.cityTF.text! as String,
-                                       "country": self.countryTF.text! as String,
-                                       "state": self.stateTF.text! as String,
-                                       "zip": self.zipTF.text! as String
+                                      "address2": self.address2TF.text! as String,
+                                      "city": self.cityTF.text! as String,
+                                      "country": self.countryTF.text! as String,
+                                      "state": self.stateTF.text! as String,
+                                      "zip": self.zipTF.text! as String
                 ]
                 
                 self.Address.child("address").child("0").setValue(Addressdetails)
@@ -302,10 +461,17 @@ class DeliveryaddressViewController: UIViewController {
                 
                 if UIDevice.current.userInterfaceIdiom == .phone
                 {
+                    if isdeviveryaddress {
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        
+                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DeliveryDateTimeViewController") as! DeliveryDateTimeViewController
+                        self.navigationController?.pushViewController(nextViewController, animated: true)
+                    }else {
                     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                     
                     let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Preference") as! EmailPreferenceView
                     self.navigationController?.pushViewController(nextViewController, animated: true)
+                    }
                 }
                 else
                 {
@@ -316,9 +482,8 @@ class DeliveryaddressViewController: UIViewController {
                 }
             }
         }
-    }
+    } */
 
-    
 
     /*
     // MARK: - Navigation

@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FBSDKCoreKit
 import IQKeyboardManagerSwift
+import Stripe
 
 var useruid :String!
 var emailpreference :String!
@@ -39,11 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
         if UserDefault.value(forKey: "uid") != nil
         {
-            useruid = UserDefault.value(forKey: "uid") as! String
-            UserEmailID = UserDefault.value(forKey: "email") as! String
-            UserFirstName = UserDefault.value(forKey: "firstName") as! String
-            UserLastName = UserDefault.value(forKey: "lastName") as! String
-            UserMobileNumber = UserDefault.value(forKey: "phone") as! String
+           // useruid = UserDefault.value(forKey: "uid") as! String
+            //UserEmailID = UserDefault.value(forKey: "email") as! String
+            //UserFirstName = UserDefault.value(forKey: "firstName") as! String
+           // UserLastName = UserDefault.value(forKey: "lastName") as! String
+           // UserMobileNumber = UserDefault.value(forKey: "phone") as! String
             print(useruid)
             print(UserEmailID)
             print(UserFirstName)
@@ -51,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(UserMobileNumber)
         }
        
-        
+         STPPaymentConfiguration.shared().publishableKey = "pk_test_ZhRZA8rzzTlnnrGRTCO0EphL"
         // Override point for customization after application launch.
         return true
     }

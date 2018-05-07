@@ -13,5 +13,7 @@ target '2HRGroceryCustomerApp' do
   pod 'Bolts'
   pod 'FBSDKCoreKit'
   pod 'SDWebImage'
+  pod 'Stripe'
+  pod 'Alamofire'
 
 end

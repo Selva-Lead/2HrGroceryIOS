@@ -15,6 +15,18 @@
 		84062DC320999387003C65A5 /* EmailPreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84062DC220999387003C65A5 /* EmailPreferenceView.swift */; };
 		84418308209DB60100BFE745 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84418306209DB60100BFE745 /* HomeViewCell.swift */; };
 		84418309209DB60100BFE745 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84418307209DB60100BFE745 /* HomeViewCell.xib */; };
+		84418314209DEBC900BFE745 /* AddressListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441830B209DEBC800BFE745 /* AddressListTableViewCell.swift */; };
+		84418315209DEBC900BFE745 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441830C209DEBC800BFE745 /* CartViewController.swift */; };
+		84418316209DEBC900BFE745 /* CreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441830D209DEBC800BFE745 /* CreditCardViewController.swift */; };
+		84418317209DEBC900BFE745 /* DeliveryDateTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441830E209DEBC800BFE745 /* DeliveryDateTimeViewController.swift */; };
+		84418318209DEBC900BFE745 /* DeliveryOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441830F209DEBC800BFE745 /* DeliveryOptionsViewController.swift */; };
+		84418319209DEBC900BFE745 /* MainCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84418310209DEBC800BFE745 /* MainCartTableViewCell.swift */; };
+		8441831A209DEBC900BFE745 /* PaymentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84418311209DEBC800BFE745 /* PaymentDetailsViewController.swift */; };
+		8441831B209DEBC900BFE745 /* PaymentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84418312209DEBC800BFE745 /* PaymentHeader.swift */; };
+		8441831C209DEBC900BFE745 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84418313209DEBC800BFE745 /* View.xib */; };
+		8441831F209DEBDC00BFE745 /* groceryText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441831E209DEBDC00BFE745 /* groceryText.swift */; };
+		84418322209DEC0700BFE745 /* orderdelivery.png in Resources */ = {isa = PBXBuildFile; fileRef = 84418320209DEC0400BFE745 /* orderdelivery.png */; };
+		84418323209DEC0700BFE745 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 84418321209DEC0600BFE745 /* trash.png */; };
 		8451520D209B0EFB00D982B7 /* EmailForgotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451520C209B0EFB00D982B7 /* EmailForgotController.swift */; };
 		8451520F209B381700D982B7 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8451520E209B381600D982B7 /* facebook.png */; };
 		84515211209B3A2800D982B7 /* FacebookAuthenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84515210209B3A2800D982B7 /* FacebookAuthenController.swift */; };
@@ -36,6 +48,8 @@
 		84691D73209C3A6300F574E3 /* GroceryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84691D72209C3A6300F574E3 /* GroceryViewController.swift */; };
 		84691D7B209C402800F574E3 /* ProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84691D79209C402800F574E3 /* ProductsCell.swift */; };
 		84691D7C209C402800F574E3 /* ProductsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84691D7A209C402800F574E3 /* ProductsCell.xib */; };
+		847330E920A0304B009FDBD5 /* OrderConformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847330E820A0304B009FDBD5 /* OrderConformationViewController.swift */; };
+		8473312520A052F3009FDBD5 /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473312420A052F3009FDBD5 /* MyAPIClient.swift */; };
 		8480173F209AEA5B007DFEE4 /* EmailSigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480173E209AEA5B007DFEE4 /* EmailSigninView.swift */; };
 		84801741209AFE5E007DFEE4 /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 84801740209AFE5D007DFEE4 /* banner.png */; };
 		848544FD20971E550072CA21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848544FC20971E550072CA21 /* AppDelegate.swift */; };
@@ -89,6 +103,18 @@
 		84062DC220999387003C65A5 /* EmailPreferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPreferenceView.swift; sourceTree = "<group>"; };
 		84418306209DB60100BFE745 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		84418307209DB60100BFE745 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
+		8441830B209DEBC800BFE745 /* AddressListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressListTableViewCell.swift; sourceTree = "<group>"; };
+		8441830C209DEBC800BFE745 /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		8441830D209DEBC800BFE745 /* CreditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardViewController.swift; sourceTree = "<group>"; };
+		8441830E209DEBC800BFE745 /* DeliveryDateTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryDateTimeViewController.swift; sourceTree = "<group>"; };
+		8441830F209DEBC800BFE745 /* DeliveryOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryOptionsViewController.swift; sourceTree = "<group>"; };
+		84418310209DEBC800BFE745 /* MainCartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCartTableViewCell.swift; sourceTree = "<group>"; };
+		84418311209DEBC800BFE745 /* PaymentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentDetailsViewController.swift; sourceTree = "<group>"; };
+		84418312209DEBC800BFE745 /* PaymentHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentHeader.swift; sourceTree = "<group>"; };
+		84418313209DEBC800BFE745 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		8441831E209DEBDC00BFE745 /* groceryText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryText.swift; sourceTree = "<group>"; };
+		84418320209DEC0400BFE745 /* orderdelivery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderdelivery.png; sourceTree = "<group>"; };
+		84418321209DEC0600BFE745 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		8451520C209B0EFB00D982B7 /* EmailForgotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForgotController.swift; sourceTree = "<group>"; };
 		8451520E209B381600D982B7 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		84515210209B3A2800D982B7 /* FacebookAuthenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthenController.swift; sourceTree = "<group>"; };
@@ -110,6 +136,8 @@
 		84691D72209C3A6300F574E3 /* GroceryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryViewController.swift; sourceTree = "<group>"; };
 		84691D79209C402800F574E3 /* ProductsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCell.swift; sourceTree = "<group>"; };
 		84691D7A209C402800F574E3 /* ProductsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsCell.xib; sourceTree = "<group>"; };
+		847330E820A0304B009FDBD5 /* OrderConformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConformationViewController.swift; sourceTree = "<group>"; };
+		8473312420A052F3009FDBD5 /* MyAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
 		8480173E209AEA5B007DFEE4 /* EmailSigninView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSigninView.swift; sourceTree = "<group>"; };
 		84801740209AFE5D007DFEE4 /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
 		848544F920971E550072CA21 /* 2HRGroceryCustomerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2HRGroceryCustomerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +224,32 @@
 			path = Objects;
 			sourceTree = "<group>";
 		};
+		8441830A209DEBC800BFE745 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8441830B209DEBC800BFE745 /* AddressListTableViewCell.swift */,
+				8441830C209DEBC800BFE745 /* CartViewController.swift */,
+				8441830D209DEBC800BFE745 /* CreditCardViewController.swift */,
+				847330E820A0304B009FDBD5 /* OrderConformationViewController.swift */,
+				8441830E209DEBC800BFE745 /* DeliveryDateTimeViewController.swift */,
+				8441830F209DEBC800BFE745 /* DeliveryOptionsViewController.swift */,
+				84418310209DEBC800BFE745 /* MainCartTableViewCell.swift */,
+				84418311209DEBC800BFE745 /* PaymentDetailsViewController.swift */,
+				84418312209DEBC800BFE745 /* PaymentHeader.swift */,
+				84418313209DEBC800BFE745 /* View.xib */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8441831D209DEBDC00BFE745 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				8473312420A052F3009FDBD5 /* MyAPIClient.swift */,
+				8441831E209DEBDC00BFE745 /* groceryText.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		84691D74209C3FC100F574E3 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +286,8 @@
 		848544FB20971E550072CA21 /* 2HRGroceryCustomerApp */ = {
 			isa = PBXGroup;
 			children = (
+				8441831D209DEBDC00BFE745 /* utils */,
+				8441830A209DEBC800BFE745 /* Controllers */,
 				842FBE1F209D8364005D8EC0 /* Objects */,
 				848545442097384E0072CA21 /* Images */,
 				84691D74209C3FC100F574E3 /* Cells */,
@@ -303,6 +359,8 @@
 		848545442097384E0072CA21 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				84418320209DEC0400BFE745 /* orderdelivery.png */,
+				84418321209DEC0600BFE745 /* trash.png */,
 				84B38210209C9A3B00C54E59 /* down.png */,
 				84B38212209C9A5600C54E59 /* down@2x.png */,
 				8451520E209B381600D982B7 /* facebook.png */,
@@ -448,9 +506,11 @@
 				8485450420971E550072CA21 /* Assets.xcassets in Resources */,
 				84B38211209C9A3B00C54E59 /* down.png in Resources */,
 				84684AE520983C8B00269619 /* cart.png in Resources */,
+				84418322209DEC0700BFE745 /* orderdelivery.png in Resources */,
 				84684AE020982DDB00269619 /* first@2x.png in Resources */,
 				84801741209AFE5E007DFEE4 /* banner.png in Resources */,
 				84684AED2098580300269619 /* shoppingcart.png in Resources */,
+				8441831C209DEBC900BFE745 /* View.xib in Resources */,
 				8485454820973F9B0072CA21 /* GoogleService-Info.plist in Resources */,
 				84684AF320986B3900269619 /* search.png in Resources */,
 				8485453220972D480072CA21 /* Open Sans Bold.ttf in Resources */,
@@ -472,6 +532,7 @@
 				8485453920972EDC0072CA21 /* opensans-semibold.ttf in Resources */,
 				8485453D20972F0B0072CA21 /* opensans-extrabolditalic.ttf in Resources */,
 				8485453F20972F260072CA21 /* opensans-extrabold.ttf in Resources */,
+				84418323209DEC0700BFE745 /* trash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +560,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-2HRGroceryCustomerApp/Pods-2HRGroceryCustomerApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -506,11 +568,13 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -518,6 +582,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -552,19 +617,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				84684AD720982B5600269619 /* FirstViewController.swift in Sources */,
+				8473312520A052F3009FDBD5 /* MyAPIClient.swift in Sources */,
 				84B3820B209C861300C54E59 /* GroceryDetailView.swift in Sources */,
 				84418308209DB60100BFE745 /* HomeViewCell.swift in Sources */,
 				84B38209209C6B1C00C54E59 /* ProductDropDown.swift in Sources */,
 				848544FF20971E550072CA21 /* ViewController.swift in Sources */,
+				847330E920A0304B009FDBD5 /* OrderConformationViewController.swift in Sources */,
+				84418318209DEBC900BFE745 /* DeliveryOptionsViewController.swift in Sources */,
 				848544FD20971E550072CA21 /* AppDelegate.swift in Sources */,
 				8480173F209AEA5B007DFEE4 /* EmailSigninView.swift in Sources */,
 				84515211209B3A2800D982B7 /* FacebookAuthenController.swift in Sources */,
+				84418319209DEBC900BFE745 /* MainCartTableViewCell.swift in Sources */,
 				84691D7B209C402800F574E3 /* ProductsCell.swift in Sources */,
 				84062DB920998255003C65A5 /* DeliveryaddressViewController.swift in Sources */,
 				84684AF5209885B500269619 /* LoginViewController.swift in Sources */,
+				84418316209DEBC900BFE745 /* CreditCardViewController.swift in Sources */,
 				84684AEB20984F4000269619 /* HomeViewController.swift in Sources */,
+				8441831B209DEBC900BFE745 /* PaymentHeader.swift in Sources */,
 				84062DC320999387003C65A5 /* EmailPreferenceView.swift in Sources */,
+				84418317209DEBC900BFE745 /* DeliveryDateTimeViewController.swift in Sources */,
+				84418315209DEBC900BFE745 /* CartViewController.swift in Sources */,
 				8451520D209B0EFB00D982B7 /* EmailForgotController.swift in Sources */,
+				8441831F209DEBDC00BFE745 /* groceryText.swift in Sources */,
+				84418314209DEBC900BFE745 /* AddressListTableViewCell.swift in Sources */,
+				8441831A209DEBC900BFE745 /* PaymentDetailsViewController.swift in Sources */,
 				84691D73209C3A6300F574E3 /* GroceryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

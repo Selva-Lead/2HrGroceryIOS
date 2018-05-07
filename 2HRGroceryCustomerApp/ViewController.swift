@@ -221,14 +221,16 @@ class ViewController: UIViewController {
                     {
                         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                         
-                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DeliveryViewController") as! DeliveryaddressViewController
+                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DeliveryaddressViewController") as! DeliveryaddressViewController
+                        nextViewController.isdeviveryaddress = false
                         self.navigationController?.pushViewController(nextViewController, animated: true)
                     }
                     else
                     {
                         let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
                         
-                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DeliveryViewController") as! DeliveryaddressViewController
+                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DeliveryaddressViewController") as! DeliveryaddressViewController
+                        nextViewController.isdeviveryaddress = false
                         self.navigationController?.pushViewController(nextViewController, animated: true)
                     }
                     //let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")

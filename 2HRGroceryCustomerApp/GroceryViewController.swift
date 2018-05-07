@@ -80,7 +80,9 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 let ProductObject =  product.value as? NSDictionary
                 let Productcategory = ProductObject?.value(forKey: "categories") as AnyObject
 //                let artistcategory  = artistObject?["categories"]
-                if Productcategory["Grocery"] != nil
+               // print(Productcategory["Grocery"] as! AnyObject)
+                let isGrocery = Productcategory["Grocery"] as? Bool ?? false
+                if isGrocery
                 {
                     /*let Productdetails = ProductDropDown()
                     Productdetails.Productbrand = ProductObject?.value(forKey: "brand") as! String
@@ -106,12 +108,12 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     let productdropdownarr = ProductObject?.value(forKey: "productVariant") as! NSArray
             
                     self.DropDown.add(productdropdownarr)
+                    print("self.Productarray.count count\(self.Productarray.count)")
                     
                 }
                 
                 self.table.reloadData()
 
-                print(self.DropDown)
                 //print(artistObject as Any)
                 
 
@@ -125,7 +127,6 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 //appending it to list
                 self.artistList.append(artist) */
             }
-            
         })
     }
 

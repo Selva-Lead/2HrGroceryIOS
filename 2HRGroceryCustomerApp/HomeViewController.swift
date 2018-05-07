@@ -22,9 +22,12 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
     @IBOutlet weak var collectionview2: UICollectionView!
     @IBOutlet weak var collectionview3: UICollectionView!
     var AvailableProducts: DatabaseReference!
-
+    var AvailableProductsArray = [ProductDropDown]()
+    var AvailProductsDropDown = NSMutableArray()
+    var PopularitemsArray = [ProductDropDown]()
+    var PopularitemsDropDown = NSMutableArray()
     var appDelegate = AppDelegate()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -115,10 +118,91 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
         self.collectionview2.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         self.collectionview3.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        self.collectionview1.reloadData()
-        self.collectionview2.reloadData()
-        self.collectionview3.reloadData()
+        self.productforsale()
+        self.popularitems()
+       // self.collectionview1.reloadData()
+        //self.collectionview2.reloadData()
+       // self.collectionview3.reloadData()
         // Do any additional setup after loading the view.
+    }
+    
+    func productforsale()
+    {
+        AvailableProducts = Database.database().reference().child("productsForSale")
+        
+        AvailableProducts.observe(DataEventType.value, with: { (snapshot) in
+            
+            for product in snapshot.children.allObjects as! [DataSnapshot]
+            {
+                let ProductObject =  product.value as? NSDictionary
+                let Productcategory = ProductObject?.value(forKey: "categories") as AnyObject
+                //                let artistcategory  = artistObject?["categories"]
+                let isPopular = Productcategory["Grocery"] as? Bool ?? false
+                if isPopular
+                {
+                    /*let Productdetails = ProductDropDown()
+                     Productdetails.Productbrand = ProductObject?.value(forKey: "brand") as! String
+                     Productdetails.ProductDesc = ProductObject?.value(forKey: "description") as! String
+                     Productdetails.ProductId = ProductObject?.value(forKey: "productID") as! String
+                     Productdetails.ProductName = ProductObject?.value(forKey: "name") as! String
+                     let Productallimages = ProductObject?.value(forKey: "image") as AnyObject
+                     Productdetails.Productimage = Productallimages.value(forKey: "128") as! String */
+                    
+                    //                    tempProductTopDown.productVarient(tempProductTopDown.ProductId) = (ProductObject?.value(forKey: "productVariant") as AnyObject) as! [String:ProductVarient]
+                    let Productbrand = ProductObject?.value(forKey: "brand") as AnyObject
+                    let ProductDesc = ProductObject?.value(forKey: "description") as AnyObject
+                    let ProductName = ProductObject?.value(forKey: "name") as AnyObject
+                    let ProductId = ProductObject?.value(forKey: "productID") as AnyObject
+                    let Productallimages = ProductObject?.value(forKey: "image") as AnyObject
+                    let Productimage = Productallimages.value(forKey: "128") as! String
+                    
+                    let productsar = ProductDropDown(ProductId: ProductId as? String, ProductDesc: ProductDesc as? String, ProductName: ProductName as? String, Productbrand: Productbrand as? String, Productimage: Productimage as? String)
+                    self.PopularitemsArray.append(productsar)
+                    //self.tempTest[product.key] = Productdetails
+                    
+                    
+                    let productdropdownarr = ProductObject?.value(forKey: "productVariant") as! NSArray
+                    
+                    self.PopularitemsDropDown.add(productdropdownarr)
+                    print("Popularitems count \(self.PopularitemsArray.count)")
+                    
+                }
+                
+                 self.collectionview3.reloadData()
+            }
+        })
+    }
+    
+    func popularitems()
+    {
+        AvailableProducts = Database.database().reference().child("productsForSale")
+        
+        AvailableProducts.observe(DataEventType.value, with: { (snapshot) in
+            
+            for product in snapshot.children.allObjects as! [DataSnapshot]
+            {
+                let ProductObject =  product.value as? NSDictionary
+                
+                let Productbrand = ProductObject?.value(forKey: "brand") as AnyObject
+                let ProductDesc = ProductObject?.value(forKey: "description") as AnyObject
+                let ProductName = ProductObject?.value(forKey: "name") as AnyObject
+                let ProductId = ProductObject?.value(forKey: "productID") as AnyObject
+                let Productallimages = ProductObject?.value(forKey: "image") as AnyObject
+                let Productimage = Productallimages.value(forKey: "128") as! String
+                
+                let productsar = ProductDropDown(ProductId: ProductId as? String, ProductDesc: ProductDesc as? String, ProductName: ProductName as? String, Productbrand: Productbrand as? String, Productimage: Productimage as? String)
+                self.AvailableProductsArray.append(productsar)
+                
+                let productdropdownarr = ProductObject?.value(forKey: "productVariant") as! NSArray
+                
+                self.AvailProductsDropDown.add(productdropdownarr)
+                print("available count \(self.AvailableProductsArray.count)")
+
+            }
+            
+            self.collectionview2.reloadData()
+            
+        })
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -129,7 +213,7 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
 
         print(useruid)
       
-        if useruid == nil
+      /*  if useruid == nil
         {
             view3.isHidden = true
            // heightconstraint.constant = 1000
@@ -138,7 +222,7 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
         {
             view3.isHidden = false
            // heightconstraint.constant = 1300
-        }
+        } */
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -152,7 +236,7 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
         {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
         else
@@ -222,7 +306,18 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return 6
+        if collectionView == self.collectionview1
+        {
+            return 10
+        }
+        else if collectionView == self.collectionview2
+        {
+            return AvailableProductsArray.count
+        }
+        else
+        {
+            return PopularitemsArray.count
+        }
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -237,14 +332,63 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
     {
-        return UIEdgeInsetsMake(2, 10, 2, 10)
+        return UIEdgeInsetsMake(5, 10, 5, 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell : HomeViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as! HomeViewCell
+        if collectionView == self.collectionview1
+        {
+            let cell : HomeViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as! HomeViewCell
+            return cell
+        }
+        else if collectionView == self.collectionview2
+        {
+            let cell : HomeViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as! HomeViewCell
+           
+            let product: ProductDropDown
+            product = AvailableProductsArray[indexPath.row]
+            cell.namelbl.text = product.ProductName
+            cell.img.sd_setImage(with:URL(string: product.Productimage!))
+            cell.img.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+            cell.img.layer.borderWidth = 0.8
+            cell.img.layer.cornerRadius = 12
+            cell.img.clipsToBounds = true
+            cell.img.layer.shadowColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
+            cell.img.layer.shadowOffset = CGSize(width: 0, height: 4.0)
+            cell.img.layer.shadowOpacity = 1.0
+            cell.img.layer.shadowRadius = 10.0
+            
+            cell.Innerview.layer.borderColor = UIColor(red:0.92, green:0.93, blue:0.94, alpha:1.0).cgColor
+            cell.Innerview.layer.borderWidth = 1.0
+            
+            return cell
+        }
+        else
+        {
+            let cell : HomeViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as! HomeViewCell
+            
+            let product: ProductDropDown
+            product = PopularitemsArray[indexPath.row]
+            cell.namelbl.text = product.ProductName
+            cell.img.sd_setImage(with:URL(string: product.Productimage!))
+            cell.img.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+            cell.img.layer.borderWidth = 0.8
+            cell.img.layer.cornerRadius = 12
+            cell.img.clipsToBounds = true
+            cell.img.layer.shadowColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
+            cell.img.layer.shadowOffset = CGSize(width: 0, height: 4.0)
+            cell.img.layer.shadowOpacity = 1.0
+            cell.img.layer.shadowRadius = 10.0
+            
+            cell.Innerview.layer.borderColor = UIColor(red:0.92, green:0.93, blue:0.94, alpha:1.0).cgColor
+            cell.Innerview.layer.borderWidth = 1.0
+            
+            return cell
+        }
         
-        return cell
+        
+        
     }
     /*
     // MARK: - Navigation
