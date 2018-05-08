@@ -74,33 +74,33 @@ class PaymentDetailsViewController: UIViewController {
             if  error  == nil{
                 // Show error in add card view controller
                 completion(error)
+                self.dismiss(animated: true)
             }
             else {
                 // Notify add card view controller that token creation was handled successfully
-                completion(nil)
-                
+                completion(error)
                 // Dismiss add card view controller
-                dismiss(animated: true)
             }
         })
-//        submitTokenToBackend(token, completion: { (error: Error?) in
-//            if let error = error {
-//                // Show error in add card view controller
-//                completion(error)
-//            }
-//            else {
-//                // Notify add card view controller that token creation was handled successfully
-//                completion(nil)
-//
-//                // Dismiss add card view controller
-//                dismiss(animated: true)
-//            }
-//        })
     }
-    func submitTokenToBack(token : STPToken, completion: (_ Error:NSError?) -> ())   {
+    func submitTokenToBack(token : STPToken, completion: @escaping (_ Error:NSError?) -> ())   {
         let tokenValue = token.allResponseFields
         print("token value \(token.allResponseFields) and \(tokenValue)")
-        
+        let tempSaveCard = saveCard()
+         let tokenval = tokenValue as? [String: Any]
+        if let cardValues = tokenval!["card"] as? [String:Any] {
+            tempSaveCard.strBrand = (cardValues["brand"] as! String)
+            tempSaveCard.strExpMonth = (cardValues["exp_month"] as! Int)
+            tempSaveCard.strExpYear = (cardValues["exp_year"] as! Int)
+            tempSaveCard.strLastFour = (cardValues["last4"] as! String)
+        }
+        FireAuthModel().saveCards(CustomerId: "RYr3lNznnpMQFcxcxSjrQbyqgoy1", Token: token.stripeID,value: tempSaveCard){ error in
+            if error != nil {
+                completion(error as NSError?)
+            }else {
+                completion (nil)
+            }
+        }
     }
 }
 extension PaymentDetailsViewController: STPAddCardViewControllerDelegate {

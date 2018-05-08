@@ -10,7 +10,15 @@ import UIKit
 
 class FireAuthModel: NSObject {
 
-    func saveCards(CustomerId: String, Token: String) {
-        FIRUtils.saveCardDBRef(customerId: CustomerId, uid: Token).setValue(saveCard.self)
+    func saveCards(CustomerId: String, Token: String,value:saveCard, compition:@escaping ((Error?) -> ())) {
+        FIRUtils.saveCardDBRef(customerId: CustomerId, uid: Token).setValue(value.toJSON()) { (error,reference) in
+            print("reference \(FIRUtils.FBPath.sveCards)")
+            if error != nil {
+                compition(error)
+            }else{
+                compition(nil)
+            }
+        
     }
+}
 }
