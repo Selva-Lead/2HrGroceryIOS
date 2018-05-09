@@ -74,7 +74,11 @@ class PaymentDetailsViewController: UIViewController {
             if  error  == nil{
                 // Show error in add card view controller
                 completion(error)
-                self.dismiss(animated: true)
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentWithCardDetailViewController") as! PaymentWithCardDetailViewController
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+                
             }
             else {
                 // Notify add card view controller that token creation was handled successfully
@@ -84,6 +88,7 @@ class PaymentDetailsViewController: UIViewController {
         })
     }
     func submitTokenToBack(token : STPToken, completion: @escaping (_ Error:NSError?) -> ())   {
+        self.dismiss(animated: true)
         let tokenValue = token.allResponseFields
         print("token value \(token.allResponseFields) and \(tokenValue)")
         let tempSaveCard = saveCard()
@@ -94,7 +99,7 @@ class PaymentDetailsViewController: UIViewController {
             tempSaveCard.strExpYear = (cardValues["exp_year"] as! Int)
             tempSaveCard.strLastFour = (cardValues["last4"] as! String)
         }
-        FireAuthModel().saveCards(CustomerId: "RYr3lNznnpMQFcxcxSjrQbyqgoy1", Token: token.stripeID,value: tempSaveCard){ error in
+        FireAuthModel().saveCards(CustomerId: "zNyVt2mQgnObVC7qcnZwedwhsau2", Token: token.stripeID,value: tempSaveCard){ error in
             if error != nil {
                 completion(error as NSError?)
             }else {

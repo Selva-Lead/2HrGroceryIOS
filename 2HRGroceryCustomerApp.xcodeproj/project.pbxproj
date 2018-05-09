@@ -74,6 +74,10 @@
 		84854543209737060072CA21 /* opensans-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84854542209737060072CA21 /* opensans-regular.ttf */; };
 		848545462097386A0072CA21 /* strip.png in Resources */ = {isa = PBXBuildFile; fileRef = 84854545209738680072CA21 /* strip.png */; };
 		8485454820973F9B0072CA21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8485454720973F9B0072CA21 /* GoogleService-Info.plist */; };
+		849A07ED20A1B95100F2BBAE /* PaymentWithCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A07EC20A1B95100F2BBAE /* PaymentWithCardDetailViewController.swift */; };
+		849A07F420A1CA0100F2BBAE /* minus-symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = 849A07F220A1CA0100F2BBAE /* minus-symbol.png */; };
+		849A07F520A1CA0100F2BBAE /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 849A07F320A1CA0100F2BBAE /* add.png */; };
+		849A07F720A1E40B00F2BBAE /* ThankyouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A07F620A1E40B00F2BBAE /* ThankyouViewController.swift */; };
 		84B38209209C6B1C00C54E59 /* ProductDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B38208209C6B1C00C54E59 /* ProductDropDown.swift */; };
 		84B3820B209C861300C54E59 /* GroceryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3820A209C861300C54E59 /* GroceryDetailView.swift */; };
 		84B38211209C9A3B00C54E59 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B38210209C9A3B00C54E59 /* down.png */; };
@@ -172,6 +176,10 @@
 		84854542209737060072CA21 /* opensans-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-regular.ttf"; sourceTree = "<group>"; };
 		84854545209738680072CA21 /* strip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strip.png; sourceTree = "<group>"; };
 		8485454720973F9B0072CA21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		849A07EC20A1B95100F2BBAE /* PaymentWithCardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWithCardDetailViewController.swift; sourceTree = "<group>"; };
+		849A07F220A1CA0100F2BBAE /* minus-symbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-symbol.png"; sourceTree = "<group>"; };
+		849A07F320A1CA0100F2BBAE /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		849A07F620A1E40B00F2BBAE /* ThankyouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankyouViewController.swift; sourceTree = "<group>"; };
 		84B38208209C6B1C00C54E59 /* ProductDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDropDown.swift; sourceTree = "<group>"; };
 		84B3820A209C861300C54E59 /* GroceryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryDetailView.swift; sourceTree = "<group>"; };
 		84B38210209C9A3B00C54E59 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
@@ -245,6 +253,8 @@
 				84418311209DEBC800BFE745 /* PaymentDetailsViewController.swift */,
 				84418312209DEBC800BFE745 /* PaymentHeader.swift */,
 				84418313209DEBC800BFE745 /* View.xib */,
+				849A07EC20A1B95100F2BBAE /* PaymentWithCardDetailViewController.swift */,
+				849A07F620A1E40B00F2BBAE /* ThankyouViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -387,6 +397,8 @@
 		848545442097384E0072CA21 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				849A07F320A1CA0100F2BBAE /* add.png */,
+				849A07F220A1CA0100F2BBAE /* minus-symbol.png */,
 				84418320209DEC0400BFE745 /* orderdelivery.png */,
 				84418321209DEC0600BFE745 /* trash.png */,
 				84B38210209C9A3B00C54E59 /* down.png */,
@@ -524,6 +536,7 @@
 			files = (
 				84062DBF20998F16003C65A5 /* uncheck.png in Resources */,
 				84684AE92098432500269619 /* ipad.storyboard in Resources */,
+				849A07F420A1CA0100F2BBAE /* minus-symbol.png in Resources */,
 				8485450720971E550072CA21 /* LaunchScreen.storyboard in Resources */,
 				8485453320972D480072CA21 /* Open Sans Italic.ttf in Resources */,
 				84684ADE20982DDB00269619 /* first~ipad.png in Resources */,
@@ -556,6 +569,7 @@
 				84691D7C209C402800F574E3 /* ProductsCell.xib in Resources */,
 				8485453120972D480072CA21 /* Open Sans Bold Italic.ttf in Resources */,
 				84B38213209C9A5600C54E59 /* down@2x.png in Resources */,
+				849A07F520A1CA0100F2BBAE /* add.png in Resources */,
 				84062DBB209985D0003C65A5 /* back.png in Resources */,
 				8485453920972EDC0072CA21 /* opensans-semibold.ttf in Resources */,
 				8485453D20972F0B0072CA21 /* opensans-extrabolditalic.ttf in Resources */,
@@ -655,6 +669,7 @@
 				848544FF20971E550072CA21 /* ViewController.swift in Sources */,
 				847330E920A0304B009FDBD5 /* OrderConformationViewController.swift in Sources */,
 				84418318209DEBC900BFE745 /* DeliveryOptionsViewController.swift in Sources */,
+				849A07F720A1E40B00F2BBAE /* ThankyouViewController.swift in Sources */,
 				848544FD20971E550072CA21 /* AppDelegate.swift in Sources */,
 				8480173F209AEA5B007DFEE4 /* EmailSigninView.swift in Sources */,
 				84515211209B3A2800D982B7 /* FacebookAuthenController.swift in Sources */,
@@ -665,6 +680,7 @@
 				84684AF5209885B500269619 /* LoginViewController.swift in Sources */,
 				84418316209DEBC900BFE745 /* CreditCardViewController.swift in Sources */,
 				84684AEB20984F4000269619 /* HomeViewController.swift in Sources */,
+				849A07ED20A1B95100F2BBAE /* PaymentWithCardDetailViewController.swift in Sources */,
 				8441831B209DEBC900BFE745 /* PaymentHeader.swift in Sources */,
 				84062DC320999387003C65A5 /* EmailPreferenceView.swift in Sources */,
 				84418317209DEBC900BFE745 /* DeliveryDateTimeViewController.swift in Sources */,

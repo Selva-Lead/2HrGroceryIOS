@@ -15,12 +15,27 @@ class AddressListTableViewCell: UITableViewCell {
     @IBOutlet weak var vewDateAndTime: UIView!
     @IBOutlet weak var btnCreditcard: UIButton!
     @IBOutlet weak var txtPaymentDate: groceryText!
+    @IBOutlet weak var lblCardEnding: UILabel!
+    @IBOutlet weak var lblCardExp: UILabel!
+    @IBOutlet weak var lblCardBrand: UILabel!
+    @IBOutlet weak var imgProduct: UIImageView!
+    @IBOutlet weak var ProTitle: UILabel!
+    @IBOutlet weak var ProBrand: UILabel!
+    @IBOutlet weak var ProLB: UIButton!
+    @IBOutlet weak var ProPrice: UILabel!
+    @IBOutlet weak var ProCount: UILabel!
+    @IBOutlet weak var ProTotalPrice: UILabel!
+    @IBOutlet weak var deliveryFee: UILabel!
+    @IBOutlet weak var addCardView: UIView!
+    @IBOutlet weak var ExistingCardView: UIView!
+    @IBOutlet weak var orderTotalAmount: UILabel!
+    @IBOutlet weak var btnProcessComplete: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         //vewDateAndTime.layer.shadowColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
        // vewDateAndTime.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-       
+      
     }
 
    
