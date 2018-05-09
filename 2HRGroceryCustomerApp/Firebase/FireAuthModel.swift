@@ -9,15 +9,18 @@
 import UIKit
 
 class FireAuthModel: NSObject {
-
-    func saveCards(CustomerId: String, Token: String,value:saveCard, compition:@escaping ((Error?) -> ())) {
-        FIRUtils.saveCardDBRef(customerId: CustomerId, uid: Token).setValue(value.toJSON()) { (error,reference) in
+    
+    func saveCards(CustomerId: String, Token: String,valueSaveCard:saveCard, compition:@escaping ((Error?) -> ())) {
+        FIRUtils.saveCardDBRef(customerId: CustomerId, uid: Token).setValue(valueSaveCard.toJSON()) { (error,reference) in
             if error != nil {
                 compition(error)
             }else{
                 compition(nil)
             }
-        
+            
+        }
     }
-}
+    func addCarts(productForSaleID: String,valueAddCart:AddCart){
+        FIRUtils.addCartDBRef(productId: productForSaleID).setValue(valueAddCart.toJSON())
+    }
 }

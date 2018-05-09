@@ -137,20 +137,24 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     @objc func cart(sender: UIButton)
     {
-        if UIDevice.current.userInterfaceIdiom == .phone
-        {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            self.navigationController?.pushViewController(nextViewController, animated: true)
-        }
-        else
-        {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            self.navigationController?.pushViewController(nextViewController, animated: true)
-        }
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+//        if UIDevice.current.userInterfaceIdiom == .phone
+//        {
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//
+//            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//            self.navigationController?.pushViewController(nextViewController, animated: true)
+//        }
+//        else
+//        {
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
+//
+//            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//            self.navigationController?.pushViewController(nextViewController, animated: true)
+//        }
     }
     
     @objc func wishlist(sender: UIButton)
@@ -175,7 +179,15 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
     {
         self.navigationController?.popViewController(animated: true)
     }
-    
+    @objc func addToCart(sender: UIButton) {
+        let productCart = Productarray[sender.tag]
+        let addcart = AddCart()
+        print(productCart.ProductId)
+        addcart.strProductId = productCart.ProductId
+        addcart.strTimeStamp = NSTimeIntervalSince1970
+        addcart.strVarients = ["1": "1" as AnyObject]
+        FireAuthModel().addCarts(productForSaleID: productCart.ProductId!, valueAddCart: addcart)
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return Productarray.count
@@ -201,6 +213,8 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         cell.addcartbtn.layer.cornerRadius = 8.0
         cell.addcartbtn.clipsToBounds = true
+        cell.addcartbtn.tag = indexPath.row
+        cell.addcartbtn.addTarget(self, action: #selector(addToCart(sender:)), for: .touchUpInside)
         
         cell.Img.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         cell.Img.layer.borderWidth = 0.5

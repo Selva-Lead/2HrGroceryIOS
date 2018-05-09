@@ -232,19 +232,36 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     @objc func cart(sender: UIButton)
     {
-        if UIDevice.current.userInterfaceIdiom == .phone
-        {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
-            self.navigationController?.pushViewController(nextViewController, animated: true)
-        }
-        else
-        {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            self.navigationController?.pushViewController(nextViewController, animated: true)
+        if useruid != nil {
+            if UIDevice.current.userInterfaceIdiom == .phone
+            {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
+            else
+            {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
+        }else {
+            if UIDevice.current.userInterfaceIdiom == .phone
+            {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
+            else
+            {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
         }
     }
 

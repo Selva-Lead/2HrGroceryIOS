@@ -99,7 +99,7 @@ class PaymentDetailsViewController: UIViewController {
             tempSaveCard.strExpYear = (cardValues["exp_year"] as! Int)
             tempSaveCard.strLastFour = (cardValues["last4"] as! String)
         }
-        FireAuthModel().saveCards(CustomerId: "zNyVt2mQgnObVC7qcnZwedwhsau2", Token: token.stripeID,value: tempSaveCard){ error in
+        FireAuthModel().saveCards(CustomerId: useruid, Token: token.stripeID,valueSaveCard: tempSaveCard){ error in
             if error != nil {
                 completion(error as NSError?)
             }else {
