@@ -20,14 +20,15 @@ var UserEmailID :String!
 var UserFirstName :String!
 var UserLastName :String!
 var UserMobileNumber :String!
-
+var fullCartList:[AddCart] = [AddCart]()
+var productForSaleItems: [String:ProductDropDown] = [String:ProductDropDown]()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        useruid = "MznQeKAsmOhNcw3YXkvsCghw71c2"
         FirebaseApp.configure()
         
         IQKeyboardManager.sharedManager().enable = true

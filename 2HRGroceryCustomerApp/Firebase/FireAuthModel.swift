@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class FireAuthModel: NSObject {
-    
+    func getProductForSale() {
+        FIRUtils.getCartsDBRef().observe(.value, with: {snapshot in
+            if let value = snapshot.value as? [String:AnyObject] {
+                //productForSaleItems = [value as! ProductDropDown]
+            }
+        })
+    }
     func saveCards(CustomerId: String, Token: String,valueSaveCard:saveCard, compition:@escaping ((Error?) -> ())) {
         FIRUtils.saveCardDBRef(customerId: CustomerId, uid: Token).setValue(valueSaveCard.toJSON()) { (error,reference) in
             if error != nil {
@@ -22,5 +29,48 @@ class FireAuthModel: NSObject {
     }
     func addCarts(productForSaleID: String,valueAddCart:AddCart){
         FIRUtils.addCartDBRef(productId: productForSaleID).setValue(valueAddCart.toJSON())
+    }
+    func getCartList(complition: @escaping () -> (Swift.Void)) {
+        FIRUtils.getCartsDBRef().observe(.childChanged, with: { snapshot -> Void in
+           
+            if let value = snapshot.value as? [String: Any] {
+                 //print(snapshot.value as AnyObject)
+                if let singleCart = Mapper<AddCart>().map(JSONObject: value) {
+                    print(singleCart)
+                    fullCartList = [singleCart]
+                    print(fullCartList)
+                    complition()
+                }
+                
+            }
+        })
+        FIRUtils.getCartsDBRef().observe(.childRemoved, with: { snapshot in
+            
+            if let value = snapshot.value as? [String: Any] {
+                //print(snapshot.value as AnyObject)
+                if let singleCart = Mapper<AddCart>().map(JSONObject: value) {
+                    print(singleCart)
+                    fullCartList = [singleCart]
+                    print(fullCartList)
+                    complition()
+                }
+                
+            }
+        })
+        FIRUtils.getCartsDBRef().observe(.childAdded, with: { snapshot in
+            
+            if let value = snapshot.value as? [String: Any] {
+                //print(snapshot.value as AnyObject)
+                if let singleCart = Mapper<AddCart>().map(JSONObject: value) {
+                    print(singleCart)
+                    fullCartList.append(singleCart)
+                    print(fullCartList)
+                    complition()
+                }else {
+                    complition()
+                }
+                
+            }
+        })
     }
 }

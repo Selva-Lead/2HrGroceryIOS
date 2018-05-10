@@ -24,6 +24,9 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
         cartTopView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         cartTopView.layer.shadowOpacity = 1.0
         cartTopView.layer.shadowRadius = 10.0
+        FireAuthModel().getCartList(complition: {
+            self.cartTableView.reloadData()
+        })
         //cartTopView.layer.shadowPath = UIBezierPath(rect: cartTopView.bounds).cgPath
         
         //cartTableView.backgroundColor = UIColor.red
@@ -64,7 +67,7 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 10
+            return fullCartList.count
         }else {
             return 1
         }
@@ -74,7 +77,13 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCartTableViewCell") as! MainCartTableViewCell
         let cellCheckout = tableView.dequeueReusableCell(withIdentifier: "CheckOut") as! MainCartTableViewCell
         if indexPath.section == 0 {
-            cell.imgProduct.image = #imageLiteral(resourceName: "cart.png")
+            var singleAddCart = AddCart()
+            singleAddCart = fullCartList[indexPath.row]
+            let product = productForSaleItems[singleAddCart.strProductId!]
+            //cell.imgProduct.image = UIImage( // product?.Productimage
+            cell.lblProductQntyCount.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
+            cell.lblProductQntyCount.layer.borderWidth = 1
+            cell.lblProductQntyCount.layer.cornerRadius = 4
             cell.lblProductQntyCount.text = "10"
             return cell
         }else if indexPath.section == 1  {

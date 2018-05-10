@@ -15,6 +15,7 @@ class FIRUtils: NSObject {
         static let savedCards = "/savedCards/"
         static let cart = "/cart/"
         static let product = "/product/"
+        static let productForSale = "/productsForSale/"
         
     }
     
@@ -24,5 +25,11 @@ class FIRUtils: NSObject {
     class func addCartDBRef(productId :String) -> DatabaseReference {
     return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.cart).child(FBPath.product).child(productId
         )
+    }
+    class func getCartsDBRef() -> DatabaseReference {
+        return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.cart).child(FBPath.product)
+    }
+    class func getProductForSaleDBRef() -> DatabaseReference {
+        return Database.database().reference().child(FBPath.productForSale)
     }
 }
