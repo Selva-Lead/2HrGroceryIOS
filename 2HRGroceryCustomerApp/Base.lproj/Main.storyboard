@@ -1847,6 +1847,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="searchTF" destination="sB5-8u-5f7" id="3EX-Wi-Nmq"/>
                         <outlet property="searchview" destination="b0S-MH-00n" id="pO0-aA-3vU"/>
                         <outlet property="table" destination="K5Q-Be-VaP" id="0b1-oq-ftu"/>
                         <outlet property="titleview" destination="c34-su-Mek" id="eeF-40-PFd"/>

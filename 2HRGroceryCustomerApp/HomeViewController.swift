@@ -137,38 +137,30 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
                 let ProductObject =  product.value as? NSDictionary
                 let Productcategory = ProductObject?.value(forKey: "categories") as AnyObject
                 //                let artistcategory  = artistObject?["categories"]
-                let isPopular = Productcategory["Grocery"] as? Bool ?? false
-                if isPopular
+                let isonSale = Productcategory["onSale"] as? Bool ?? false
+                if isonSale
                 {
-                    /*let Productdetails = ProductDropDown()
-                     Productdetails.Productbrand = ProductObject?.value(forKey: "brand") as! String
-                     Productdetails.ProductDesc = ProductObject?.value(forKey: "description") as! String
-                     Productdetails.ProductId = ProductObject?.value(forKey: "productID") as! String
-                     Productdetails.ProductName = ProductObject?.value(forKey: "name") as! String
-                     let Productallimages = ProductObject?.value(forKey: "image") as AnyObject
-                     Productdetails.Productimage = Productallimages.value(forKey: "128") as! String */
                     
-                    //                    tempProductTopDown.productVarient(tempProductTopDown.ProductId) = (ProductObject?.value(forKey: "productVariant") as AnyObject) as! [String:ProductVarient]
-                    let Productbrand = ProductObject?.value(forKey: "brand") as AnyObject
-                    let ProductDesc = ProductObject?.value(forKey: "description") as AnyObject
-                    let ProductName = ProductObject?.value(forKey: "name") as AnyObject
-                    let ProductId = ProductObject?.value(forKey: "productID") as AnyObject
+                    let Productbrand = ProductObject?.value(forKey: "brand") as! String
+                    let ProductDesc = ProductObject?.value(forKey: "description") as! String
+                    let ProductName = ProductObject?.value(forKey: "name") as! String
+                    let ProductId = ProductObject?.value(forKey: "productID") as! String
                     let Productallimages = ProductObject?.value(forKey: "image") as AnyObject
                     let Productimage = Productallimages.value(forKey: "128") as! String
                     
-                    let productsar = ProductDropDown(ProductId: ProductId as? String, ProductDesc: ProductDesc as? String, ProductName: ProductName as? String, Productbrand: Productbrand as? String, Productimage: Productimage as? String)
-                    self.PopularitemsArray.append(productsar)
+                    let productsar = ProductDropDown(ProductId: ProductId, ProductDesc: ProductDesc, ProductName: ProductName, Productbrand: Productbrand, Productimage: Productimage)
+                    self.AvailableProductsArray.append(productsar)
                     //self.tempTest[product.key] = Productdetails
                     
                     
                     let productdropdownarr = ProductObject?.value(forKey: "productVariant") as! NSArray
                     
-                    self.PopularitemsDropDown.add(productdropdownarr)
-                    print("Popularitems count \(self.PopularitemsArray.count)")
+                    self.AvailProductsDropDown.add(productdropdownarr)
+                    print("Popularitems count \(self.AvailableProductsArray.count)")
                     
                 }
                 
-                 self.collectionview3.reloadData()
+                self.collectionview2.reloadData()
             }
         })
     }
@@ -182,25 +174,32 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
             for product in snapshot.children.allObjects as! [DataSnapshot]
             {
                 let ProductObject =  product.value as? NSDictionary
-                
-                let Productbrand = ProductObject?.value(forKey: "brand") as AnyObject
-                let ProductDesc = ProductObject?.value(forKey: "description") as AnyObject
-                let ProductName = ProductObject?.value(forKey: "name") as AnyObject
-                let ProductId = ProductObject?.value(forKey: "productID") as AnyObject
-                let Productallimages = ProductObject?.value(forKey: "image") as AnyObject
-                let Productimage = Productallimages.value(forKey: "128") as! String
-                
-                let productsar = ProductDropDown(ProductId: ProductId as? String, ProductDesc: ProductDesc as? String, ProductName: ProductName as? String, Productbrand: Productbrand as? String, Productimage: Productimage as? String)
-                self.AvailableProductsArray.append(productsar)
-                
-                let productdropdownarr = ProductObject?.value(forKey: "productVariant") as! NSArray
-                
-                self.AvailProductsDropDown.add(productdropdownarr)
-                print("available count \(self.AvailableProductsArray.count)")
-
+                let Productcategory = ProductObject?.value(forKey: "categories") as AnyObject
+                //                let artistcategory  = artistObject?["categories"]
+                let isPopular = Productcategory["isPopular"] as? Bool ?? false
+                if isPopular
+                {
+                    let ProductObject =  product.value as? NSDictionary
+                    
+                    let Productbrand = ProductObject?.value(forKey: "brand") as! String
+                    let ProductDesc = ProductObject?.value(forKey: "description") as! String
+                    let ProductName = ProductObject?.value(forKey: "name") as! String
+                    let ProductId = ProductObject?.value(forKey: "productID") as! String
+                    let Productallimages = ProductObject?.value(forKey: "image") as AnyObject
+                    let Productimage = Productallimages.value(forKey: "128") as! String
+                    
+                    let productsar = ProductDropDown(ProductId: ProductId, ProductDesc: ProductDesc, ProductName: ProductName, Productbrand: Productbrand, Productimage: Productimage)
+                    self.PopularitemsArray.append(productsar)
+                    
+                    let productdropdownarr = ProductObject?.value(forKey: "productVariant") as! NSArray
+                    
+                    self.PopularitemsDropDown.add(productdropdownarr)
+                    print("available count \(self.PopularitemsArray.count)")
+                    
+                }
             }
             
-            self.collectionview2.reloadData()
+            self.collectionview3.reloadData()
             
         })
     }

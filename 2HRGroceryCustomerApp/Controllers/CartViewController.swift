@@ -79,7 +79,7 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 0 {
             var singleAddCart = AddCart()
             singleAddCart = fullCartList[indexPath.row]
-            let product = productForSaleItems[singleAddCart.strProductId!]
+//            let product = productForSaleItems[singleAddCart.strProductId!]
             //cell.imgProduct.image = UIImage( // product?.Productimage
             cell.lblProductQntyCount.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
             cell.lblProductQntyCount.layer.borderWidth = 1
