@@ -76,7 +76,7 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCartTableViewCell") as! MainCartTableViewCell
         let cellCheckout = tableView.dequeueReusableCell(withIdentifier: "CheckOut") as! MainCartTableViewCell
-        if productForCart.count != 0 {
+        //if productForCart.count != 0 {
             if indexPath.section == 0 {
                 
                 var singleAddCart = AddCart()
@@ -111,6 +111,19 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
                 cellCheckout.btnCheckOut.titleLabel?.text = "CHECKOUT - $67.96"
                 return cellCheckout
             }
+        if indexPath.section == 0 {
+            var singleAddCart = AddCart()
+            singleAddCart = fullCartList[indexPath.row]
+//            let product = productForSaleItems[singleAddCart.strProductId!]
+            //cell.imgProduct.image = UIImage( // product?.Productimage
+            cell.lblProductQntyCount.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
+            cell.lblProductQntyCount.layer.borderWidth = 1
+            cell.lblProductQntyCount.layer.cornerRadius = 4
+            cell.lblProductQntyCount.text = "10"
+            return cell
+        }else if indexPath.section == 1  {
+            cellCheckout.btnCheckOut.titleLabel?.text = "CHECKOUT - $67.96"
+            return cellCheckout
         }
         return MainCartTableViewCell()
     }
@@ -121,4 +134,3 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
         return 0
     }
 }
-

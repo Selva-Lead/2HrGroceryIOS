@@ -29,6 +29,7 @@
 		8441831F209DEBDC00BFE745 /* groceryText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441831E209DEBDC00BFE745 /* groceryText.swift */; };
 		84418322209DEC0700BFE745 /* orderdelivery.png in Resources */ = {isa = PBXBuildFile; fileRef = 84418320209DEC0400BFE745 /* orderdelivery.png */; };
 		84418323209DEC0700BFE745 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 84418321209DEC0600BFE745 /* trash.png */; };
+		8447873D20A46D9C00B37ED3 /* ProductInvarient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447873C20A46D9C00B37ED3 /* ProductInvarient.swift */; };
 		8451520D209B0EFB00D982B7 /* EmailForgotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451520C209B0EFB00D982B7 /* EmailForgotController.swift */; };
 		8451520F209B381700D982B7 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8451520E209B381600D982B7 /* facebook.png */; };
 		84515211209B3A2800D982B7 /* FacebookAuthenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84515210209B3A2800D982B7 /* FacebookAuthenController.swift */; };
@@ -127,6 +128,7 @@
 		8441831E209DEBDC00BFE745 /* groceryText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryText.swift; sourceTree = "<group>"; };
 		84418320209DEC0400BFE745 /* orderdelivery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderdelivery.png; sourceTree = "<group>"; };
 		84418321209DEC0600BFE745 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
+		8447873C20A46D9C00B37ED3 /* ProductInvarient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductInvarient.swift; sourceTree = "<group>"; };
 		8451520C209B0EFB00D982B7 /* EmailForgotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForgotController.swift; sourceTree = "<group>"; };
 		8451520E209B381600D982B7 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		84515210209B3A2800D982B7 /* FacebookAuthenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthenController.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				84B38208209C6B1C00C54E59 /* ProductDropDown.swift */,
+				8447873C20A46D9C00B37ED3 /* ProductInvarient.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -686,7 +689,9 @@
 				84062DB920998255003C65A5 /* DeliveryaddressViewController.swift in Sources */,
 				84684AF5209885B500269619 /* LoginViewController.swift in Sources */,
 				84418316209DEBC900BFE745 /* CreditCardViewController.swift in Sources */,
+
 				8412956620A4721300E5F2A0 /* ProductForSale.swift in Sources */,
+				8447873D20A46D9C00B37ED3 /* ProductInvarient.swift in Sources */,
 				84684AEB20984F4000269619 /* HomeViewController.swift in Sources */,
 				849A07ED20A1B95100F2BBAE /* PaymentWithCardDetailViewController.swift in Sources */,
 				8441831B209DEBC900BFE745 /* PaymentHeader.swift in Sources */,
