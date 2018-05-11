@@ -13,6 +13,7 @@
 		84062DBF20998F16003C65A5 /* uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 84062DBE20998F14003C65A5 /* uncheck.png */; };
 		84062DC120998F21003C65A5 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 84062DC020998F20003C65A5 /* check.png */; };
 		84062DC320999387003C65A5 /* EmailPreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84062DC220999387003C65A5 /* EmailPreferenceView.swift */; };
+		8412956620A4721300E5F2A0 /* ProductForSale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412956520A4721300E5F2A0 /* ProductForSale.swift */; };
 		84387DE420A2F1DC0050FE15 /* AddCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84387DE320A2F1DC0050FE15 /* AddCart.swift */; };
 		84418308209DB60100BFE745 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84418306209DB60100BFE745 /* HomeViewCell.swift */; };
 		84418309209DB60100BFE745 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84418307209DB60100BFE745 /* HomeViewCell.xib */; };
@@ -110,6 +111,7 @@
 		84062DBE20998F14003C65A5 /* uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheck.png; sourceTree = "<group>"; };
 		84062DC020998F20003C65A5 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		84062DC220999387003C65A5 /* EmailPreferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPreferenceView.swift; sourceTree = "<group>"; };
+		8412956520A4721300E5F2A0 /* ProductForSale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductForSale.swift; sourceTree = "<group>"; };
 		84387DE320A2F1DC0050FE15 /* AddCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCart.swift; sourceTree = "<group>"; };
 		84418306209DB60100BFE745 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		84418307209DB60100BFE745 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			children = (
 				8473313020A09203009FDBD5 /* saveCard.swift */,
 				84387DE320A2F1DC0050FE15 /* AddCart.swift */,
+				8412956520A4721300E5F2A0 /* ProductForSale.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				84062DB920998255003C65A5 /* DeliveryaddressViewController.swift in Sources */,
 				84684AF5209885B500269619 /* LoginViewController.swift in Sources */,
 				84418316209DEBC900BFE745 /* CreditCardViewController.swift in Sources */,
+				8412956620A4721300E5F2A0 /* ProductForSale.swift in Sources */,
 				84684AEB20984F4000269619 /* HomeViewController.swift in Sources */,
 				849A07ED20A1B95100F2BBAE /* PaymentWithCardDetailViewController.swift in Sources */,
 				8441831B209DEBC900BFE745 /* PaymentHeader.swift in Sources */,
@@ -866,7 +870,7 @@
 				DEVELOPMENT_TEAM = 743NUZ9ERZ;
 				INFOPLIST_FILE = 2HRGroceryCustomerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Mitosis.-HRGroceryCustomerApp";
+				PRODUCT_BUNDLE_IDENTIFIER = "-com.twohrgrocery.customer--";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -882,7 +886,7 @@
 				DEVELOPMENT_TEAM = 743NUZ9ERZ;
 				INFOPLIST_FILE = 2HRGroceryCustomerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Mitosis.-HRGroceryCustomerApp";
+				PRODUCT_BUNDLE_IDENTIFIER = "-com.twohrgrocery.customer--";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

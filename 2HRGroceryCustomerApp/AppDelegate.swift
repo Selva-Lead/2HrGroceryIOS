@@ -21,7 +21,7 @@ var UserFirstName :String!
 var UserLastName :String!
 var UserMobileNumber :String!
 var fullCartList:[AddCart] = [AddCart]()
-var productForSaleItems: [String:ProductDropDown] = [String:ProductDropDown]()
+var productForCart: [String:ProductForSale] = [String:ProductForSale]()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

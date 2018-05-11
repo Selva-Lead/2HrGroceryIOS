@@ -11,9 +11,17 @@ import ObjectMapper
 
 class FireAuthModel: NSObject {
     func getProductForSale() {
-        FIRUtils.getCartsDBRef().observe(.value, with: {snapshot in
+        FIRUtils.getProductForSaleDBRef().observe(.childAdded, with: {snapshot in
             if let value = snapshot.value as? [String:AnyObject] {
-                //productForSaleItems = [value as! ProductDropDown]
+               // productForSaleItems = value as! [String : ProductDropDown]
+                if let singleproduct = Mapper<ProductForSale>().map(JSON: value) {
+                    print(singleproduct)
+                    let id = singleproduct.strProductId
+                    print(id)
+                    productForCart[id!] = singleproduct
+                    print(productForCart)
+                   
+                }
             }
         })
     }
@@ -31,6 +39,7 @@ class FireAuthModel: NSObject {
         FIRUtils.addCartDBRef(productId: productForSaleID).setValue(valueAddCart.toJSON())
     }
     func getCartList(complition: @escaping () -> (Swift.Void)) {
+        fullCartList.removeAll()
         FIRUtils.getCartsDBRef().observe(.childChanged, with: { snapshot -> Void in
            
             if let value = snapshot.value as? [String: Any] {

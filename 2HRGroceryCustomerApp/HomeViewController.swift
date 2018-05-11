@@ -30,7 +30,7 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        FireAuthModel().getProductForSale()
         self.navigationController?.isNavigationBarHidden = false
 
         appDelegate = UIApplication.shared.delegate as! AppDelegate
