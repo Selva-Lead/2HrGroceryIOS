@@ -219,7 +219,7 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
         print(productCart.ProductId)
         addcart.strProductId = productCart.ProductId
         addcart.strTimeStamp = NSTimeIntervalSince1970
-        addcart.strVarients = ["1": "1" as AnyObject]
+        addcart.strVarients = ["0": "1" as AnyObject]
         FireAuthModel().addCarts(productForSaleID: productCart.ProductId!, valueAddCart: addcart)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int

@@ -2262,7 +2262,7 @@
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="36" id="fSK-RQ-KBY"/>
                                                                             </constraints>
-                                                                            <fontDescription key="fontDescription" name="Gibson-SemiBold" family="Gibson" pointSize="14"/>
+                                                                            <fontDescription key="fontDescription" name="Gibson-SemiBold" family="Gibson" pointSize="13"/>
                                                                             <color key="textColor" red="0.27058823529999998" green="0.30980392159999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <variation key="default">
@@ -2382,6 +2382,7 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
+                                                    <outlet property="btnVarient" destination="9h0-sR-yxd" id="OxC-pr-pnl"/>
                                                     <outlet property="imgProduct" destination="lAm-ol-jn1" id="sag-fQ-1sZ"/>
                                                     <outlet property="lblBrandName" destination="aIM-k9-wde" id="qkp-pd-oEH"/>
                                                     <outlet property="lblPrice" destination="3eW-Wo-7Tk" id="xNY-2P-73h"/>

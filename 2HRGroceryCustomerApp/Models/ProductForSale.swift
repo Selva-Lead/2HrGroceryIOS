@@ -28,5 +28,5 @@ class ProductForSale: NSObject, Mappable {
     var strProductName: String?
     var strProductbrand: String?
     var strProductimage: [String:AnyObject] = [String: AnyObject]()
-    var strProductVarients: [String:AnyObject] = [String: AnyObject]()
+    var strProductVarients: [ProductVarient] = [ProductVarient]()
 }

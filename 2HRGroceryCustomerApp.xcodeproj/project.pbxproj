@@ -85,6 +85,7 @@
 		84B3820B209C861300C54E59 /* GroceryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3820A209C861300C54E59 /* GroceryDetailView.swift */; };
 		84B38211209C9A3B00C54E59 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B38210209C9A3B00C54E59 /* down.png */; };
 		84B38213209C9A5600C54E59 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B38212209C9A5600C54E59 /* down@2x.png */; };
+		84CB872920A57E050071EF1B /* ProductVarient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB872820A57E050071EF1B /* ProductVarient.swift */; };
 		88EE122B5E737C884068A748 /* Pods_2HRGroceryCustomerApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 954C631E23BC7A9B8B8EE164 /* Pods_2HRGroceryCustomerApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -190,6 +191,7 @@
 		84B3820A209C861300C54E59 /* GroceryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryDetailView.swift; sourceTree = "<group>"; };
 		84B38210209C9A3B00C54E59 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		84B38212209C9A5600C54E59 /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
+		84CB872820A57E050071EF1B /* ProductVarient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVarient.swift; sourceTree = "<group>"; };
 		954C631E23BC7A9B8B8EE164 /* Pods_2HRGroceryCustomerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_2HRGroceryCustomerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C0685982BBB8A83D38E315D /* Pods-2HRGroceryCustomerApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-2HRGroceryCustomerApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-2HRGroceryCustomerApp/Pods-2HRGroceryCustomerApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A7C7CDA875282D0148F34C97 /* Pods-2HRGroceryCustomerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-2HRGroceryCustomerApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-2HRGroceryCustomerApp/Pods-2HRGroceryCustomerApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				8473313020A09203009FDBD5 /* saveCard.swift */,
 				84387DE320A2F1DC0050FE15 /* AddCart.swift */,
 				8412956520A4721300E5F2A0 /* ProductForSale.swift */,
+				84CB872820A57E050071EF1B /* ProductVarient.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -689,7 +692,6 @@
 				84062DB920998255003C65A5 /* DeliveryaddressViewController.swift in Sources */,
 				84684AF5209885B500269619 /* LoginViewController.swift in Sources */,
 				84418316209DEBC900BFE745 /* CreditCardViewController.swift in Sources */,
-
 				8412956620A4721300E5F2A0 /* ProductForSale.swift in Sources */,
 				8447873D20A46D9C00B37ED3 /* ProductInvarient.swift in Sources */,
 				84684AEB20984F4000269619 /* HomeViewController.swift in Sources */,
@@ -703,6 +705,7 @@
 				84418314209DEBC900BFE745 /* AddressListTableViewCell.swift in Sources */,
 				8441831A209DEBC900BFE745 /* PaymentDetailsViewController.swift in Sources */,
 				84691D73209C3A6300F574E3 /* GroceryViewController.swift in Sources */,
+				84CB872920A57E050071EF1B /* ProductVarient.swift in Sources */,
 				8473313120A09203009FDBD5 /* saveCard.swift in Sources */,
 				8473312C20A08D3E009FDBD5 /* FIRUtils.swift in Sources */,
 			);
@@ -875,7 +878,7 @@
 				DEVELOPMENT_TEAM = 743NUZ9ERZ;
 				INFOPLIST_FILE = 2HRGroceryCustomerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-com.twohrgrocery.customer--";
+				PRODUCT_BUNDLE_IDENTIFIER = com.twohrgrocery.customer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -891,7 +894,7 @@
 				DEVELOPMENT_TEAM = 743NUZ9ERZ;
 				INFOPLIST_FILE = 2HRGroceryCustomerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-com.twohrgrocery.customer--";
+				PRODUCT_BUNDLE_IDENTIFIER = com.twohrgrocery.customer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
