@@ -2122,6 +2122,9 @@
                                             <constraint firstAttribute="width" secondItem="if2-mj-MNC" secondAttribute="height" multiplier="1:1" id="BXN-Sw-njP"/>
                                         </constraints>
                                         <state key="normal" image="trash.png"/>
+                                        <connections>
+                                            <action selector="emptyCart:" destination="4YT-3r-4bd" eventType="touchUpInside" id="K0g-Ha-DgX"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty Cart" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBH-m8-19x">
                                         <rect key="frame" x="307" y="32" width="53" height="12"/>

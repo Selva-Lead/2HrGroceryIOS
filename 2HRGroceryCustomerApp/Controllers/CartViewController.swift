@@ -58,6 +58,13 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
     }
     
     
+    @IBAction func emptyCart(_ sender: Any) {
+        FIRUtils.getCartsDBRef().removeValue(completionBlock: {(error, databaseReference) in
+            print("its compleated")
+            fullCartList.removeAll()
+            self.cartTableView.reloadData()
+        })
+    }
     @IBAction func Checkout(_ sender: UIButton) {
         for addcartSingle in fullCartList {
             FireAuthModel().addCarts(productForSaleID: addcartSingle.strProductId!, valueAddCart: addcartSingle)
@@ -159,16 +166,16 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
                     cell.lblBrandName.text = product?.strProductbrand
                     cell.lblProductTitle.text = product?.strProductName
                     
-                    cell.lblPrice.text = String(productVarient.strRegularPrice!)
                     cell.btnVarient.setTitle(productVarient.strUnit, for: .normal)
                     cell.lblProductQntyCount.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
                     cell.lblProductQntyCount.layer.borderWidth = 1
                     cell.lblProductQntyCount.layer.cornerRadius = 4
                     cell.lblProductQntyCount.text = SingleVarientValue
+                    let perProductTotalPrice = Int(productVarient.strRegularPrice!) * Int(SingleVarientValue)!
+                    cell.lblPrice.text = String(perProductTotalPrice)
                     cell.btnVarientIncrease.tag = indexPath.row
                     cell.btnVarientIncrease.addTarget(self, action: #selector(varientCountIncrease(sender:)), for: .touchUpInside)
                     selectedVarientKey = singleVarientsKey
-                   // selecetedIndex = indexPath.row
                     selectedQuantity = Int(cell.lblProductQntyCount.text!)
                     cell.btnVarientDecrease.tag = indexPath.row
                     cell.btnVarientDecrease.addTarget(self, action: #selector(varientCountDecrease(sender:)), for: .touchUpInside)
