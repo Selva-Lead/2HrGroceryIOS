@@ -2383,6 +2383,8 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="btnVarient" destination="9h0-sR-yxd" id="OxC-pr-pnl"/>
+                                                    <outlet property="btnVarientDecrease" destination="FB4-Kg-zfd" id="oxc-jh-4AT"/>
+                                                    <outlet property="btnVarientIncrease" destination="tIt-QJ-g5K" id="DFc-V1-hcK"/>
                                                     <outlet property="imgProduct" destination="lAm-ol-jn1" id="sag-fQ-1sZ"/>
                                                     <outlet property="lblBrandName" destination="aIM-k9-wde" id="qkp-pd-oEH"/>
                                                     <outlet property="lblPrice" destination="3eW-Wo-7Tk" id="xNY-2P-73h"/>

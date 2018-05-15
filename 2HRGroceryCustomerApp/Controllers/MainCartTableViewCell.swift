@@ -18,7 +18,9 @@ class MainCartTableViewCell: UITableViewCell {
     @IBOutlet weak var lblDeliveryFee: UILabel!
     @IBOutlet weak var btnCheckOut: UIButton!
     @IBOutlet weak var btnVarient: UIButton!
+    @IBOutlet weak var btnVarientIncrease: UIButton!
     
+    @IBOutlet weak var btnVarientDecrease: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

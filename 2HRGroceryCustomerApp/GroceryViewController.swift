@@ -277,6 +277,8 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
             
             cell.addcartbtn.layer.cornerRadius = 8.0
             cell.addcartbtn.clipsToBounds = true
+            cell.addcartbtn.tag = indexPath.row
+            cell.addcartbtn.addTarget(self, action: #selector(addToCart(sender:)), for:.touchUpInside)
             
             cell.Img.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
             cell.Img.layer.borderWidth = 0.5

@@ -59,13 +59,21 @@ class FireAuthModel: NSObject {
     func addCarts(productForSaleID: String,valueAddCart:AddCart){
         FIRUtils.addCartDBRef(productId: productForSaleID).setValue(valueAddCart.toJSON())
     }
+    func removeCarts(productForSAleID: String) {
+        FIRUtils.addCartDBRef(productId: productForSAleID).removeValue()
+    }
     func getCartList(complition: @escaping () -> (Swift.Void)) {
         fullCartList.removeAll()
         FIRUtils.getCartsDBRef().observe(.childChanged, with: { snapshot -> Void in
-           
+             let provar = snapshot.childSnapshot(forPath: "variants").value
             if let value = snapshot.value as? [String: Any] {
-                 //print(snapshot.value as AnyObject)
                 if let singleCart = Mapper<AddCart>().map(JSON: value) {
+                    let provarArr = provar as! NSArray
+                    var vartemp : [String: AnyObject] = [String:AnyObject]()
+                    for (key, value) in provarArr.enumerated() {
+                        print("\(key) and \(value)")
+                        singleCart.strVarients = ["\(key)":"\(value )" as AnyObject]
+                    }
                     print(singleCart)
                     fullCartList = [singleCart]
                     print(fullCartList)
@@ -74,19 +82,24 @@ class FireAuthModel: NSObject {
                 
             }
         })
-        FIRUtils.getCartsDBRef().observe(.childRemoved, with: { snapshot in
-            
-            if let value = snapshot.value as? [String: Any] {
-                //print(snapshot.value as AnyObject)
-                if let singleCart = Mapper<AddCart>().map(JSONObject: value) {
-                    print(singleCart)
-                    fullCartList = [singleCart]
-                    print(fullCartList)
-                    complition()
-                }
-                
-            }
-        })
+//        FIRUtils.getCartsDBRef().observe(.childRemoved, with: { snapshot in
+//             let provar = snapshot.childSnapshot(forPath: "variants").value
+//            if let value = snapshot.value as? [String: Any] {
+//                if let singleCart = Mapper<AddCart>().map(JSONObject: value) {
+//                    let provarArr = provar as! NSArray
+//                    var vartemp : [String: AnyObject] = [String:AnyObject]()
+//                    for (key, value) in provarArr.enumerated() {
+//                        print("\(key) and \(value)")
+//                        singleCart.strVarients = ["\(key)":"\(value )" as AnyObject]
+//                    }
+//                    print(singleCart)
+//                    fullCartList = [singleCart]
+//                    print(fullCartList)
+//                    complition()
+//                }
+//                
+//            }
+//        })
         FIRUtils.getCartsDBRef().observe(.childAdded, with: { (snapshot) -> Void in
             let provar = snapshot.childSnapshot(forPath: "variants").value
                 if let singleCart = Mapper<AddCart>().map(JSONObject: snapshot.value) {
