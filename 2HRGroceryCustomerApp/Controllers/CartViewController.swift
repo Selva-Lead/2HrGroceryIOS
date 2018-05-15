@@ -16,6 +16,8 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
     var selecetedIndex: Int!
     var selectedVarientKey: Int!
     var selectedQuantity: Int!
+    var totalCheckOutPrice: Float = 0
+    var dicSelectedProductTolPrice: [Int:Float] = [Int: Float]()
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,14 +80,16 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
     @objc func varientCountIncrease(sender: UIButton) {
         selecetedIndex = sender.tag
         let selectedProduct = fullCartList[selecetedIndex]
+         let product = productForCart[selectedProduct.strProductId!]
         let varientValue = selectedProduct.strVarients["\(selectedVarientKey!)"] as! String
         selectedProduct.strVarients.removeValue(forKey: "\(selectedVarientKey)")
         selectedProduct.strVarients["\(selectedVarientKey!)"] = String(Int(varientValue)! + 1) as AnyObject
-        
-        let indexpath = IndexPath(row: selecetedIndex, section: 0)  //NSIndexPath(row: selecetedIndex, section: 0)
-        cartTableView.reloadRows(at: [indexpath], with: .none)
+        //       let indexpath = IndexPath(row: selecetedIndex, section: 0)
+        //        cartTableView.reloadRows(at: [indexpath], with: .none)
+     cartTableView.reloadData()
     }
     @objc func varientCountDecrease(sender: UIButton) {
+       
         selecetedIndex = sender.tag
         let selectedProduct = fullCartList[selecetedIndex]
          let varientValue = selectedProduct.strVarients["\(selectedVarientKey!)"] as! String
@@ -98,14 +102,10 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
                 fullCartList.remove(at: selecetedIndex)
                 FireAuthModel().removeCarts(productForSAleID: selectedProduct.strProductId!)
                  //[Int(selectedProduct.strProductId!)]
-                cartTableView.reloadData()
-            }else {
-                let indexpath = IndexPath(row: selecetedIndex, section: 0)
-                cartTableView.reloadRows(at: [indexpath], with: .none)
+                 dicSelectedProductTolPrice[selecetedIndex] = 0
             }
         }
-        
-       
+       cartTableView.reloadData()
     }
     
     /*
@@ -117,6 +117,14 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    func checkOutTotalPrice() {
+        var count = 0
+        for cartList in dicSelectedProductTolPrice  {
+           let value = cartList.value
+            totalCheckOutPrice = totalCheckOutPrice + value
+            count = count + 1
+        }
+    }
     
 }
 extension CartViewController: UITableViewDelegate,UITableViewDataSource {
@@ -132,6 +140,7 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        totalCheckOutPrice = 0
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCartTableViewCell") as! MainCartTableViewCell
         let cellCheckout = tableView.dequeueReusableCell(withIdentifier: "CheckOut") as! MainCartTableViewCell
         cell.selectionStyle = .none
@@ -171,7 +180,8 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
                     cell.lblProductQntyCount.layer.borderWidth = 1
                     cell.lblProductQntyCount.layer.cornerRadius = 4
                     cell.lblProductQntyCount.text = SingleVarientValue
-                    let perProductTotalPrice = Int(productVarient.strRegularPrice!) * Int(SingleVarientValue)!
+                    let perProductTotalPrice = productVarient.strRegularPrice! * Float(SingleVarientValue)!
+                    dicSelectedProductTolPrice[indexPath.row] = perProductTotalPrice
                     cell.lblPrice.text = String(perProductTotalPrice)
                     cell.btnVarientIncrease.tag = indexPath.row
                     cell.btnVarientIncrease.addTarget(self, action: #selector(varientCountIncrease(sender:)), for: .touchUpInside)
@@ -182,7 +192,8 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
                     
                     return cell
                 }else if indexPath.section == 1  {
-                    cellCheckout.btnCheckOut.titleLabel?.text = "CHECKOUT - $67.96"
+                    checkOutTotalPrice()
+                    cellCheckout.btnCheckOut.setTitle( "CHECKOUT - $ \(totalCheckOutPrice)", for: .normal)
                     return cellCheckout
                 }
             }
