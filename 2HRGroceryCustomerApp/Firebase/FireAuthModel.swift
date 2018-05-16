@@ -118,4 +118,12 @@ class FireAuthModel: NSObject {
                 }
         })
     }
+
+    func getDeliveryFee() {
+        FIRUtils.getstroeDeliveryFeeDBRef().observe(.value, with: {(snapshot) in
+            if let value = snapshot.value as? [String:AnyObject] {
+                deliveryfeeArr = value
+            }
+        })
+    }
 }

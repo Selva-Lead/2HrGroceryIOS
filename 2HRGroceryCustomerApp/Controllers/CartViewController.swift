@@ -89,7 +89,7 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
      cartTableView.reloadData()
     }
     @objc func varientCountDecrease(sender: UIButton) {
-       
+       dicSelectedProductTolPrice.removeAll()
         selecetedIndex = sender.tag
         let selectedProduct = fullCartList[selecetedIndex]
          let varientValue = selectedProduct.strVarients["\(selectedVarientKey!)"] as! String
@@ -102,7 +102,7 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
                 fullCartList.remove(at: selecetedIndex)
                 FireAuthModel().removeCarts(productForSAleID: selectedProduct.strProductId!)
                  //[Int(selectedProduct.strProductId!)]
-                 dicSelectedProductTolPrice[selecetedIndex] = 0
+                 //dicSelectedProductTolPrice[selecetedIndex] = 0
             }
         }
        cartTableView.reloadData()
@@ -150,6 +150,7 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
                 if indexPath.section == 0 {
                     
                     var singleAddCart = AddCart()
+                    print("indexpath row \(indexPath.row)")
                     singleAddCart = fullCartList[indexPath.row]
                     let varients = singleAddCart.strVarients
                     let product = productForCart[singleAddCart.strProductId!]
@@ -193,6 +194,17 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
                     return cell
                 }else if indexPath.section == 1  {
                     checkOutTotalPrice()
+                    let fee = deliveryfeeArr["fee"] as! Float
+                    let to = deliveryfeeArr["to"] as! Float
+                    if totalCheckOutPrice >= to {
+                        cellCheckout.lblDeliveryFee.isHidden = true
+                        cellCheckout.lblOrderEligible.text = "Your order eligible for free shipping"
+                    }else {
+                        cellCheckout.lblDeliveryFee.isHidden = false
+                        cellCheckout.lblDeliveryFee.text = "$ \(fee) Delivery fee applies"
+                        let remining = to - totalCheckOutPrice
+                         cellCheckout.lblOrderEligible.text = "Add $ \(remining) for Free 2 hour delivery"
+                    }
                     cellCheckout.btnCheckOut.setTitle( "CHECKOUT - $ \(totalCheckOutPrice)", for: .normal)
                     return cellCheckout
                 }

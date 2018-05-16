@@ -16,6 +16,7 @@ class FIRUtils: NSObject {
         static let cart = "/cart/"
         static let product = "/product/"
         static let productForSale = "/productsForSale/"
+        static let storeSettingdeliveryFee = "/storeSetting/2HRGroceryLLC/deliveryFee/0/"
         
     }
     
@@ -31,5 +32,8 @@ class FIRUtils: NSObject {
     }
     class func getProductForSaleDBRef() -> DatabaseReference {
         return Database.database().reference().child(FBPath.productForSale)
+    }
+    class func getstroeDeliveryFeeDBRef() -> DatabaseReference {
+        return Database.database().reference().child(FBPath.storeSettingdeliveryFee)
     }
 }

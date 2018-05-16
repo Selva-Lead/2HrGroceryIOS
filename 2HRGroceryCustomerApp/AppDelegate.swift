@@ -23,6 +23,7 @@ var UserMobileNumber :String!
 var fullCartList:[AddCart] = [AddCart]()
 var productForCart: [String:ProductForSale] = [String:ProductForSale]()
 var productForSaleItems = [ProductDropDown]()
+var deliveryfeeArr : [String: AnyObject] = [String:AnyObject]()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
