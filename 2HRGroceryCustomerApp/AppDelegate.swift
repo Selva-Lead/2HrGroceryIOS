@@ -19,11 +19,14 @@ var useruidstatus :String!
 var UserEmailID :String!
 var UserFirstName :String!
 var UserLastName :String!
+var UserDisplayName: String!
 var UserMobileNumber :String!
 var fullCartList:[AddCart] = [AddCart]()
 var productForCart: [String:ProductForSale] = [String:ProductForSale]()
 var productForSaleItems = [ProductDropDown]()
 var deliveryfeeArr : [String: AnyObject] = [String:AnyObject]()
+var customAddressList : [AddressList] = [AddressList]()
+var availabilityTimes = NSArray()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        useruid = "MznQeKAsmOhNcw3YXkvsCghw71c2"
+        useruid = "RYr3lNznnpMQFcxcxSjrQbyqgoy1"
         FirebaseApp.configure()
         
         IQKeyboardManager.sharedManager().enable = true
@@ -46,9 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
            // useruid = UserDefault.value(forKey: "uid") as! String
             //UserEmailID = UserDefault.value(forKey: "email") as! String
-            //UserFirstName = UserDefault.value(forKey: "firstName") as! String
+            UserFirstName = UserDefault.value(forKey: "firstName") as! String
            // UserLastName = UserDefault.value(forKey: "lastName") as! String
            // UserMobileNumber = UserDefault.value(forKey: "phone") as! String
+            
             print(useruid)
             print(UserEmailID)
             print(UserFirstName)

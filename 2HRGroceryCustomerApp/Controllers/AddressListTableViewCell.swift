@@ -29,6 +29,7 @@ class AddressListTableViewCell: UITableViewCell {
     @IBOutlet weak var addCardView: UIView!
     @IBOutlet weak var ExistingCardView: UIView!
     @IBOutlet weak var orderTotalAmount: UILabel!
+    @IBOutlet weak var lblTotalDateandTimeList: UILabel!
     @IBOutlet weak var btnProcessComplete: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()

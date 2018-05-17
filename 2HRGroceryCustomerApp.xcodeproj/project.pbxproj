@@ -57,6 +57,8 @@
 		8473312C20A08D3E009FDBD5 /* FIRUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473312B20A08D3E009FDBD5 /* FIRUtils.swift */; };
 		8473312E20A09102009FDBD5 /* FireAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473312D20A09102009FDBD5 /* FireAuthModel.swift */; };
 		8473313120A09203009FDBD5 /* saveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473313020A09203009FDBD5 /* saveCard.swift */; };
+		847400E520ABFB6100C2CF46 /* ConformDeliveryAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847400E420ABFB6100C2CF46 /* ConformDeliveryAddressViewController.swift */; };
+		847400E720AC077A00C2CF46 /* AddressList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847400E620AC077A00C2CF46 /* AddressList.swift */; };
 		8480173F209AEA5B007DFEE4 /* EmailSigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480173E209AEA5B007DFEE4 /* EmailSigninView.swift */; };
 		84801741209AFE5E007DFEE4 /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 84801740209AFE5D007DFEE4 /* banner.png */; };
 		848544FD20971E550072CA21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848544FC20971E550072CA21 /* AppDelegate.swift */; };
@@ -157,6 +159,8 @@
 		8473312B20A08D3E009FDBD5 /* FIRUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRUtils.swift; sourceTree = "<group>"; };
 		8473312D20A09102009FDBD5 /* FireAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAuthModel.swift; sourceTree = "<group>"; };
 		8473313020A09203009FDBD5 /* saveCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveCard.swift; sourceTree = "<group>"; };
+		847400E420ABFB6100C2CF46 /* ConformDeliveryAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConformDeliveryAddressViewController.swift; sourceTree = "<group>"; };
+		847400E620AC077A00C2CF46 /* AddressList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressList.swift; sourceTree = "<group>"; };
 		8480173E209AEA5B007DFEE4 /* EmailSigninView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSigninView.swift; sourceTree = "<group>"; };
 		84801740209AFE5D007DFEE4 /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
 		848544F920971E550072CA21 /* 2HRGroceryCustomerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2HRGroceryCustomerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +268,7 @@
 				84418313209DEBC800BFE745 /* View.xib */,
 				849A07EC20A1B95100F2BBAE /* PaymentWithCardDetailViewController.swift */,
 				849A07F620A1E40B00F2BBAE /* ThankyouViewController.swift */,
+				847400E420ABFB6100C2CF46 /* ConformDeliveryAddressViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 				84387DE320A2F1DC0050FE15 /* AddCart.swift */,
 				8412956520A4721300E5F2A0 /* ProductForSale.swift */,
 				84CB872820A57E050071EF1B /* ProductVarient.swift */,
+				847400E620AC077A00C2CF46 /* AddressList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -690,6 +696,7 @@
 				84418319209DEBC900BFE745 /* MainCartTableViewCell.swift in Sources */,
 				84691D7B209C402800F574E3 /* ProductsCell.swift in Sources */,
 				84062DB920998255003C65A5 /* DeliveryaddressViewController.swift in Sources */,
+				847400E520ABFB6100C2CF46 /* ConformDeliveryAddressViewController.swift in Sources */,
 				84684AF5209885B500269619 /* LoginViewController.swift in Sources */,
 				84418316209DEBC900BFE745 /* CreditCardViewController.swift in Sources */,
 				8412956620A4721300E5F2A0 /* ProductForSale.swift in Sources */,
@@ -699,6 +706,7 @@
 				8441831B209DEBC900BFE745 /* PaymentHeader.swift in Sources */,
 				84062DC320999387003C65A5 /* EmailPreferenceView.swift in Sources */,
 				84418317209DEBC900BFE745 /* DeliveryDateTimeViewController.swift in Sources */,
+				847400E720AC077A00C2CF46 /* AddressList.swift in Sources */,
 				84418315209DEBC900BFE745 /* CartViewController.swift in Sources */,
 				8451520D209B0EFB00D982B7 /* EmailForgotController.swift in Sources */,
 				8441831F209DEBDC00BFE745 /* groceryText.swift in Sources */,

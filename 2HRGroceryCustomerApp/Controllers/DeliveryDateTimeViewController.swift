@@ -23,9 +23,45 @@ class DeliveryDateTimeViewController: UIViewController {
         }
     }
         
-    
+    func getWeekday(weekday:Int) -> String {
+        switch weekday {
+        case 0:
+            return "Sunday"
+        case 1:
+            return "Monday"
+        case 2:
+            return "Tuesday"
+        case 3:
+            return "Wednesday"
+        case 4:
+            return "Thursday"
+        case 5:
+            return "Friday"
+        case 6:
+            return "Saturday"
+        default:
+            return ""
+        }
+    }
      @ IBOutlet weak var deliTopView: UIView!
+    
+    var strmothdayArr : [String] = [String]()
+    var dateAndTimeArray : [String] = [String]()
+    
     override func viewDidLoad() {
+        
+        var calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier(rawValue: NSGregorianCalendar))
+        let dateComponent = NSDateComponents()
+        let currentDate = getCurrentDate()
+        for i in 1...7 {
+            dateComponent.day = i
+            let newDate = calendar?.date(byAdding: dateComponent as DateComponents, to: currentDate, options:[])
+            let day = Calendar.current.component(.day, from: newDate!)
+            let month = Calendar.current.component(.month, from: newDate!)
+            let singleMonthDay = "\(month)/ \(day)"
+            strmothdayArr.append(singleMonthDay)
+            print(newDate)
+        }
         super.viewDidLoad()
         deliTopView.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
         deliTopView.layer.borderWidth = 0.5
@@ -33,10 +69,83 @@ class DeliveryDateTimeViewController: UIViewController {
         deliTopView.layer.shadowOffset = CGSize(width: 1, height: 2.0)
         deliTopView.layer.shadowOpacity = 1.0
         deliTopView.layer.shadowRadius = 10.0
-
-        // Do any additional setup after loading the view.
+        
+        let weekday = Calendar.current.component(.weekday, from: Date())
+        var intWeakday: Int = weekday
+        var intcount = 0
+        for availabilityTime in availabilityTimes {
+            let vv = availabilityTime as! [String:AnyObject]
+            for v in vv {
+                if v.value != nil {
+                    if  let sv = v.value as? NSArray {
+                        for (key,value)in sv.enumerated() {
+                            let va = value as! [String:AnyObject]
+                            //print (sv.value(forKey: "startHour"))
+                            //  print (sv.value(forKey: "endHour"))
+                            // print("\(key) and \(value)")
+                            let weeday = getWeekday(weekday: intWeakday)
+                            let str = "-"
+                            let startDate = String(va["startHour"] as! Int)
+                            let endDate = String(va["endHour"] as! Int)
+                            let strfull = "\(strmothdayArr[intcount]) \(weeday) \(startDate) \(str) \(endDate))"
+                            dateAndTimeArray.append(strfull)
+                            print("\(strmothdayArr[intcount]) \(weeday) \(startDate) \(str) \(endDate)")
+                        }
+                    }
+                }
+            }
+            if intWeakday == 6 {
+                intWeakday = 0
+            }else {
+                intWeakday += 1
+            }
+            intcount = intcount + 1
+        }
     }
 
+    
+    func getCurrentDate()-> Date {
+        let nowcu = Date()
+        let dateFormattercurr = DateFormatter()
+        dateFormattercurr.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let nameOfMonth = dateFormattercurr.string(from: nowcu)
+        let isoDate = nameOfMonth//"2018-05-25T10:44:00+0000"
+        
+        
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+        
+        var now = dateFormatter.date(from: isoDate)
+        
+        
+        
+        var nowComponents = DateComponents()
+        
+        let calendar = Calendar.current
+        
+        //nowComponents.year = Calendar.current.component(.year, from: now!)
+        
+        nowComponents.month = Calendar.current.component(.month, from: now!)
+        
+        nowComponents.day = Calendar.current.component(.day, from: now!)
+        
+        // nowComponents.hour = Calendar.current.component(.hour, from: now)
+        
+        //nowComponents.minute = Calendar.current.component(.minute, from: now)
+        
+        // nowComponents.second = Calendar.current.component(.second, from: now)
+        
+        // nowComponents.timeZone = NSTimeZone.local
+       
+        now = calendar.date(from: nowComponents)!
+        
+        return now as! Date
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -75,7 +184,7 @@ extension DeliveryDateTimeViewController: UITableViewDelegate, UITableViewDataSo
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        if section == 2 {
-            return 7
+            return dateAndTimeArray.count
         }
         return 1
     }
@@ -101,15 +210,15 @@ extension DeliveryDateTimeViewController: UITableViewDelegate, UITableViewDataSo
         let cellDateAndTime = tableView.dequeueReusableCell(withIdentifier: addressList.dateAndTime.identifier) as! AddressListTableViewCell
 
         if indexPath.section == 0 {
-            cell.addrName.text = "name from Firebase"
+            cell.addrName.text = UserFirstName
             return cell
         }else if indexPath.section == 1 {
             celldetail.lbladdrDetail.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
             celldetail.lbladdrDetail.layer.borderWidth = 1.0
-            celldetail.lbladdrDetail.text = "erteuwyfeuwif \n eifrewfds \n  frwefnsv \n isfre rfnsvfd vorfvnfgh afhnvdfghfvfrjryrrlcj"
+            celldetail.lbladdrDetail.text = customAddressList[0].strFullAddress
             return celldetail
         }else if indexPath.section == 2 {
-            //cellDateAndTime.
+            cellDateAndTime.lblTotalDateandTimeList.text = dateAndTimeArray[indexPath.row]
             cellDateAndTime.vewDateAndTime.layer.borderWidth = 1.0
             cellDateAndTime.vewDateAndTime.layer.borderColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
             return cellDateAndTime

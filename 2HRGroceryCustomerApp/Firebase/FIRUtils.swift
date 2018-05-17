@@ -17,6 +17,8 @@ class FIRUtils: NSObject {
         static let product = "/product/"
         static let productForSale = "/productsForSale/"
         static let storeSettingdeliveryFee = "/storeSetting/2HRGroceryLLC/deliveryFee/0/"
+        static let address = "/address/"
+        static let availabitity = "/Availability/regularHours"
         
     }
     
@@ -35,5 +37,11 @@ class FIRUtils: NSObject {
     }
     class func getstroeDeliveryFeeDBRef() -> DatabaseReference {
         return Database.database().reference().child(FBPath.storeSettingdeliveryFee)
+    }
+    class func getAddressListDBRef() -> DatabaseReference {
+        return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.address)
+    }
+    class func getAvailabitityTime() -> DatabaseReference {
+        return Database.database().reference().child(FBPath.availabitity)
     }
 }

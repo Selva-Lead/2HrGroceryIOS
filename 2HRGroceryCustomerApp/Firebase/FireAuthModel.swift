@@ -64,24 +64,24 @@ class FireAuthModel: NSObject {
     }
     func getCartList(complition: @escaping () -> (Swift.Void)) {
         fullCartList.removeAll()
-        FIRUtils.getCartsDBRef().observe(.childChanged, with: { snapshot -> Void in
-             let provar = snapshot.childSnapshot(forPath: "variants").value
-            if let value = snapshot.value as? [String: Any] {
-                if let singleCart = Mapper<AddCart>().map(JSON: value) {
-                    let provarArr = provar as! NSArray
-                    var vartemp : [String: AnyObject] = [String:AnyObject]()
-                    for (key, value) in provarArr.enumerated() {
-                        print("\(key) and \(value)")
-                        singleCart.strVarients = ["\(key)":"\(value )" as AnyObject]
-                    }
-                    print(singleCart)
-                    fullCartList = [singleCart]
-                    print(fullCartList)
-                    complition()
-                }
-                
-            }
-        })
+//        FIRUtils.getCartsDBRef().observe(.childChanged, with: { snapshot -> Void in
+//             let provar = snapshot.childSnapshot(forPath: "variants").value
+//            if let value = snapshot.value as? [String: Any] {
+//                if let singleCart = Mapper<AddCart>().map(JSON: value) {
+//                    let provarArr = provar as! NSArray
+//                    var vartemp : [String: AnyObject] = [String:AnyObject]()
+//                    for (key, value) in provarArr.enumerated() {
+//                        print("\(key) and \(value)")
+//                        singleCart.strVarients = ["\(key)":"\(value )" as AnyObject]
+//                    }
+//                    print(singleCart)
+//                    fullCartList = [singleCart]
+//                    print(fullCartList)
+//                    complition()
+//                }
+//                
+//            }
+//        })
 //        FIRUtils.getCartsDBRef().observe(.childRemoved, with: { snapshot in
 //             let provar = snapshot.childSnapshot(forPath: "variants").value
 //            if let value = snapshot.value as? [String: Any] {
@@ -103,12 +103,16 @@ class FireAuthModel: NSObject {
         FIRUtils.getCartsDBRef().observe(.childAdded, with: { (snapshot) -> Void in
             let provar = snapshot.childSnapshot(forPath: "variants").value
                 if let singleCart = Mapper<AddCart>().map(JSONObject: snapshot.value) {
-                     let provarArr = provar as! NSArray
-                    var vartemp : [String: AnyObject] = [String:AnyObject]()
-                   for (key, value) in provarArr.enumerated() {
-                        print("\(key) and \(value)")
-                    singleCart.strVarients = ["\(key)":"\(value )" as AnyObject]
+                    if  let provarArr = provar as? NSArray {
+                        for (key, value) in provarArr.enumerated() {
+                            print("\(key) and \(value)")
+                            singleCart.strVarients = ["\(key)":"\(value )" as AnyObject]
+                        }
+                    } else if let provarDic = provar as? [String:AnyObject] {
+                        singleCart.strVarients = provarDic
                     }
+                   // var vartemp : [String: AnyObject] = [String:AnyObject]()
+                   
                     print(singleCart)
                     fullCartList.append(singleCart)
                     print(fullCartList)
@@ -125,5 +129,39 @@ class FireAuthModel: NSObject {
                 deliveryfeeArr = value
             }
         })
+    }
+    
+    func getAddressList() {
+        FIRUtils.getAddressListDBRef().observe(.value, with: {(snapshot) in
+            if let value = snapshot.value  {
+                let temAddressArr = value as! NSArray
+                for object in temAddressArr{
+                    var tempdic = AddressList()
+                    let dic = object as! NSDictionary
+                    tempdic.strAddress = dic.value(forKey: "address") as? String
+                    tempdic.strCity = dic.value(forKey: "city") as? String
+                    tempdic.strFullAddress = dic.value(forKey: "fulladdress") as? String
+                    tempdic.strState = dic.value(forKey: "state") as? String
+                    tempdic.strZip = dic.value(forKey: "zip") as? String
+                    customAddressList.append(tempdic)
+                }
+                //            if let singleCart = Mapper<AddressList>().mapArray(JSONfile: snapshot.value as! String) {
+                //                    customAddressList = singleCart
+                //                }
+            }
+        })
+    }
+
+    func setdefaultAddress(addcount: String, value: AddressList) {
+        FIRUtils.getAddressListDBRef().child(addcount).setValue(value.toJSON())
+    }
+    func getAvaialbility() {
+        FIRUtils.getAvailabitityTime().observe(.value, with: {(snapshot) in
+            print(snapshot.value)
+            if let value = snapshot.value  {
+                availabilityTimes = value as! NSArray
+            }
+        })
+       
     }
 }

@@ -73,8 +73,7 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
         }
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DeliveryaddressViewController") as! DeliveryaddressViewController
-        nextViewController.isdeviveryaddress = true
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ConformDeliveryAddressViewController") as! ConformDeliveryAddressViewController
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     @objc func varientCountIncrease(sender: UIButton) {
