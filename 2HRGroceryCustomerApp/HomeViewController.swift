@@ -227,7 +227,7 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     @objc func cart(sender: UIButton)
     {
-        if useruid != nil {
+        if useruid != "" {
             if UIDevice.current.userInterfaceIdiom == .phone
             {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)

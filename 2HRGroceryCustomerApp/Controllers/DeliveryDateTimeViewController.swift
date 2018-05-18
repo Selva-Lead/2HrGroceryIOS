@@ -93,7 +93,7 @@ class DeliveryDateTimeViewController: UIViewController {
                             let str = "-"
                             let startDate = String(va["startHour"] as! Int)
                             let endDate = String(va["endHour"] as! Int)
-                            let strfull = "\(strmothdayArr[intcount]) \(weeday) \(startDate) \(str) \(endDate))"
+                            let strfull = "\(strmothdayArr[intcount]) \(weeday) \(startDate) \(str) \(endDate)"
                             dateAndTimeArray.append(strfull)
                             print("\(strmothdayArr[intcount]) \(weeday) \(startDate) \(str) \(endDate)")
                         }
@@ -163,15 +163,16 @@ class DeliveryDateTimeViewController: UIViewController {
         imgChangeTag = sender.tag
         if sender.imageView?.image == #imageLiteral(resourceName: "uncheck.png") {
             imgChange = #imageLiteral(resourceName: "check.png")
-            UserDefaults.standard.set(dateAndTimeArray[sender.tag], forKey: "DeliveryDateAndTime")
+            //UserDefaults.standard.set(dateAndTimeArray[sender.tag], forKey: "DeliveryDateAndTime")
+            selectedDateandTime = dateAndTimeArray[sender.tag]
         }else {
             imgChange = #imageLiteral(resourceName: "uncheck.png")
         }
         tblView.reloadData()
     }
     @IBAction func ContinuePayment(_ sender: UIButton) {
-        let dayAndTime = UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as? String
-        if dayAndTime != nil {
+        //let dayAndTime = UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as? String
+        if selectedDateandTime != nil {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentDetailsViewController") as! PaymentDetailsViewController
@@ -245,7 +246,9 @@ extension DeliveryDateTimeViewController: UITableViewDelegate, UITableViewDataSo
             .name.identifier) as! AddressListTableViewCell
         let celldetail = tableView.dequeueReusableCell(withIdentifier: addressList.address.identifier) as! AddressListTableViewCell
         let cellDateAndTime = tableView.dequeueReusableCell(withIdentifier: addressList.dateAndTime.identifier) as! AddressListTableViewCell
-
+        cell.selectionStyle = .none
+        celldetail.selectionStyle = .none
+        cellDateAndTime.selectionStyle = .none
         if indexPath.section == 0 {
             cell.addrName.text = UserFirstName
             return cell
@@ -262,6 +265,7 @@ extension DeliveryDateTimeViewController: UITableViewDelegate, UITableViewDataSo
                 cellDateAndTime.btnDeliveryTimeCheck.setImage(imgChange, for: .normal)
             }else {
                 cellDateAndTime.btnDeliveryTimeCheck.setImage(#imageLiteral(resourceName: "uncheck.png"), for: .normal)
+               // UserDefaults.standard.set(nil, forKey: "DeliveryDateAndTime")
             }
             cellDateAndTime.btnDeliveryTimeCheck.tag = indexPath.row
             cellDateAndTime.btnDeliveryTimeCheck.addTarget(self, action: #selector(dateTimeCheckout(sender:)), for: .touchUpInside)

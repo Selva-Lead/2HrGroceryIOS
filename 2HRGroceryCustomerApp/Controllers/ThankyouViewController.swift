@@ -28,6 +28,17 @@ class ThankyouViewController: UIViewController {
     }
     
 
+    @IBAction func continueShipping(_ sender: Any) {
+        
+        for controller in self.navigationController!.viewControllers as Array
+        {
+            if controller.isKind(of: UserHomeViewController.self)
+            {
+                self.navigationController!.popToViewController(controller, animated: true)
+                break
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 

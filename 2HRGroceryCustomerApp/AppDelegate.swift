@@ -30,6 +30,7 @@ var availabilityTimes = NSArray()
 var savedCards : [String:saveCard] = [String:saveCard]()
 var savedCardsKey : [String] = [String]()
 var totalCheckOutPrice: Float = 0
+var selectedDateandTime: String?
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -2106,7 +2106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3Y-WL-jNR">
-                                <rect key="frame" x="0.0" y="63" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHOPPING CART" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUp-0d-GbK">
                                         <rect key="frame" x="44" y="12" width="126" height="22"/>
@@ -2158,14 +2158,14 @@
                                 </variation>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="strip.png" translatesAutoresizingMaskIntoConstraints="NO" id="uVi-xT-UHK">
-                                <rect key="frame" x="0.0" y="107" width="186" height="7"/>
+                                <rect key="frame" x="0.0" y="64" width="186" height="7"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196078430000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9s-Ic-ZmM">
-                                <rect key="frame" x="0.0" y="115" width="375" height="552"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="595"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZAS-v3-Elf">
-                                        <rect key="frame" x="0.0" y="26" width="375" height="509"/>
+                                        <rect key="frame" x="0.0" y="26" width="375" height="552"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainCartTableViewCell" rowHeight="93" id="v4b-LH-xba" customClass="MainCartTableViewCell" customModule="_HRGroceryCustomerApp" customModuleProvider="target">
@@ -2479,7 +2479,7 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7wx-Gp-WWb">
-                                        <rect key="frame" x="83" y="543" width="237" height="3"/>
+                                        <rect key="frame" x="83" y="586" width="237" height="3"/>
                                         <color key="backgroundColor" red="0.33333333329999998" green="0.34509803919999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="3" id="5Ad-iL-c7e"/>
@@ -2507,7 +2507,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="2e4-Rn-S3j" firstAttribute="trailing" secondItem="B3Y-WL-jNR" secondAttribute="trailing" id="2Z9-zU-Rpb"/>
-                            <constraint firstItem="B3Y-WL-jNR" firstAttribute="top" secondItem="2e4-Rn-S3j" secondAttribute="top" constant="43" id="45L-OA-BLb"/>
+                            <constraint firstItem="B3Y-WL-jNR" firstAttribute="top" secondItem="2e4-Rn-S3j" secondAttribute="top" id="45L-OA-BLb"/>
                             <constraint firstItem="i9s-Ic-ZmM" firstAttribute="top" secondItem="B3Y-WL-jNR" secondAttribute="bottom" constant="8" id="ENz-a0-TUy"/>
                             <constraint firstItem="2e4-Rn-S3j" firstAttribute="trailing" secondItem="i9s-Ic-ZmM" secondAttribute="trailing" id="RsA-9c-HSq"/>
                             <constraint firstItem="uVi-xT-UHK" firstAttribute="leading" secondItem="B3Y-WL-jNR" secondAttribute="leading" id="UQm-1S-ugg"/>
@@ -2536,7 +2536,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="acP-6R-hwz">
-                                <rect key="frame" x="0.0" y="63" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PAYMENT DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djm-LT-xlM">
                                         <rect key="frame" x="18" y="12" width="228" height="22"/>
@@ -2556,7 +2556,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.50196078430000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T3F-Gx-vhf">
-                                <rect key="frame" x="1" y="132" width="374" height="535"/>
+                                <rect key="frame" x="1" y="89" width="374" height="578"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellName" rowHeight="72" id="mha-Zd-8ZR" customClass="AddressListTableViewCell" customModule="_HRGroceryCustomerApp" customModuleProvider="target">
@@ -2749,7 +2749,7 @@
                             <constraint firstItem="tW3-vA-dbT" firstAttribute="trailing" secondItem="acP-6R-hwz" secondAttribute="trailing" id="5nU-6V-GXG"/>
                             <constraint firstItem="T3F-Gx-vhf" firstAttribute="top" secondItem="acP-6R-hwz" secondAttribute="bottom" constant="25" id="6P1-gV-mqa"/>
                             <constraint firstItem="pkO-rq-NHq" firstAttribute="top" secondItem="acP-6R-hwz" secondAttribute="bottom" id="Bkz-74-S9f"/>
-                            <constraint firstItem="acP-6R-hwz" firstAttribute="top" secondItem="tW3-vA-dbT" secondAttribute="top" constant="43" id="Jtf-OC-rHF"/>
+                            <constraint firstItem="acP-6R-hwz" firstAttribute="top" secondItem="tW3-vA-dbT" secondAttribute="top" id="Jtf-OC-rHF"/>
                             <constraint firstItem="T3F-Gx-vhf" firstAttribute="leading" secondItem="tW3-vA-dbT" secondAttribute="leading" constant="1" id="WeB-4w-WQO"/>
                             <constraint firstItem="tW3-vA-dbT" firstAttribute="trailing" secondItem="T3F-Gx-vhf" secondAttribute="trailing" id="ePy-gL-4Fs"/>
                             <constraint firstItem="acP-6R-hwz" firstAttribute="leading" secondItem="tW3-vA-dbT" secondAttribute="leading" id="k3L-b2-Bwd"/>
@@ -2776,7 +2776,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fk-SO-i5c">
-                                <rect key="frame" x="0.0" y="63" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DELIVERY DATE &amp; TIME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PaQ-rZ-iRD">
                                         <rect key="frame" x="18" y="12" width="228" height="22"/>
@@ -2794,7 +2794,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="strip.png" translatesAutoresizingMaskIntoConstraints="NO" id="HmZ-FC-aFK">
-                                <rect key="frame" x="0.0" y="107" width="186" height="7"/>
+                                <rect key="frame" x="0.0" y="64" width="186" height="7"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196078430000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpo-GU-ycn">
@@ -2817,8 +2817,8 @@
                                     <action selector="ContinuePayment:" destination="6AW-XT-BHW" eventType="touchUpInside" id="qJ5-zq-WSZ"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zQb-WJ-7YE">
-                                <rect key="frame" x="0.0" y="122" width="375" height="446"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zQb-WJ-7YE">
+                                <rect key="frame" x="0.0" y="79" width="375" height="496"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellName" rowHeight="72" id="eiZ-I0-gO3" customClass="AddressListTableViewCell" customModule="_HRGroceryCustomerApp" customModuleProvider="target">
@@ -2981,14 +2981,20 @@
                             <constraint firstItem="4Nx-gh-9Pb" firstAttribute="trailing" secondItem="6fk-SO-i5c" secondAttribute="trailing" id="Cuk-SN-3CU"/>
                             <constraint firstItem="HmZ-FC-aFK" firstAttribute="leading" secondItem="4Nx-gh-9Pb" secondAttribute="leading" id="DkN-eu-OR5"/>
                             <constraint firstItem="zQb-WJ-7YE" firstAttribute="leading" secondItem="4Nx-gh-9Pb" secondAttribute="leading" id="FBL-Cd-EQ7"/>
-                            <constraint firstItem="6fk-SO-i5c" firstAttribute="top" secondItem="4Nx-gh-9Pb" secondAttribute="top" constant="43" id="OxK-e1-SNe"/>
+                            <constraint firstItem="6fk-SO-i5c" firstAttribute="top" secondItem="4Nx-gh-9Pb" secondAttribute="top" id="OxK-e1-SNe"/>
                             <constraint firstItem="4Nx-gh-9Pb" firstAttribute="trailing" secondItem="zQb-WJ-7YE" secondAttribute="trailing" id="Yj9-P2-QBs"/>
                             <constraint firstItem="6fk-SO-i5c" firstAttribute="leading" secondItem="4Nx-gh-9Pb" secondAttribute="leading" id="f6A-3z-o7D"/>
                             <constraint firstItem="HmZ-FC-aFK" firstAttribute="top" secondItem="6fk-SO-i5c" secondAttribute="bottom" id="len-IB-8Hb"/>
                             <constraint firstItem="4Nx-gh-9Pb" firstAttribute="bottom" secondItem="Bpo-GU-ycn" secondAttribute="bottom" constant="20" id="sQE-10-twz"/>
+                            <constraint firstItem="zQb-WJ-7YE" firstAttribute="top" secondItem="6fk-SO-i5c" secondAttribute="bottom" constant="15" id="xsA-5H-WXJ"/>
                             <constraint firstItem="Bpo-GU-ycn" firstAttribute="centerX" secondItem="4Nx-gh-9Pb" secondAttribute="centerX" id="zeD-sP-cSd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Nx-gh-9Pb"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Bva-fC-FZJ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="deliTopView" destination="6fk-SO-i5c" id="9X3-e8-uh4"/>
@@ -3437,7 +3443,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hU-G3-sbS">
-                                <rect key="frame" x="-3" y="47" width="375" height="44"/>
+                                <rect key="frame" x="-3" y="20" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PAYMENT DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXy-k4-3ih">
                                         <rect key="frame" x="18" y="12" width="228" height="22"/>
@@ -3453,11 +3459,11 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="strip.png" translatesAutoresizingMaskIntoConstraints="NO" id="2f1-hZ-Dnx">
-                                <rect key="frame" x="-3" y="91" width="186" height="7"/>
+                                <rect key="frame" x="-3" y="64" width="186" height="7"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196078430000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eVk-yi-hWh">
-                                <rect key="frame" x="-3" y="116" width="378" height="551"/>
+                                <rect key="frame" x="-3" y="89" width="378" height="578"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="551" id="3k1-Vn-5Iq"/>
@@ -3750,7 +3756,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2hU-G3-sbS" firstAttribute="top" secondItem="5kK-XC-yWI" secondAttribute="top" constant="27" id="3YI-3T-wAh"/>
+                            <constraint firstItem="2hU-G3-sbS" firstAttribute="top" secondItem="5kK-XC-yWI" secondAttribute="top" id="3YI-3T-wAh"/>
                             <constraint firstItem="2f1-hZ-Dnx" firstAttribute="top" secondItem="2hU-G3-sbS" secondAttribute="bottom" id="3bY-Br-IKE"/>
                             <constraint firstItem="5kK-XC-yWI" firstAttribute="trailing" secondItem="2hU-G3-sbS" secondAttribute="trailing" constant="3" id="MBT-DV-tEP"/>
                             <constraint firstItem="eVk-yi-hWh" firstAttribute="top" secondItem="2hU-G3-sbS" secondAttribute="bottom" constant="25" id="RSg-OR-x0W"/>
@@ -3984,7 +3990,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZe-IE-QCm">
                                                     <rect key="frame" x="17" y="0.0" width="346" height="89"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.png" translatesAutoresizingMaskIntoConstraints="NO" id="rg6-kj-CtB">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rg6-kj-CtB">
                                                             <rect key="frame" x="17" y="24" width="45" height="45"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="rg6-kj-CtB" secondAttribute="height" multiplier="1:1" id="X1l-qi-3TQ"/>
@@ -4434,6 +4440,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="continueShipping:" destination="e8J-hJ-6dS" eventType="touchUpInside" id="j7i-yG-ZfC"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -102,7 +102,13 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     let cellProductItem = tableView.dequeueReusableCell(withIdentifier: "cellProductDetails") as! AddressListTableViewCell
     let cellMore = tableView.dequeueReusableCell(withIdentifier: "cellMoreProduct") as! AddressListTableViewCell
     let cellPlaceOrder = tableView.dequeueReusableCell(withIdentifier: "cellPlaceOrder") as! AddressListTableViewCell
-    
+    cell.selectionStyle = .none
+    celldetail.selectionStyle = .none
+    cellPaymentDate.selectionStyle = .none
+    cellCard.selectionStyle = .none
+    cellProductItem.selectionStyle = .none
+    cellMore.selectionStyle = .none
+    cellPlaceOrder.selectionStyle = .none
     if indexPath.section == 0 {
         cell.addrName.text = UserDisplayName
         return cell
@@ -152,7 +158,9 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         cellProductItem.ProCount.layer.cornerRadius = 4
         cellProductItem.ProCount.text = SingleVarientValue
         let perProductTotalPrice = productVarient.strRegularPrice! * Float(SingleVarientValue)!
-        cellProductItem.ProPrice.text = String(perProductTotalPrice)
+        cellProductItem.ProPrice .text = String(productVarient.strRegularPrice!)
+        cellProductItem.ProTotalPrice.text = String(perProductTotalPrice)
+
         return cellProductItem
     } else if indexPath.section == 5 {
         let fee = deliveryfeeArr["fee"] as! Float

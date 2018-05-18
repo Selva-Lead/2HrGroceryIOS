@@ -153,7 +153,13 @@ extension PaymentWithCardDetailViewController: UITableViewDelegate,UITableViewDa
         let cellPaymentDateAndTime = tableView.dequeueReusableCell(withIdentifier: "cellPaymentDate") as! AddressListTableViewCell
         let cellCardSelection = tableView.dequeueReusableCell(withIdentifier: "cellCardSelection") as! AddressListTableViewCell
         let cellComplete = tableView.dequeueReusableCell(withIdentifier: "cellComplete") as! AddressListTableViewCell
-        cellCardSelection.selectionStyle = .none
+        
+        cell.selectionStyle = .none
+        celldetail.selectionStyle = .none
+        cellPaymentDateAndTime.selectionStyle = .none
+       cellCardSelection.selectionStyle = .none
+        cellComplete.selectionStyle = .none
+       
         if indexPath.section == 0 {
             cell.addrName.text = UserDisplayName
             return cell
@@ -166,7 +172,7 @@ extension PaymentWithCardDetailViewController: UITableViewDelegate,UITableViewDa
             //cellDateAndTime.
             //            cellDateAndTime.vewDateAndTime.layer.borderWidth = 1.0
             //            cellDateAndTime.vewDateAndTime.layer.borderColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
-            cellPaymentDateAndTime.txtPaymentDate.text = UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as! String
+            cellPaymentDateAndTime.txtPaymentDate.text = selectedDateandTime// UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as! String
             return cellPaymentDateAndTime
         }else if indexPath.section == 3 {
             if indexPath.row < savedCards.count {

@@ -162,7 +162,10 @@ extension PaymentDetailsViewController: UITableViewDelegate,UITableViewDataSourc
         let celldetail = tableView.dequeueReusableCell(withIdentifier: "cellAddress") as! AddressListTableViewCell
         let cellPaymentDateAndTime = tableView.dequeueReusableCell(withIdentifier: "cellPaymentDate") as! AddressListTableViewCell
         let cellPayment = tableView.dequeueReusableCell(withIdentifier: "cellPayment") as! AddressListTableViewCell
-        
+        cell.selectionStyle = .none
+        celldetail.selectionStyle = .none
+        cellPaymentDateAndTime.selectionStyle = .none
+        cellPayment.selectionStyle = .none
         if indexPath.section == 0 {
             cell.addrName.text = UserDisplayName
             return cell
@@ -172,7 +175,7 @@ extension PaymentDetailsViewController: UITableViewDelegate,UITableViewDataSourc
             celldetail.lbladdrDetail.text = customAddressList[0].strFullAddress
             return celldetail
         }else if indexPath.section == 2 {
-            let selectedDate = UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as! String
+            let selectedDate = selectedDateandTime //UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as! String
             cellPaymentDateAndTime.txtPaymentDate.text = selectedDate
             return cellPaymentDateAndTime
         }else if indexPath.section == 3 {

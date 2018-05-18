@@ -16,7 +16,6 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
     var selecetedIndex: Int!
     var selectedVarientKey: Int!
     var selectedQuantity: Int!
-    
     var dicSelectedProductTolPrice: [Int:Float] = [Int: Float]()
   
     override func viewDidLoad() {
@@ -35,13 +34,14 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
         backbutton.addTarget(self, action: #selector(popvc), for: .touchUpInside)
         let backbuttonitem = UIBarButtonItem(customView: backbutton)
         self.navigationItem.leftBarButtonItem = backbuttonitem
-      
        // btnCheckOut.setTitle("CHECKOUT - $", for: .normal)
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        fullCartList.removeAll()
+        if fullCartList.count != 0 {
+            fullCartList.removeAll()
+        }
         FireAuthModel().getCartList(complition: {
             self.cartTableView.reloadData()
         })
