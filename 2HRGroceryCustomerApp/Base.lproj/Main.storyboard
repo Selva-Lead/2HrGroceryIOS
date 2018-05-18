@@ -2246,6 +2246,10 @@
                                                                             <rect key="frame" x="35" y="7" width="10" height="10"/>
                                                                             <state key="normal" image="add.png"/>
                                                                         </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-fS-f4h">
+                                                                            <rect key="frame" x="-1" y="-6" width="66" height="30"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
@@ -2307,6 +2311,10 @@
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FB4-Kg-zfd">
                                                                             <rect key="frame" x="35" y="0.0" width="10" height="16"/>
                                                                             <state key="normal" image="minus-symbol.png"/>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbm-it-KXl">
+                                                                            <rect key="frame" x="0.0" y="-7" width="73" height="29"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2387,8 +2395,8 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="btnVarient" destination="9h0-sR-yxd" id="OxC-pr-pnl"/>
-                                                    <outlet property="btnVarientDecrease" destination="FB4-Kg-zfd" id="oxc-jh-4AT"/>
-                                                    <outlet property="btnVarientIncrease" destination="tIt-QJ-g5K" id="DFc-V1-hcK"/>
+                                                    <outlet property="btnVarientDecrease" destination="Bbm-it-KXl" id="9BE-fd-HwA"/>
+                                                    <outlet property="btnVarientIncrease" destination="cwg-fS-f4h" id="x1o-q8-vgI"/>
                                                     <outlet property="imgProduct" destination="lAm-ol-jn1" id="sag-fQ-1sZ"/>
                                                     <outlet property="lblBrandName" destination="aIM-k9-wde" id="qkp-pd-oEH"/>
                                                     <outlet property="lblPrice" destination="3eW-Wo-7Tk" id="xNY-2P-73h"/>
@@ -2525,7 +2533,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ng-DK-ZZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7530" y="1447"/>
+            <point key="canvasLocation" x="-7530.3999999999996" y="1446.9265367316343"/>
         </scene>
         <!--Payment Details View Controller-->
         <scene sceneID="Yb0-8J-Hvr">
