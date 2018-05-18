@@ -38,30 +38,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        
-        useruid = "RYr3lNznnpMQFcxcxSjrQbyqgoy1"
+        //useruid = "RYr3lNznnpMQFcxcxSjrQbyqgoy1"
         FirebaseApp.configure()
         
         IQKeyboardManager.sharedManager().enable = true
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-
-        let UserDefault = UserDefaults.standard
-        print(UserDefault)
-        UserDefault.value(forKey: "fullName")
       
-        if UserDefault.value(forKey: "uid") != nil
+        useruid = ""
+        UserEmailID = ""
+        UserFirstName = ""
+        UserLastName = ""
+        UserMobileNumber = ""
+        
+        let UserDefault = UserDefaults.standard
+
+        if useruid == ""
         {
-           // useruid = UserDefault.value(forKey: "uid") as! String
-            //UserEmailID = UserDefault.value(forKey: "email") as! String
-            UserFirstName = UserDefault.value(forKey: "firstName") as! String
-            UserLastName = UserDefault.value(forKey: "lastName") as! String
-           // UserMobileNumber = UserDefault.value(forKey: "phone") as! String
-            
-            print(useruid)
-            print(UserEmailID)
-            print(UserFirstName)
-            print(UserLastName)
-            print(UserMobileNumber)
+            if UserDefault.value(forKey: "uid") != nil
+            {
+                useruid = UserDefault.value(forKey: "uid") as? String
+                UserEmailID = UserDefault.value(forKey: "email") as? String
+                UserFirstName = UserDefault.value(forKey: "firstName") as? String
+                UserLastName = UserDefault.value(forKey: "lastName") as? String
+                UserMobileNumber = UserDefault.value(forKey: "phone") as? String
+            }
+            else
+            {
+                print(useruid)
+                print(UserEmailID)
+                print(UserFirstName)
+                print(UserLastName)
+                print(UserMobileNumber)
+            }
         }
        
          STPPaymentConfiguration.shared().publishableKey = "pk_test_ZhRZA8rzzTlnnrGRTCO0EphL"

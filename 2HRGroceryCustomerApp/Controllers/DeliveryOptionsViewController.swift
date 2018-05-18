@@ -13,7 +13,11 @@ class DeliveryOptionsViewController: UIViewController {
     @IBOutlet weak var deliveryTop: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-       // UserDisplayName = UserFirstName.appending(" \(UserLastName)")
+       
+        if useruid != ""
+        {
+            UserDisplayName = UserFirstName.appending(" \(UserLastName!)")
+        }
         deliveryTop.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
         deliveryTop.layer.borderWidth = 0.5
         deliveryTop.layer.shadowColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor

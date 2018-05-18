@@ -16,5 +16,6 @@ target '2HRGroceryCustomerApp' do
   pod 'Stripe'
   pod 'Alamofire'
   pod 'ObjectMapper'
+  pod 'DropDown'
 
 end

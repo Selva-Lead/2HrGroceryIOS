@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import DropDown
 
 class GroceryDetailView: UIViewController {
 
@@ -17,13 +18,27 @@ class GroceryDetailView: UIViewController {
     @IBOutlet weak var favoritebtn: UIButton!
     @IBOutlet weak var productimage: UIImageView!
     @IBOutlet weak var cartbtn: UIButton!
+    @IBOutlet weak var dropview: UIView!
+    @IBOutlet weak var dropbtn: UIButton!
+    var VarientArrayList : [String] = []
     
+    @IBOutlet weak var varientlbl: UILabel!
+    var DropDownArray = NSArray()
+
     var brandstr :String!
     var namestr :String!
     var descriptionstr :String!
     var imagestr :String!
     var productid :String!
 
+    let listdropDown = DropDown()
+    
+    lazy var dropDowns: [DropDown] = {
+        return [
+            self.listdropDown
+        ]
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,7 +78,37 @@ class GroceryDetailView: UIViewController {
         backbutton.addTarget(self, action: #selector(popvc), for: .touchUpInside)
         let backbuttonitem = UIBarButtonItem(customView: backbutton)
         self.navigationItem.leftBarButtonItem = backbuttonitem
+        SetuplistDropDown()
+    }
+    
+    func SetuplistDropDown() {
         
+        listdropDown.anchorView = dropview
+        listdropDown.width = 120
+        listdropDown.direction = .bottom
+        listdropDown.bottomOffset = CGPoint(x: 0, y: dropbtn.bounds.height+10)
+        
+        print(DropDownArray)
+        print(DropDownArray.count)
+        
+        self.VarientArrayList.removeAll()
+        
+        for index in 0..<DropDownArray.count
+        {
+            print((DropDownArray.object(at: index) as! NSDictionary).value(forKey: "unit") as! String)
+            let dropdownstr = String(format:"%@.  $%d",((DropDownArray.object(at: index) as! NSDictionary).value(forKey: "unit") as! String),((DropDownArray.object(at: index) as! NSDictionary).value(forKey: "regularPrice") as! Int))
+            print(dropdownstr)
+            self.VarientArrayList.append(dropdownstr)
+        }
+        
+        self.varientlbl.text = self.VarientArrayList[0]
+        listdropDown.dataSource = self.VarientArrayList
+        
+        listdropDown.selectionAction = { [weak self] (index, item) in
+            
+            self!.varientlbl.text = item
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -105,6 +150,11 @@ class GroceryDetailView: UIViewController {
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
+    }
+    
+    @IBAction func DropAction(_ sender: Any)
+    {
+        listdropDown.show()
     }
     
     @objc func popvc(sender: UIButton)

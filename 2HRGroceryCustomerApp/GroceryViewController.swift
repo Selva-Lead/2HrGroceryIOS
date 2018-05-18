@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import Firebase
 import SDWebImage
+import DropDown
 
 class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate {
 
@@ -18,8 +19,8 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBOutlet weak var searchview: UIView!
     var Products: DatabaseReference!
     var appDelegate = AppDelegate()
-    var Productarray = [ProductDropDown]()
-    var DropDown = NSMutableArray()
+    var Productarray = [GroceryVarients]()
+    var DropDownArray = NSMutableArray()
     var DropDownArr = [ProductInvarient]()
     var selectedCell : Int?
     @IBOutlet var table: UITableView!
@@ -27,8 +28,18 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var issearch = Bool()
     var tapper = UITapGestureRecognizer()
     var searchDropDownArr = NSMutableArray()
-    var searchArray = [ProductDropDown]()
+    var searchArray = [GroceryVarients]()
     var searchTerm:String!
+    
+    var ProductVarientArray : [String] = []
+    
+    let productdropDown = DropDown()
+    
+    lazy var dropDowns: [DropDown] = {
+        return [
+            self.productdropDown
+        ]
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,20 +116,13 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     let Productallimages = ProductObject?.value(forKey: "image") as AnyObject
                     let Productimage = Productallimages.value(forKey: "128") as! String
                     
-                   let productsar = ProductDropDown(ProductId: ProductId as? String, ProductDesc: ProductDesc as? String, ProductName: ProductName as? String, Productbrand: Productbrand as? String, Productimage: Productimage as? String)
+                    let varientarr = ProductObject?.value(forKey: "productVariant") as! NSArray
+
+                   let productsar = GroceryVarients(ProductId: ProductId as? String, ProductDesc: ProductDesc as? String, ProductName: ProductName as? String, Productbrand: Productbrand as? String, Productimage: Productimage as? String, ProductVarient: varientarr as NSArray)
                     self.Productarray.append(productsar)
-                    //self.tempTest[product.key] = Productdetails
-
-
-                    let productdropdownarr = ProductObject?.value(forKey: "productVariant") as! NSArray
-            
-                    self.DropDown.add(productdropdownarr)
-                    print("self.Productarray.count count\(self.Productarray.count)")
                     
                 }
-                
                 self.table.reloadData()
-
             }
         })
     }
@@ -148,7 +152,7 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
             
             for x in 0..<Productarray.count
             {
-                let product: ProductDropDown
+                let product: GroceryVarients
                 product = Productarray[x]
                 let y=Productarray[x]
                 let name=Productarray[x]
@@ -250,8 +254,8 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         if issearch == true
         {
-            let product: ProductDropDown
-            product = searchArray[indexPath.row] as! ProductDropDown
+            let product: GroceryVarients
+            product = searchArray[indexPath.row] as! GroceryVarients
             
             cell.NameLbl.text = product.ProductName
             cell.BrandLbl.text = "Brand: \(String(describing: product.Productbrand!))"
@@ -268,10 +272,13 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
             
             cell.dropview.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
             cell.dropview.layer.borderWidth = 0.5
+            
+            //cell.productdropbtn.addTarget(self, action: #selector(Productvareintaction(sender:)), for: .touchUpInside)
+            cell.addcartbtn.addTarget(self, action: #selector(addToCart(sender:)), for: .touchUpInside)
         }
         else
         {
-            let product: ProductDropDown
+            let product: GroceryVarients
             product = Productarray[indexPath.row]
             
             cell.NameLbl.text = product.ProductName
@@ -292,34 +299,108 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.dropview.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
             cell.dropview.layer.borderWidth = 0.5
             
+            //cell.productdropbtn.addTarget(self, action: #selector(Productvareintaction(sender:)), for: .touchUpInside)
+            cell.addcartbtn.addTarget(self, action: #selector(addToCart(sender:)), for: .touchUpInside)
         }
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        let product: ProductDropDown
-        product = Productarray[indexPath.row]
+    @objc func Productvareintaction(sender: UIButton) {
         
-        if UIDevice.current.userInterfaceIdiom == .phone
+        let buttonPosition:CGPoint = sender.convert(.zero, to:self.table)
+        let indexPath = self.table.indexPathForRow(at: buttonPosition)
+        
+        let cell = table.dequeueReusableCell(withIdentifier:"Cell", for: indexPath!) as! ProductsCell
+        
+        productdropDown.anchorView = cell.productdropbtn
+        productdropDown.width = 120
+        productdropDown.direction = .any
+        productdropDown.bottomOffset = CGPoint(x: cell.frame.origin.x-90, y: buttonPosition.y)
+        
+        let product: GroceryVarients
+        
+        if issearch == true
         {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GroceryDetail") as! GroceryDetailView
-            nextViewController.brandstr = product.Productbrand
-            nextViewController.namestr = product.ProductName
-            nextViewController.descriptionstr = product.ProductDesc
-            nextViewController.imagestr = product.Productimage
-            nextViewController.productid = product.ProductId
-            self.navigationController?.pushViewController(nextViewController, animated: true)
+            product = searchArray[indexPath!.row]
+            DropDownArray = product.ProductVarient as! NSMutableArray
         }
         else
         {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GroceryDetail") as! GroceryDetailView
-            self.navigationController?.pushViewController(nextViewController, animated: true)
+            product = Productarray[indexPath!.row]
+            DropDownArray = product.ProductVarient as! NSMutableArray
+        }
+        
+        self.ProductVarientArray.removeAll()
+        
+        for varientindex in 0..<DropDownArray.count
+        {
+            print((DropDownArray.object(at: varientindex) as! NSDictionary).value(forKey: "unit") as! String)
+            let dropdownstr = String(format:"%@.  $%d",((DropDownArray.object(at: varientindex) as! NSDictionary).value(forKey: "unit") as! String),((DropDownArray.object(at: varientindex) as! NSDictionary).value(forKey: "regularPrice") as! Int))
+            print(dropdownstr)
+            self.ProductVarientArray.append(dropdownstr)
+        }
+        
+        productdropDown.dataSource = self.ProductVarientArray
+        
+        productdropDown.show()
+        
+        productdropDown.selectionAction = { [weak self] (index, item) in
+            //cell.productdropbtn.setTitle(item, for: .normal)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let product: GroceryVarients
+        
+        if issearch == true
+        {
+            if UIDevice.current.userInterfaceIdiom == .phone
+            {
+                product = searchArray[indexPath.row]
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GroceryDetail") as! GroceryDetailView
+                nextViewController.brandstr = product.Productbrand
+                nextViewController.namestr = product.ProductName
+                nextViewController.descriptionstr = product.ProductDesc
+                nextViewController.imagestr = product.Productimage
+                nextViewController.productid = product.ProductId
+                nextViewController.DropDownArray = product.ProductVarient as! NSMutableArray
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
+            else
+            {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GroceryDetail") as! GroceryDetailView
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
+        }
+        else
+        {
+            if UIDevice.current.userInterfaceIdiom == .phone
+            {
+                product = Productarray[indexPath.row]
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GroceryDetail") as! GroceryDetailView
+                nextViewController.brandstr = product.Productbrand
+                nextViewController.namestr = product.ProductName
+                nextViewController.descriptionstr = product.ProductDesc
+                nextViewController.imagestr = product.Productimage
+                nextViewController.productid = product.ProductId
+                nextViewController.DropDownArray = product.ProductVarient as! NSMutableArray
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
+            else
+            {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GroceryDetail") as! GroceryDetailView
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
         }
     }
 }

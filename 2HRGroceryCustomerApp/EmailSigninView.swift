@@ -131,29 +131,60 @@ class EmailSigninView: UIViewController {
                     print("You have successfully logged in")
                     print(user?.uid as Any)
                     useruid = user!.uid
-                 /*   self.UserDetails = Database.database().reference().child("Customer-List").child(useruid)
-
+                    
+                    self.UserDetails = Database.database().reference().child("Customer-List").child(useruid)
+                    
                     self.UserDetails.observe(.value, with: { snapshot in
                         
-                        for item in snapshot.ch
+                        for item in snapshot.children.allObjects as! [DataSnapshot]
                         {
-                            //print(item)
-                            let child = item as! DataSnapshot
-                            print(child.value(forKey: "email")!)
-                          //  let dict = child.value as! NSDictionary
-                           // tempItems.append(item)
+                            print(item)
+                            let dict = snapshot.value as! NSDictionary
+                            
+                            print(dict.value(forKey: "email") as! String)
+                            
+                            UserEmailID = dict.value(forKey: "email") as! String
+                            UserFirstName = dict.value(forKey: "firstName") as! String
+                            UserLastName = dict.value(forKey: "lastName") as! String
+                            UserMobileNumber = dict.value(forKey: "phone") as! String
+                            
+                            let userdefault = UserDefaults.standard
+                            userdefault.set(UserFirstName, forKey: "firstName")
+                            userdefault.set(UserLastName, forKey: "lastName")
+                            userdefault.set(UserEmailID, forKey: "email")
+                            userdefault.set(UserMobileNumber, forKey: "phone")
+                            userdefault.set(useruid, forKey: "uid")
+                            userdefault.synchronize()
+                            
                         }
-                    }) */
+                    })
                     
-                    for controller in self.navigationController!.viewControllers as Array
-                    {
-                        if controller.isKind(of: HomeViewController.self)
-                        {
-                            self.navigationController!.popToViewController(controller, animated: true)
-                            break
-                        }
-                    }
-
+                    /* let userdefault = UserDefaults.standard
+                     userdefault.set(self.usernameTF.text!, forKey: "firstName")
+                     userdefault.set(self.LastnameTF.text!, forKey: "lastName")
+                     userdefault.set(self.EmailTF.text!, forKey: "email")
+                     userdefault.set(useruid, forKey: "uid")
+                     userdefault.synchronize() */
+                    
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    
+                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeWithSignin") as! UserHomeViewController
+                    
+                    self.navigationController?.pushViewController(nextViewController, animated: true)
+                    
+                    /* for controller in self.navigationController!.viewControllers as Array
+                     {
+                     if controller.isKind(of: UserHomeViewController.self)
+                     {
+                     self.navigationController!.popToViewController(controller, animated: true)
+                     break
+                     }
+                     else
+                     {
+                     self.navigationController?.popToRootViewController(animated: true)
+                     }
+                     } */
+                    
                 }
                 else
                 {

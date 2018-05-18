@@ -37,7 +37,26 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func startAction(_ sender: Any) {
+        
+        if useruid == ""
+        {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeWithoutSignin") as! HomeViewController
+            
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+            
+        }
+        else
+        {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeWithSignin") as! UserHomeViewController
+            
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
+    }
     /*
     // MARK: - Navigation
 
