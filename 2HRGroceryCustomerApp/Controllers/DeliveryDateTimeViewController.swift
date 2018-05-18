@@ -44,12 +44,18 @@ class DeliveryDateTimeViewController: UIViewController {
         }
     }
      @ IBOutlet weak var deliTopView: UIView!
+    @IBOutlet weak var tblView: UITableView!
     
     var strmothdayArr : [String] = [String]()
     var dateAndTimeArray : [String] = [String]()
+    var imgChange : UIImage!
+    var imgChangeTag: Int?
     
     override func viewDidLoad() {
-        
+       // UIImage.init(cgImage: #imageLiteral(resourceName: "uncheck.png") as! CGImage)
+        imgChange = #imageLiteral(resourceName: "uncheck.png")
+        let nib = UINib(nibName: "View", bundle: nil)
+        self.tblView.register(nib, forHeaderFooterViewReuseIdentifier: "PaymentHeader")
         var calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier(rawValue: NSGregorianCalendar))
         let dateComponent = NSDateComponents()
         let currentDate = getCurrentDate()
@@ -150,12 +156,28 @@ class DeliveryDateTimeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    @objc func addressChange(sender: UIButton) {
+        print("action calling")
+    }
+    @objc func dateTimeCheckout(sender: UIButton) {
+        imgChangeTag = sender.tag
+        if sender.imageView?.image == #imageLiteral(resourceName: "uncheck.png") {
+            imgChange = #imageLiteral(resourceName: "check.png")
+            UserDefaults.standard.set(dateAndTimeArray[sender.tag], forKey: "DeliveryDateAndTime")
+        }else {
+            imgChange = #imageLiteral(resourceName: "uncheck.png")
+        }
+        tblView.reloadData()
+    }
     @IBAction func ContinuePayment(_ sender: UIButton) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DeliveryOptionsViewController") as! DeliveryOptionsViewController
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        let dayAndTime = UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as? String
+        if dayAndTime != nil {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentDetailsViewController") as! PaymentDetailsViewController
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
+      
     }
     /*
     // MARK: - Navigation
@@ -172,16 +194,31 @@ extension DeliveryDateTimeViewController: UITableViewDelegate, UITableViewDataSo
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        if section == 0 {
-            return "CUSTOMER NAME"
-        } else if section == 1 {
-            return "DELIVERY ADDRESS"
-        } else  {
-            return "Delivery Date & Time"
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "PaymentHeader") as! PaymentHeader
+        if section == 0  {
+            cell.btnChange.isHidden = true
+            cell.lblTitle.text = "CUSTOMER NAME"
+        }else if section == 1 {
+            cell.btnChange.isHidden = false
+            cell.btnChange.addTarget(self, action: #selector(addressChange(sender:)), for: .touchUpInside)
+            cell.lblTitle.text = "DELIVERY ADDRESS"
+        }else {
+            cell.btnChange.isHidden = true
+            cell.lblTitle.text = "DELIVERY DATE& TIME"
         }
+        return cell
     }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//
+//        if section == 0 {
+//            return "CUSTOMER NAME"
+//        } else if section == 1 {
+//            return "DELIVERY ADDRESS"
+//        } else  {
+//            return "Delivery Date & Time"
+//        }
+//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        if section == 2 {
             return dateAndTimeArray.count
@@ -221,6 +258,13 @@ extension DeliveryDateTimeViewController: UITableViewDelegate, UITableViewDataSo
             cellDateAndTime.lblTotalDateandTimeList.text = dateAndTimeArray[indexPath.row]
             cellDateAndTime.vewDateAndTime.layer.borderWidth = 1.0
             cellDateAndTime.vewDateAndTime.layer.borderColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
+            if imgChangeTag == indexPath.row {
+                cellDateAndTime.btnDeliveryTimeCheck.setImage(imgChange, for: .normal)
+            }else {
+                cellDateAndTime.btnDeliveryTimeCheck.setImage(#imageLiteral(resourceName: "uncheck.png"), for: .normal)
+            }
+            cellDateAndTime.btnDeliveryTimeCheck.tag = indexPath.row
+            cellDateAndTime.btnDeliveryTimeCheck.addTarget(self, action: #selector(dateTimeCheckout(sender:)), for: .touchUpInside)
             return cellDateAndTime
         }
         return AddressListTableViewCell()

@@ -46,7 +46,15 @@ class PaymentDetailsViewController: UIViewController {
     }
     */
     @objc func PaymentCreditCard(_ sender: Any) {
-       handleAddPaymentMethodButtonTapped()
+        if savedCards.count != 0  {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentWithCardDetailViewController") as! PaymentWithCardDetailViewController
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else {
+            handleAddPaymentMethodButtonTapped()
+        }
+      
 //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
 //
 //        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CreditCardViewController") as! CreditCardViewController
@@ -107,6 +115,13 @@ class PaymentDetailsViewController: UIViewController {
             }
         }
     }
+    
+    @objc func addressChange(sender: UIButton) {
+        
+    }
+    @objc func dataAndTimeChange(sender: UIButton) {
+        
+    }
 }
 extension PaymentDetailsViewController: STPAddCardViewControllerDelegate {
     
@@ -123,9 +138,13 @@ extension PaymentDetailsViewController: UITableViewDelegate,UITableViewDataSourc
             cell.lblTitle.text = "CUSTOMER NAME"
         }else if section == 1 {
             cell.btnChange.isHidden = false
-             cell.lblTitle.text = "DELIVERY ADDRESS"
+            cell.btnChange.tag = section
+            cell.lblTitle.text = "DELIVERY ADDRESS"
+            cell.btnChange.addTarget(self, action: #selector(addressChange(sender:)), for: .touchUpInside)
         }else if section == 2 {
             cell.btnChange.isHidden = false
+            cell.btnChange.tag = section
+            cell.btnChange.addTarget(self, action: #selector(dataAndTimeChange(sender:)), for:.touchUpInside)
              cell.lblTitle.text = "DELIVERY DATE& TIME"
         }else if section == 3 {
             cell.btnChange.isHidden = true
@@ -145,18 +164,16 @@ extension PaymentDetailsViewController: UITableViewDelegate,UITableViewDataSourc
         let cellPayment = tableView.dequeueReusableCell(withIdentifier: "cellPayment") as! AddressListTableViewCell
         
         if indexPath.section == 0 {
-            cell.addrName.text = "name from Firebase"
+            cell.addrName.text = UserDisplayName
             return cell
         }else if indexPath.section == 1 {
             celldetail.lbladdrDetail.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
             celldetail.lbladdrDetail.layer.borderWidth = 1.0
-            celldetail.lbladdrDetail.text = "erteuwyfeuwif \n eifrewfds \n  frwefnsv \n isfre rfnsvfd vorfvnfgh afhnvdfghfvfrjryrrlcj"
+            celldetail.lbladdrDetail.text = customAddressList[0].strFullAddress
             return celldetail
         }else if indexPath.section == 2 {
-            //cellDateAndTime.
-//            cellDateAndTime.vewDateAndTime.layer.borderWidth = 1.0
-//            cellDateAndTime.vewDateAndTime.layer.borderColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
-            cellPaymentDateAndTime.txtPaymentDate.text = "3/20 FRIDAY 10:00am - 12:00 pm"
+            let selectedDate = UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as! String
+            cellPaymentDateAndTime.txtPaymentDate.text = selectedDate
             return cellPaymentDateAndTime
         }else if indexPath.section == 3 {
             cellPayment.btnCreditcard.addTarget(self, action: #selector(PaymentCreditCard(_:)), for: .touchUpInside)

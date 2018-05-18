@@ -29,8 +29,13 @@ class AddressListTableViewCell: UITableViewCell {
     @IBOutlet weak var addCardView: UIView!
     @IBOutlet weak var ExistingCardView: UIView!
     @IBOutlet weak var orderTotalAmount: UILabel!
+    @IBOutlet weak var btnDeliveryTimeCheck: UIButton!
     @IBOutlet weak var lblTotalDateandTimeList: UILabel!
     @IBOutlet weak var btnProcessComplete: UIButton!
+    
+    @IBOutlet weak var btnAddCards: UIButton!
+    @IBOutlet weak var deliveryFeeview: UIView!
+    @IBOutlet weak var btnAddMoreProduct: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

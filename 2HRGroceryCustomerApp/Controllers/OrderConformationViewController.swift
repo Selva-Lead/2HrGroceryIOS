@@ -47,6 +47,12 @@ class OrderConformationViewController: UIViewController {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ThankyouViewController") as! ThankyouViewController
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
+    @objc func addMoreProduct() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
 }
 extension OrderConformationViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -79,8 +85,11 @@ extension OrderConformationViewController: UITableViewDelegate, UITableViewDataS
 //        }
 //    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 1
+        if section == 4 {
+            return fullCartList.count
+        }else {
+            return 1
+        }
     }
     
 
@@ -95,25 +104,70 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     let cellPlaceOrder = tableView.dequeueReusableCell(withIdentifier: "cellPlaceOrder") as! AddressListTableViewCell
     
     if indexPath.section == 0 {
-        cell.addrName.text = "name from Firebase"
+        cell.addrName.text = UserDisplayName
         return cell
     }else if indexPath.section == 1 {
         celldetail.lbladdrDetail.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
         celldetail.lbladdrDetail.layer.borderWidth = 1.0
-        celldetail.lbladdrDetail.text = "erteuwyfeuwif \n eifrewfds \n  frwefnsv \n isfre rfnsvfd vorfvnfgh afhnvdfghfvfrjryrrlcj"
+        celldetail.lbladdrDetail.text = customAddressList[0].strFullAddress
         return celldetail
     }else if indexPath.section == 2 {
-        //cellDateAndTime.
+        //cellPaymentDate.
         //cellPaymentDate.vewDateAndTime.layer.borderWidth = 1.0
         //cellPaymentDate.vewDateAndTime.layer.borderColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
         return cellPaymentDate
     } else if indexPath.section == 3 {
         return cellCard
     } else if indexPath.section == 4 {
+        var singleAddCart = AddCart()
+        print("indexpath row \(indexPath.row)")
+        singleAddCart = fullCartList[indexPath.row]
+        let varients = singleAddCart.strVarients
+        let product = productForCart[singleAddCart.strProductId!]
+        let singleVarientsKey = Int((varients.first?.key)!)
+        let SingleVarientValue = varients.first?.value as! String
+        
+        var productVarient = ProductVarient()
+        productVarient = (product?.strProductVarients[singleVarientsKey!])!
+        // if cell.imgProduct.image == nil {
+        let imgurl = product?.strProductimage.first?.value as! String
+        let imgURL = URL(string: imgurl)
+        
+        cellProductItem.imgProduct.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
+        cellProductItem.imgProduct.layer.borderWidth = 1
+        cellProductItem.imgProduct.layer.cornerRadius = 3
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: imgURL!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            DispatchQueue.main.async {
+                cellProductItem.imgProduct.image = UIImage(data: data!)
+            }
+        }
+        //}
+        cellProductItem.ProBrand.text = product?.strProductbrand
+        cellProductItem.ProTitle.text = product?.strProductName
+        
+        cellProductItem.ProLB.setTitle(productVarient.strUnit, for: .normal)
+        cellProductItem.ProCount.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
+        cellProductItem.ProCount.layer.borderWidth = 1
+        cellProductItem.ProCount.layer.cornerRadius = 4
+        cellProductItem.ProCount.text = SingleVarientValue
+        let perProductTotalPrice = productVarient.strRegularPrice! * Float(SingleVarientValue)!
+        cellProductItem.ProPrice.text = String(perProductTotalPrice)
         return cellProductItem
     } else if indexPath.section == 5 {
+        let fee = deliveryfeeArr["fee"] as! Float
+        let to = deliveryfeeArr["to"] as! Float
+        if totalCheckOutPrice >= to {
+            cellMore.deliveryFeeview.isHidden = true
+            cellMore.btnAddMoreProduct.isHidden = true
+        }else {
+            cellMore.deliveryFeeview.isHidden = false
+            cellMore.deliveryFee.text = "-$ \(fee) "
+            cellMore.btnAddMoreProduct.addTarget(self, action: #selector(addMoreProduct), for: .touchUpInside)
+        }
         return cellMore
     }else if indexPath.section == 6 {
+        cellPlaceOrder.orderTotalAmount.text = String(totalCheckOutPrice)
         cellPlaceOrder.btnCreditcard.addTarget(self, action: #selector(placeOrder), for: .touchUpInside)
         return cellPlaceOrder
     }

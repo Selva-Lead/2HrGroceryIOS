@@ -222,6 +222,10 @@ class ConformDeliveryAddressViewController: UIViewController {
         loadAddress.strCity = cityTF.text
         loadAddress.strState =  stateTF.text
         loadAddress.strZip = zipTF.text
+        let strf1 = loadAddress.strAddress?.appending(",\n").appending(loadAddress.strCity!).appending(",\n")
+        let strf2 = strf1?.appending(loadAddress.strState!).appending(",\n")
+        let strf3 = strf2?.appending(loadAddress.strZip!)
+        loadAddress.strFullAddress =  strf3
         FireAuthModel().setdefaultAddress(addcount: "0", value: loadAddress)
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             

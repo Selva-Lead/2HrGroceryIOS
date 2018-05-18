@@ -32,8 +32,12 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
         super.viewDidLoad()
         FireAuthModel().getProductForSale()
         FireAuthModel().getDeliveryFee()
-        FireAuthModel().getAddressList()
         FireAuthModel().getAvaialbility()
+        if useruid != nil {
+            FireAuthModel().getAddressList()
+            FireAuthModel().getCards()
+        }
+        
         self.navigationController?.isNavigationBarHidden = false
 
         appDelegate = UIApplication.shared.delegate as! AppDelegate

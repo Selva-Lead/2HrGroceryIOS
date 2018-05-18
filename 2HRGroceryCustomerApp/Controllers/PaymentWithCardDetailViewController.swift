@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Stripe
 
 class PaymentWithCardDetailViewController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
@@ -47,6 +48,65 @@ class PaymentWithCardDetailViewController: UIViewController {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "OrderConformationViewController") as! OrderConformationViewController
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
+    @objc func addNewCard(sender: UIButton) {
+          handleAddPaymentMethodButtonTapped()
+    }
+    func handleAddPaymentMethodButtonTapped() {
+        // Setup add card view controller
+        let addCardViewController = STPAddCardViewController()
+        addCardViewController.delegate = self
+        // Present add card view controller
+        let navigationController = UINavigationController(rootViewController: addCardViewController)
+        present(navigationController, animated: true)
+    }
+    
+    
+    // MARK: STPAddCardViewControllerDelegate
+    
+    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+        // Dismiss add card view controller
+        dismiss(animated: true)
+    }
+    
+    func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
+        submitTokenToBack(token: token, completion: {(error) in
+            if  error  == nil{
+                // Show error in add card view controller
+                completion(error)
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentWithCardDetailViewController") as! PaymentWithCardDetailViewController
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+                
+            }
+            else {
+                // Notify add card view controller that token creation was handled successfully
+                completion(error)
+                // Dismiss add card view controller
+            }
+        })
+    }
+    func submitTokenToBack(token : STPToken, completion: @escaping (_ Error:NSError?) -> ())   {
+        self.dismiss(animated: true)
+        let tokenValue = token.allResponseFields
+        print("token value \(token.allResponseFields) and \(tokenValue)")
+        let tempSaveCard = saveCard()
+        let tokenval = tokenValue as? [String: Any]
+        if let cardValues = tokenval!["card"] as? [String:Any] {
+            tempSaveCard.strBrand = (cardValues["brand"] as! String)
+            tempSaveCard.strExpMonth = (cardValues["exp_month"] as! Int)
+            tempSaveCard.strExpYear = (cardValues["exp_year"] as! Int)
+            tempSaveCard.strLastFour = (cardValues["last4"] as! String)
+        }
+        FireAuthModel().saveCards(CustomerId: useruid, Token: token.stripeID,valueSaveCard: tempSaveCard){ error in
+            if error != nil {
+                completion(error as NSError?)
+            }else {
+                completion (nil)
+            }
+        }
+    }
+    
 }
 extension PaymentWithCardDetailViewController: UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -80,7 +140,7 @@ extension PaymentWithCardDetailViewController: UITableViewDelegate,UITableViewDa
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 3 {
-            return 4
+            return savedCards.count + 1
         }else {
             return 1
         }
@@ -93,29 +153,40 @@ extension PaymentWithCardDetailViewController: UITableViewDelegate,UITableViewDa
         let cellPaymentDateAndTime = tableView.dequeueReusableCell(withIdentifier: "cellPaymentDate") as! AddressListTableViewCell
         let cellCardSelection = tableView.dequeueReusableCell(withIdentifier: "cellCardSelection") as! AddressListTableViewCell
         let cellComplete = tableView.dequeueReusableCell(withIdentifier: "cellComplete") as! AddressListTableViewCell
+        cellCardSelection.selectionStyle = .none
         if indexPath.section == 0 {
-            cell.addrName.text = "name from Firebase"
+            cell.addrName.text = UserDisplayName
             return cell
         }else if indexPath.section == 1 {
             celldetail.lbladdrDetail.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
             celldetail.lbladdrDetail.layer.borderWidth = 1.0
-            celldetail.lbladdrDetail.text = "erteuwyfeuwif \n eifrewfds \n  frwefnsv \n isfre rfnsvfd vorfvnfgh afhnvdfghfvfrjryrrlcj"
+            celldetail.lbladdrDetail.text = customAddressList[0].strFullAddress
             return celldetail
         }else if indexPath.section == 2 {
             //cellDateAndTime.
             //            cellDateAndTime.vewDateAndTime.layer.borderWidth = 1.0
             //            cellDateAndTime.vewDateAndTime.layer.borderColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
-            cellPaymentDateAndTime.txtPaymentDate.text = "3/20 FRIDAY 10:00am - 12:00 pm"
+            cellPaymentDateAndTime.txtPaymentDate.text = UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as! String
             return cellPaymentDateAndTime
         }else if indexPath.section == 3 {
-            if indexPath.row <= 2 {
+            if indexPath.row < savedCards.count {
                 cellCardSelection.ExistingCardView.isHidden = false
                 cellCardSelection.addCardView.isHidden = true
+                let key = savedCardsKey[indexPath.row]
+                let Mon = savedCards[key]?.strExpMonth!
+                let yer = savedCards[key]?.strExpYear!
+                let cardEnd = savedCards[key]?.strLastFour
+                let cardExpMonth = String(Mon!)
+                let cardExpYear = String(yer!)
+                let exp = cardExpMonth.appending("/").appending(cardExpYear)
+                cellCardSelection.lblCardEnding.text = cardEnd
+                cellCardSelection.lblCardExp.text = exp
             }else {
                 cellCardSelection.ExistingCardView.isHidden = true
                 cellCardSelection.addCardView.isHidden = false
+                cellCardSelection.btnAddCards.addTarget(self, action: #selector(addNewCard(sender:)), for: .touchUpInside)
             }
-         
+            
             return cellCardSelection
         } else if indexPath.section == 4 {
             cellComplete.btnProcessComplete.addTarget(self, action: #selector(processCompletion), for: .touchUpInside)
@@ -124,5 +195,8 @@ extension PaymentWithCardDetailViewController: UITableViewDelegate,UITableViewDa
         return AddressListTableViewCell()
     }
     
+    
+}
+extension PaymentWithCardDetailViewController: STPAddCardViewControllerDelegate {
     
 }

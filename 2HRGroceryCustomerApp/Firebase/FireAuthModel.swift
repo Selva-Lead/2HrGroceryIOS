@@ -56,6 +56,22 @@ class FireAuthModel: NSObject {
             
         }
     }
+    
+    func getCards() {
+        FIRUtils.getSavedCardDBRef().observe(.value, with: {(snapshot) in
+            if let value = snapshot.value as? [String: AnyObject]{
+                print(value)
+                //savedCardsKey = value.keys
+                let dic = value.values
+                if let singleproduct = Mapper<saveCard>().mapDictionary(JSON: value as! [String : [String : Any]]) { //(JSON: (dic as? [String:AnyObject])!) {
+                    print(singleproduct.keys)
+                    let keys = singleproduct.flatMap(){ $0.0 as? String }
+                    savedCardsKey = keys
+                    savedCards = singleproduct
+                }
+            }
+        })
+    }
     func addCarts(productForSaleID: String,valueAddCart:AddCart){
         FIRUtils.addCartDBRef(productId: productForSaleID).setValue(valueAddCart.toJSON())
     }

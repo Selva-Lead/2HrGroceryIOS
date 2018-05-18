@@ -16,7 +16,7 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
     var selecetedIndex: Int!
     var selectedVarientKey: Int!
     var selectedQuantity: Int!
-    var totalCheckOutPrice: Float = 0
+    
     var dicSelectedProductTolPrice: [Int:Float] = [Int: Float]()
   
     override func viewDidLoad() {
@@ -73,7 +73,7 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
         }
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ConformDeliveryAddressViewController") as! ConformDeliveryAddressViewController
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DeliveryOptionsViewController") as! DeliveryOptionsViewController
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     @objc func varientCountIncrease(sender: UIButton) {

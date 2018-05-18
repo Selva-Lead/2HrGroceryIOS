@@ -27,6 +27,9 @@ var productForSaleItems = [ProductDropDown]()
 var deliveryfeeArr : [String: AnyObject] = [String:AnyObject]()
 var customAddressList : [AddressList] = [AddressList]()
 var availabilityTimes = NSArray()
+var savedCards : [String:saveCard] = [String:saveCard]()
+var savedCardsKey : [String] = [String]()
+var totalCheckOutPrice: Float = 0
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+       
         useruid = "RYr3lNznnpMQFcxcxSjrQbyqgoy1"
         FirebaseApp.configure()
         
@@ -50,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            // useruid = UserDefault.value(forKey: "uid") as! String
             //UserEmailID = UserDefault.value(forKey: "email") as! String
             UserFirstName = UserDefault.value(forKey: "firstName") as! String
-           // UserLastName = UserDefault.value(forKey: "lastName") as! String
+            UserLastName = UserDefault.value(forKey: "lastName") as! String
            // UserMobileNumber = UserDefault.value(forKey: "phone") as! String
             
             print(useruid)

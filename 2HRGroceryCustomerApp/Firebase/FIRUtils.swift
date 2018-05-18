@@ -25,6 +25,9 @@ class FIRUtils: NSObject {
     class func  saveCardDBRef(customerId: String,uid : String) -> DatabaseReference {
         return Database.database().reference().child(FBPath.customerList).child(customerId).child(FBPath.savedCards).child(uid)
     }
+    class func getSavedCardDBRef() -> DatabaseReference {
+        return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.savedCards)
+    }
     class func addCartDBRef(productId :String) -> DatabaseReference {
     return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.cart).child(FBPath.product).child(productId
         )

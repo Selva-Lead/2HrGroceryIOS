@@ -2611,6 +2611,9 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUr-5F-03f">
                                                     <rect key="frame" x="15" y="11" width="344" height="99"/>
                                                     <color key="backgroundColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="99" id="1Qu-ah-ZMx"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2870,6 +2873,9 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfB-qd-I3T">
                                                     <rect key="frame" x="15" y="11" width="345" height="99"/>
                                                     <color key="backgroundColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="99" id="3Jv-Ln-sqB"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2924,7 +2930,7 @@
                                                                 <constraint firstAttribute="width" constant="37" id="tLl-Ap-ReJ"/>
                                                                 <constraint firstAttribute="height" constant="31" id="urf-WW-z6z"/>
                                                             </constraints>
-                                                            <state key="normal" title="Button" image="uncheck.png"/>
+                                                            <state key="normal" title="Button"/>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="dtV-hW-mlx"/>
@@ -2954,6 +2960,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btnDeliveryTimeCheck" destination="Emk-jH-3RT" id="z0m-Yq-v06"/>
                                             <outlet property="lblTotalDateandTimeList" destination="Ikh-Y4-Hqz" id="EGD-s0-Ndr"/>
                                             <outlet property="vewDateAndTime" destination="TDi-RZ-XTz" id="go3-YI-oU2"/>
                                         </connections>
@@ -2984,6 +2991,7 @@
                     </view>
                     <connections>
                         <outlet property="deliTopView" destination="6fk-SO-i5c" id="9X3-e8-uh4"/>
+                        <outlet property="tblView" destination="zQb-WJ-7YE" id="O9a-4F-Ve0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdI-wo-chi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3541,16 +3549,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xt5-WV-xcb">
-                                                    <rect key="frame" x="13" y="1" width="351" height="51"/>
+                                                    <rect key="frame" x="13" y="1" width="351" height="35"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Add a Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdJ-07-FL0">
-                                                            <rect key="frame" x="81" y="17" width="94" height="21"/>
+                                                            <rect key="frame" x="81" y="0.0" width="94" height="38"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.20392156862745098" green="0.59215686274509804" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CzN-iR-T3v">
-                                                            <rect key="frame" x="19" y="16" width="20" height="20"/>
+                                                            <rect key="frame" x="19" y="0.0" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="20" id="epS-ka-BIw"/>
                                                                 <constraint firstAttribute="height" constant="20" id="tjB-ml-VTR"/>
@@ -3564,9 +3572,17 @@
                                                         <constraint firstAttribute="bottom" secondItem="CzN-iR-T3v" secondAttribute="bottom" constant="15" id="2yC-As-mjf"/>
                                                         <constraint firstItem="CzN-iR-T3v" firstAttribute="centerY" secondItem="xt5-WV-xcb" secondAttribute="centerY" id="3bd-Cd-Ixx"/>
                                                         <constraint firstItem="kdJ-07-FL0" firstAttribute="leading" secondItem="CzN-iR-T3v" secondAttribute="trailing" constant="42" id="Gag-2S-Yxk"/>
+                                                        <constraint firstItem="kdJ-07-FL0" firstAttribute="bottom" secondItem="CzN-iR-T3v" secondAttribute="bottom" id="VgF-y7-Cxo"/>
                                                         <constraint firstItem="kdJ-07-FL0" firstAttribute="centerY" secondItem="xt5-WV-xcb" secondAttribute="centerY" constant="2" id="eYM-v6-UHT"/>
-                                                        <constraint firstItem="CzN-iR-T3v" firstAttribute="top" secondItem="xt5-WV-xcb" secondAttribute="top" constant="16" id="gcy-Vu-7sd"/>
+                                                        <constraint firstItem="CzN-iR-T3v" firstAttribute="top" secondItem="xt5-WV-xcb" secondAttribute="top" id="gcy-Vu-7sd"/>
+                                                        <constraint firstItem="kdJ-07-FL0" firstAttribute="top" secondItem="CzN-iR-T3v" secondAttribute="top" id="m6M-XW-MFF"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="3bd-Cd-Ixx"/>
+                                                            <exclude reference="eYM-v6-UHT"/>
+                                                        </mask>
+                                                    </variation>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPZ-BN-2IY">
                                                     <rect key="frame" x="15" y="0.0" width="344" height="39"/>
@@ -3581,7 +3597,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pc3-SM-uqN">
-                                                            <rect key="frame" x="81" y="8" width="263" height="15"/>
+                                                            <rect key="frame" x="81" y="8" width="263" height="14.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ending in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UE6-M7-zle">
                                                                     <rect key="frame" x="16" y="0.0" width="68" height="33"/>
@@ -3657,10 +3673,16 @@
                                                 <constraint firstAttribute="trailing" secondItem="Pc3-SM-uqN" secondAttribute="trailing" constant="19" id="efA-Oj-sM5"/>
                                                 <constraint firstAttribute="bottom" secondItem="xt5-WV-xcb" secondAttribute="bottom" constant="-2.5" id="idc-xn-02u"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="idc-xn-02u"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="ExistingCardView" destination="CPZ-BN-2IY" id="qPk-xH-23N"/>
                                             <outlet property="addCardView" destination="xt5-WV-xcb" id="wUV-FL-h4K"/>
+                                            <outlet property="btnAddCards" destination="CzN-iR-T3v" id="csq-Vp-GSU"/>
                                             <outlet property="lblCardBrand" destination="DCW-MA-OHe" id="Ssa-PC-qYS"/>
                                             <outlet property="lblCardEnding" destination="0nx-27-TDW" id="ibP-7C-EEE"/>
                                             <outlet property="lblCardExp" destination="KiN-Gk-L2z" id="fVN-hy-n97"/>
@@ -3858,7 +3880,6 @@
                                             <constraint firstItem="Vve-Xl-8oO" firstAttribute="leading" secondItem="hRz-AS-TdR" secondAttribute="leading" constant="15" id="ulp-vj-RTO"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="addrName" destination="Vve-Xl-8oO" id="3J2-Fm-QNn"/>
                                             <outlet property="txtPaymentDate" destination="Vve-Xl-8oO" id="K6c-Ti-dZH"/>
                                         </connections>
                                     </tableViewCell>
@@ -4036,7 +4057,7 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="98" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKV-4e-Fkq">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKV-4e-Fkq">
                                                                     <rect key="frame" x="68" y="1" width="65" height="20"/>
                                                                     <fontDescription key="fontDescription" name="Gibson-SemiBold" family="Gibson" pointSize="14"/>
                                                                     <color key="textColor" red="0.27058823529999998" green="0.30980392159999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -4075,6 +4096,7 @@
                                                         <constraint firstItem="hzb-dd-IvF" firstAttribute="bottom" secondItem="MTT-f0-f64" secondAttribute="bottom" constant="5" id="Qtd-cp-26s"/>
                                                         <constraint firstAttribute="bottom" secondItem="rg6-kj-CtB" secondAttribute="bottom" constant="20" id="SPW-ol-nb3"/>
                                                         <constraint firstItem="hzb-dd-IvF" firstAttribute="leading" secondItem="MTT-f0-f64" secondAttribute="trailing" constant="27" id="UIf-mG-md2"/>
+                                                        <constraint firstAttribute="trailing" secondItem="rg6-kj-CtB" secondAttribute="trailing" constant="284" id="UUN-2P-nSr"/>
                                                         <constraint firstItem="A0j-eP-InI" firstAttribute="top" secondItem="q3h-l2-KVx" secondAttribute="bottom" constant="5" id="XjE-iI-HKX"/>
                                                         <constraint firstItem="hzb-dd-IvF" firstAttribute="top" secondItem="MTT-f0-f64" secondAttribute="top" id="hLS-Bd-4MW"/>
                                                         <constraint firstItem="A0j-eP-InI" firstAttribute="leading" secondItem="q3h-l2-KVx" secondAttribute="leading" id="ljn-BQ-mqE"/>
@@ -4166,7 +4188,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btnAddMoreProduct" destination="LMq-hP-A4b" id="FMG-Qg-9Xk"/>
                                             <outlet property="deliveryFee" destination="3u6-37-XIZ" id="ibm-p1-7am"/>
+                                            <outlet property="deliveryFeeview" destination="fhS-MR-qCs" id="2DR-gV-Kzb"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellPlaceOrder" rowHeight="128" id="ZAX-XO-6cf" customClass="AddressListTableViewCell" customModule="_HRGroceryCustomerApp" customModuleProvider="target">
