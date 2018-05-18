@@ -30,6 +30,7 @@ class GroceryDetailView: UIViewController {
     var descriptionstr :String!
     var imagestr :String!
     var productid :String!
+    var varientid :String!
 
     let listdropDown = DropDown()
     
@@ -106,8 +107,9 @@ class GroceryDetailView: UIViewController {
         
         listdropDown.selectionAction = { [weak self] (index, item) in
             
+            self!.varientid = String(format: "\(index)")
+            print(self!.varientid)
             self!.varientlbl.text = item
-            
         }
     }
     
@@ -118,19 +120,32 @@ class GroceryDetailView: UIViewController {
     
     @objc func cart(sender: UIButton)
     {
-        if UIDevice.current.userInterfaceIdiom == .phone
+        if useruid != ""
         {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            self.navigationController?.pushViewController(nextViewController, animated: true)
+            if UIDevice.current.userInterfaceIdiom == .phone
+            {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
         }
         else
         {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            self.navigationController?.pushViewController(nextViewController, animated: true)
+            if UIDevice.current.userInterfaceIdiom == .phone
+            {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
+            else
+            {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "ipad", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            }
         }
     }
     
@@ -162,5 +177,27 @@ class GroceryDetailView: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-
+    @IBAction func cartAction(_ sender: Any)
+    {
+        if useruid != ""
+        {
+            var timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(tosterView), userInfo: nil, repeats: false)
+            let addcart = AddCart()
+            print(productid)
+            addcart.strProductId = productid
+            addcart.strTimeStamp = NSTimeIntervalSince1970
+            addcart.strVarients = [self.varientid: "1" as AnyObject]
+            FireAuthModel().addCarts(productForSaleID: productid!, valueAddCart: addcart)
+        }
+        else
+        {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
+    }
+    
+    @objc func tosterView() {
+        
+    }
 }

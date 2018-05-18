@@ -221,7 +221,7 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
     }
     @objc func addToCart(sender: UIButton) {
-         var timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(tosterView), userInfo: nil, repeats: false)
+        var timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(tosterView), userInfo: nil, repeats: false)
         let productCart = Productarray[sender.tag]
         let addcart = AddCart()
         print(productCart.ProductId)

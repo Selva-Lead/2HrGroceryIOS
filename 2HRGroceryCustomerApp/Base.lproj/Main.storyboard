@@ -2029,6 +2029,9 @@
                                         <state key="normal" title="ADD TO CART">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="cartAction:" destination="eBX-ux-nVp" eventType="touchUpInside" id="LcI-hg-OY8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
