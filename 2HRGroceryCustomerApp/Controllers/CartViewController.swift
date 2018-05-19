@@ -68,6 +68,10 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
         })
     }
     @IBAction func Checkout(_ sender: UIButton) {
+        var strValues = [String : AnyObject]()
+        strValues["status"] = "checkout" as AnyObject
+        FireAuthModel().setOrderStatus(status: strValues)
+        strCheckout = "checkout"
         for addcartSingle in fullCartList {
             FireAuthModel().addCarts(productForSaleID: addcartSingle.strProductId!, valueAddCart: addcartSingle)
         }

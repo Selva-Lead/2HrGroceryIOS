@@ -31,6 +31,9 @@ var savedCards : [String:saveCard] = [String:saveCard]()
 var savedCardsKey : [String] = [String]()
 var totalCheckOutPrice: Float = 0
 var selectedDateandTime: String?
+var strCheckout: String?
+var selectedCard: Int = 0
+var strCompleted : String?
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

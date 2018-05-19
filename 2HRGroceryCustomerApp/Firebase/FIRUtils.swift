@@ -19,6 +19,7 @@ class FIRUtils: NSObject {
         static let storeSettingdeliveryFee = "/storeSetting/2HRGroceryLLC/deliveryFee/0/"
         static let address = "/address/"
         static let availabitity = "/Availability/regularHours"
+        static let orderStatus = "order"
         
     }
     
@@ -29,8 +30,7 @@ class FIRUtils: NSObject {
         return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.savedCards)
     }
     class func addCartDBRef(productId :String) -> DatabaseReference {
-    return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.cart).child(FBPath.product).child(productId
-        )
+    return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.cart).child(FBPath.product).child(productId)
     }
     class func getCartsDBRef() -> DatabaseReference {
         return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.cart).child(FBPath.product)
@@ -46,5 +46,14 @@ class FIRUtils: NSObject {
     }
     class func getAvailabitityTime() -> DatabaseReference {
         return Database.database().reference().child(FBPath.availabitity)
+    }
+    class func setOrderStatus() -> DatabaseReference {
+        return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.cart).child(FBPath.orderStatus)
+    }
+    class func cartMove() -> DatabaseReference {
+       return Database.database().reference().child(FBPath.customerList).child(useruid).child(FBPath.cart)
+    }
+    class func pendingCartPath () -> DatabaseReference {
+        return Database.database().reference().child(FBPath.customerList).child(useruid).child("pendingCart")
     }
 }

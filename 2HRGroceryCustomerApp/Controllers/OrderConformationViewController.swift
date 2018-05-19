@@ -42,6 +42,14 @@ class OrderConformationViewController: UIViewController {
     }
     */
     @objc func placeOrder() {
+        strCheckout = nil
+        strCompleted = "completed"
+        var strValues = [String : AnyObject]()
+        strValues["token"] = (savedCardsKey[selectedCard]) as AnyObject
+        strValues["total"] = totalCheckOutPrice as AnyObject
+        strValues["time"] = NSTimeIntervalSince1970 as AnyObject
+         FireAuthModel().setOrderStatus(status: strValues)
+        FireAuthModel().cartMoveToBendingCart()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ThankyouViewController") as! ThankyouViewController

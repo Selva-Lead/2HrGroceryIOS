@@ -29,7 +29,7 @@ class ThankyouViewController: UIViewController {
     
 
     @IBAction func continueShipping(_ sender: Any) {
-        
+        strCompleted = nil
         for controller in self.navigationController!.viewControllers as Array
         {
             if controller.isKind(of: UserHomeViewController.self)

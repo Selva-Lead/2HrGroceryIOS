@@ -23,26 +23,7 @@ class DeliveryDateTimeViewController: UIViewController {
         }
     }
         
-    func getWeekday(weekday:Int) -> String {
-        switch weekday {
-        case 0:
-            return "Sunday"
-        case 1:
-            return "Monday"
-        case 2:
-            return "Tuesday"
-        case 3:
-            return "Wednesday"
-        case 4:
-            return "Thursday"
-        case 5:
-            return "Friday"
-        case 6:
-            return "Saturday"
-        default:
-            return ""
-        }
-    }
+   
      @ IBOutlet weak var deliTopView: UIView!
     @IBOutlet weak var tblView: UITableView!
     
@@ -53,6 +34,7 @@ class DeliveryDateTimeViewController: UIViewController {
     
     override func viewDidLoad() {
        // UIImage.init(cgImage: #imageLiteral(resourceName: "uncheck.png") as! CGImage)
+        super.viewDidLoad()
         imgChange = #imageLiteral(resourceName: "uncheck.png")
         let nib = UINib(nibName: "View", bundle: nil)
         self.tblView.register(nib, forHeaderFooterViewReuseIdentifier: "PaymentHeader")
@@ -68,7 +50,7 @@ class DeliveryDateTimeViewController: UIViewController {
             strmothdayArr.append(singleMonthDay)
             print(newDate)
         }
-        super.viewDidLoad()
+        
         deliTopView.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
         deliTopView.layer.borderWidth = 0.5
         deliTopView.layer.shadowColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
@@ -77,7 +59,7 @@ class DeliveryDateTimeViewController: UIViewController {
         deliTopView.layer.shadowRadius = 10.0
         
         let weekday = Calendar.current.component(.weekday, from: Date())
-        var intWeakday: Int = weekday
+        var intWeakday: Int = weekday - 1
         var intcount = 0
         for availabilityTime in availabilityTimes {
             let vv = availabilityTime as! [String:AnyObject]
@@ -108,7 +90,26 @@ class DeliveryDateTimeViewController: UIViewController {
             intcount = intcount + 1
         }
     }
-
+    func getWeekday(weekday:Int) -> String {
+        switch weekday {
+        case 0:
+            return "Sunday"
+        case 1:
+            return "Monday"
+        case 2:
+            return "Tuesday"
+        case 3:
+            return "Wednesday"
+        case 4:
+            return "Thursday"
+        case 5:
+            return "Friday"
+        case 6:
+            return "Saturday"
+        default:
+            return ""
+        }
+    }
     
     func getCurrentDate()-> Date {
         let nowcu = Date()

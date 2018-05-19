@@ -180,4 +180,28 @@ class FireAuthModel: NSObject {
         })
        
     }
+    
+    func setOrderStatus(status: [String:AnyObject]) {
+        FIRUtils.setOrderStatus().updateChildValues(status)
+    }
+    
+    func cartMoveToBendingCart() {
+        // self.ref.child("users").child(user1).child(nodeA).child(nodeToBeMoved).observe(.value, with: {
+       
+            FIRUtils.cartMove().observe(.value, with: {(snapshot) in
+                let value = snapshot.value as? [String: AnyObject]
+                if let actualvalue = value {
+                     if strCompleted != nil {
+                    // self.ref.child(users).child(user1).child(nodeA).child(nodeToBeMoved).removeValue()
+                    FIRUtils.cartMove().removeValue()
+                    FIRUtils.pendingCartPath().child("product").setValue(actualvalue["product"] as! [String : AnyObject])
+                    FIRUtils.pendingCartPath().child("order").setValue(actualvalue["order"] as! [String : AnyObject])
+                    //self.ref.child(users).child(user2).child(nodeB).child(nodeToBeMoved).child(date).setValue(actualvalue["date"] as Any)
+                    
+                }
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        }
 }
