@@ -34,6 +34,7 @@ var selectedDateandTime: String?
 var strCheckout: String?
 var selectedCard: Int = 0
 var strCompleted : String?
+var strDeliveryDetails: [String:AnyObject] = [String:AnyObject]()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

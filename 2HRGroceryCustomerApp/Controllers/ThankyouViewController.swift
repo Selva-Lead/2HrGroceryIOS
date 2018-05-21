@@ -12,7 +12,7 @@ class ThankyouViewController: UIViewController {
  @IBOutlet weak var topView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        self.navigationItem.setHidesBackButton(true, animated:true);
         topView.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
         topView.layer.borderWidth = 0.5
         topView.layer.shadowColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor

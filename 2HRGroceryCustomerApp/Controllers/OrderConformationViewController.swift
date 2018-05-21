@@ -43,12 +43,36 @@ class OrderConformationViewController: UIViewController {
     */
     @objc func placeOrder() {
         strCheckout = nil
-        strCompleted = "completed"
+        print(selectedDateandTime)
+        let sepratedString = selectedDateandTime?.split(separator: .init(" ") )
+      //  let sepratedString = selectedDateandTime?.split(separator: "-") //(in: .alphanumerics)
+        var strtimes = [String:AnyObject]()
+        strtimes["startTime"] = "2018-05-25 12:00" as AnyObject//sepratedString?[3] as AnyObject
+        strtimes["endTime"] = "2018-05-25 14:00" as AnyObject//sepratedString?[5] as AnyObject
+        strCompleted = "complete"
+       // var customaddress = [str]()
+        //customaddres = customAddressList[0]
+        
+        strDeliveryDetails["address"] = customAddressList[0].toJSON() as AnyObject
+        strDeliveryDetails["deliveryTime"] = strtimes as AnyObject
+        strDeliveryDetails["deliveryType"] = "Delivery" as AnyObject
         var strValues = [String : AnyObject]()
         strValues["token"] = (savedCardsKey[selectedCard]) as AnyObject
         strValues["total"] = totalCheckOutPrice as AnyObject
-        strValues["time"] = NSTimeIntervalSince1970 as AnyObject
+        let date = Date() // Get Todays Date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let stringDate: String = dateFormatter.string(from: date as Date)
+        print(stringDate)
+        strValues["time"] = stringDate as AnyObject//"2018-05-21T10:13:26-04:00" as AnyObject// NSTimeIntervalSince1970 as AnyObject
+        strValues["status"] = "complete" as AnyObject
+        strValues["newCard"] = "true" as AnyObject
+        strValues["saveForLater"] = "false" as AnyObject
+        
+        
+        
          FireAuthModel().setOrderStatus(status: strValues)
+        FireAuthModel().setDeliveryDetails(status: strDeliveryDetails)
         FireAuthModel().cartMoveToBendingCart()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
@@ -126,7 +150,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         celldetail.lbladdrDetail.text = customAddressList[0].strFullAddress
         return celldetail
     }else if indexPath.section == 2 {
-        //cellPaymentDate.
+        cellPaymentDate.txtPaymentDate.text = selectedDateandTime
         //cellPaymentDate.vewDateAndTime.layer.borderWidth = 1.0
         //cellPaymentDate.vewDateAndTime.layer.borderColor = UIColor(red:0.95, green:0.95, blue:0.96, alpha:1.0).cgColor
         return cellPaymentDate
