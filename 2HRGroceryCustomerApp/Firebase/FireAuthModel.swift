@@ -116,26 +116,62 @@ class FireAuthModel: NSObject {
 //                
 //            }
 //        })
-        FIRUtils.getCartsDBRef().observe(.childAdded, with: { (snapshot) -> Void in
-            let provar = snapshot.childSnapshot(forPath: "variants").value
-                if let singleCart = Mapper<AddCart>().map(JSONObject: snapshot.value) {
-                    if  let provarArr = provar as? NSArray {
-                        for (key, value) in provarArr.enumerated() {
-                            print("\(key) and \(value)")
-                            singleCart.strVarients = ["\(key)":"\(value )" as AnyObject]
+        FIRUtils.getCartsDBRef().observeSingleEvent(of: .value, with: { (snapshot) -> Void in //)(.value, with: { (snapshot) -> Void in
+            if  let values = snapshot.value as? [String:AnyObject] {
+            let sr =  values
+                print(sr)
+               
+                for (key,ele) in sr.enumerated() {
+
+                     let singleAddCart = AddCart()
+                    let ee = ele.value as! Dictionary<String, AnyObject> as Dictionary
+                    for (kys,els) in ee.enumerated() {
+                        print(els.key)
+                        if els.key == "id" {
+                            singleAddCart.strProductId = els.value as? String
                         }
-                    } else if let provarDic = provar as? [String:AnyObject] {
-                        singleCart.strVarients = provarDic
+                        if els.key == "timeStamp" {
+                            singleAddCart.strTimeStamp = els.value as? Double
+                        }
+                        if els.key == "variants" {
+                            if  let provarArr = els.value as? NSArray {
+                                for (key, value) in provarArr.enumerated() {
+                                    print("\(key) and \(value)")
+                                    singleAddCart.strVarients = ["\(key)":value  as AnyObject]
+                                }
+                            } else if let provarDic = els.value as? [String:AnyObject] {
+                                singleAddCart.strVarients = provarDic
+                            }
+                            fullCartList.append(singleAddCart)
+                           // singleAddCart.strVarients = els.value as! [String : AnyObject]
+                        }
                     }
-                   // var vartemp : [String: AnyObject] = [String:AnyObject]()
-                   
-                    print(singleCart)
-                    fullCartList.append(singleCart)
-                    print(fullCartList)
-                    complition()
-                }else {
-                    complition()
+                    
                 }
+                print(fullCartList.count)
+                complition()
+            }
+//
+//             let provar = snapshot.childSnapshot(forPath: "variants").value
+//            if let singleCart = Mapper<AddCart>().map(JSONObject: snapshot.value as! [String:AnyObject]) {
+//                print(singleCart)
+////                    if  let provarArr = provar as? NSArray {
+////                        for (key, value) in provarArr.enumerated() {
+////                            print("\(key) and \(value)")
+////                            singleCart.strVarients = ["\(key)":"\(value )" as AnyObject]
+////                        }
+////                    } else if let provarDic = provar as? [String:AnyObject] {
+////                        singleCart.strVarients = provarDic
+////                    }
+////                   // var vartemp : [String: AnyObject] = [String:AnyObject]()
+////
+////                    print(singleCart)
+////                    fullCartList.append(singleCart)
+////                    print(fullCartList)
+////                    complition()
+//                }else {
+//                    complition()
+//                }
         })
     }
 

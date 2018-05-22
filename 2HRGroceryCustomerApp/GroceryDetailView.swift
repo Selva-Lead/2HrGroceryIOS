@@ -185,8 +185,9 @@ class GroceryDetailView: UIViewController {
             let addcart = AddCart()
             print(productid)
             addcart.strProductId = productid
-            addcart.strTimeStamp = NSTimeIntervalSince1970
-            addcart.strVarients = [self.varientid: "1" as AnyObject]
+            addcart.strTimeStamp = round((Date().timeIntervalSince1970) * 1000)//NSTimeIntervalSince1970
+            // DOTO addcart.strVarients = [self.varientid: "1" as AnyObject]
+             addcart.strVarients = ["0": 1 as AnyObject]
             FireAuthModel().addCarts(productForSaleID: productid!, valueAddCart: addcart)
         }
         else

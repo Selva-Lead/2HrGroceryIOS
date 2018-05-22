@@ -66,8 +66,8 @@ class OrderConformationViewController: UIViewController {
         print(stringDate)
         strValues["time"] = stringDate as AnyObject//"2018-05-21T10:13:26-04:00" as AnyObject// NSTimeIntervalSince1970 as AnyObject
         strValues["status"] = "complete" as AnyObject
-        strValues["newCard"] = "true" as AnyObject
-        strValues["saveForLater"] = "false" as AnyObject
+        strValues["newCard"] = true as AnyObject
+        strValues["saveForLater"] = false as AnyObject
         
         
         
@@ -163,7 +163,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         let varients = singleAddCart.strVarients
         let product = productForCart[singleAddCart.strProductId!]
         let singleVarientsKey = Int((varients.first?.key)!)
-        let SingleVarientValue = varients.first?.value as! String
+        let SingleVarientValue = varients.first?.value as! Int
         
         var productVarient = ProductVarient()
         productVarient = (product?.strProductVarients[singleVarientsKey!])!
@@ -188,8 +188,8 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         cellProductItem.ProCount.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
         cellProductItem.ProCount.layer.borderWidth = 1
         cellProductItem.ProCount.layer.cornerRadius = 4
-        cellProductItem.ProCount.text = SingleVarientValue
-        let perProductTotalPrice = productVarient.strRegularPrice! * Float(SingleVarientValue)!
+        cellProductItem.ProCount.text = String(SingleVarientValue)
+        let perProductTotalPrice = productVarient.strRegularPrice! * Float(SingleVarientValue)
         cellProductItem.ProPrice .text = String(productVarient.strRegularPrice!)
         cellProductItem.ProTotalPrice.text = String(perProductTotalPrice)
 

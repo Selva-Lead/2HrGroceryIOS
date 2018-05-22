@@ -234,8 +234,8 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
             let addcart = AddCart()
             print(productCart.ProductId)
             addcart.strProductId = productCart.ProductId
-            addcart.strTimeStamp = NSTimeIntervalSince1970
-            addcart.strVarients = ["0": "1" as AnyObject]
+            addcart.strTimeStamp = round((Date().timeIntervalSince1970) * 1000)//NSTimeIntervalSince1970
+            addcart.strVarients = ["0": 1 as AnyObject]
             FireAuthModel().addCarts(productForSaleID: productCart.ProductId!, valueAddCart: addcart)
         }else {
             if UIDevice.current.userInterfaceIdiom == .phone

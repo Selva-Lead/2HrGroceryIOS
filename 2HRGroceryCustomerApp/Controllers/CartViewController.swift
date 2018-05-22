@@ -84,9 +84,9 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
         selecetedIndex = sender.tag
         let selectedProduct = fullCartList[selecetedIndex]
          let product = productForCart[selectedProduct.strProductId!]
-        let varientValue = selectedProduct.strVarients["\(selectedVarientKey!)"] as! String
+        let varientValue = selectedProduct.strVarients["\(selectedVarientKey!)"] as! Int
         selectedProduct.strVarients.removeValue(forKey: "\(selectedVarientKey)")
-        selectedProduct.strVarients["\(selectedVarientKey!)"] = String(Int(varientValue)! + 1) as AnyObject
+        selectedProduct.strVarients["\(selectedVarientKey!)"] = varientValue + 1 as AnyObject
         //       let indexpath = IndexPath(row: selecetedIndex, section: 0)
         //        cartTableView.reloadRows(at: [indexpath], with: .none)
      cartTableView.reloadData()
@@ -95,11 +95,12 @@ class CartViewController: UIViewController, UIScrollViewDelegate {
        dicSelectedProductTolPrice.removeAll()
         selecetedIndex = sender.tag
         let selectedProduct = fullCartList[selecetedIndex]
-         let varientValue = selectedProduct.strVarients["\(selectedVarientKey!)"] as! String
+         let varientValue = selectedProduct.strVarients["\(selectedVarientKey!)"] as! Int
         selectedProduct.strVarients.removeValue(forKey: "\(selectedVarientKey)")
         
-        if Int(varientValue)! >= 1 {
-            let strChangeValue = String(Int(varientValue)! - 1)
+        if Int(varientValue) >= 1 {
+
+            let strChangeValue = varientValue - 1
             selectedProduct.strVarients["\(selectedVarientKey!)"] = strChangeValue as AnyObject
             if Int(strChangeValue) == 0 {
                 fullCartList.remove(at: selecetedIndex)
@@ -158,7 +159,7 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
                     let varients = singleAddCart.strVarients
                     let product = productForCart[singleAddCart.strProductId!]
                     let singleVarientsKey = Int((varients.first?.key)!)
-                    let SingleVarientValue = varients.first?.value as! String
+                    let SingleVarientValue = varients.first?.value as! Int
                     
                     var productVarient = ProductVarient()
                     productVarient = (product?.strProductVarients[singleVarientsKey!])!
@@ -183,8 +184,8 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
                     cell.lblProductQntyCount.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
                     cell.lblProductQntyCount.layer.borderWidth = 1
                     cell.lblProductQntyCount.layer.cornerRadius = 4
-                    cell.lblProductQntyCount.text = SingleVarientValue
-                    let perProductTotalPrice = productVarient.strRegularPrice! * Float(SingleVarientValue)!
+                    cell.lblProductQntyCount.text = String(SingleVarientValue)
+                    let perProductTotalPrice = productVarient.strRegularPrice! * Float(SingleVarientValue)
                     dicSelectedProductTolPrice[indexPath.row] = perProductTotalPrice
                     cell.lblPrice.text = String(perProductTotalPrice)
                     cell.btnVarientIncrease.tag = indexPath.row
