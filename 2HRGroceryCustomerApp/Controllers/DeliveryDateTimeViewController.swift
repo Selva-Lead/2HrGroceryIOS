@@ -29,8 +29,10 @@ class DeliveryDateTimeViewController: UIViewController {
     
     var strmothdayArr : [String] = [String]()
     var dateAndTimeArray : [String] = [String]()
+    var dateAndTimeWithYear : [String] = [String]()
     var imgChange : UIImage!
     var imgChangeTag: Int?
+    var arrlistWithYear: [Date] = [Date]()
     
     override func viewDidLoad() {
        // UIImage.init(cgImage: #imageLiteral(resourceName: "uncheck.png") as! CGImage)
@@ -48,6 +50,7 @@ class DeliveryDateTimeViewController: UIViewController {
             let month = Calendar.current.component(.month, from: newDate!)
             let singleMonthDay = "\(month)/ \(day)"
             strmothdayArr.append(singleMonthDay)
+            arrlistWithYear.append(newDate!)
             print(newDate)
         }
         
@@ -73,10 +76,14 @@ class DeliveryDateTimeViewController: UIViewController {
                             // print("\(key) and \(value)")
                             let weeday = getWeekday(weekday: intWeakday)
                             let str = "-"
-                            let startDate = String(va["startHour"] as! Int)
-                            let endDate = String(va["endHour"] as! Int)
-                            let strfull = "\(strmothdayArr[intcount]) \(weeday) \(startDate) \(str) \(endDate)"
+                            let startDate = va["startHour"] as! Int
+                            let strStartDteinNormalTime =  normalTimeArr[startDate]
+                            let endDate = va["endHour"] as! Int
+                            let strEndDteNormalTime = normalTimeArr[endDate]
+                            let strfull = "\(strmothdayArr[intcount]) \(weeday) \(strStartDteinNormalTime) \(str) \(strEndDteNormalTime)"
+                            let strYearfull = "\(arrlistWithYear[intcount]) \(weeday) \(startDate) \(str) \(endDate)"
                             dateAndTimeArray.append(strfull)
+                            dateAndTimeWithYear.append(strYearfull)
                             print("\(strmothdayArr[intcount]) \(weeday) \(startDate) \(str) \(endDate)")
                         }
                     }
@@ -116,7 +123,7 @@ class DeliveryDateTimeViewController: UIViewController {
         let dateFormattercurr = DateFormatter()
         dateFormattercurr.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let nameOfMonth = dateFormattercurr.string(from: nowcu)
-        let isoDate = nameOfMonth//"2018-05-25T10:44:00+0000"
+        let isoDate = nameOfMonth//"2018-12-29T10:44:00+0000"
         
         
         
@@ -134,7 +141,7 @@ class DeliveryDateTimeViewController: UIViewController {
         
         let calendar = Calendar.current
         
-        //nowComponents.year = Calendar.current.component(.year, from: now!)
+        nowComponents.year = Calendar.current.component(.year, from: now!)
         
         nowComponents.month = Calendar.current.component(.month, from: now!)
         
@@ -166,6 +173,7 @@ class DeliveryDateTimeViewController: UIViewController {
             imgChange = #imageLiteral(resourceName: "check.png")
             //UserDefaults.standard.set(dateAndTimeArray[sender.tag], forKey: "DeliveryDateAndTime")
             selectedDateandTime = dateAndTimeArray[sender.tag]
+            seleDateWithYear = dateAndTimeWithYear[sender.tag]
         }else {
             imgChange = #imageLiteral(resourceName: "uncheck.png")
         }
@@ -178,8 +186,23 @@ class DeliveryDateTimeViewController: UIViewController {
             
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentDetailsViewController") as! PaymentDetailsViewController
             self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else {
+            toasterView()
         }
       
+    }
+    @objc func toasterView() {
+        let message = "select delivery date and time."
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.view.frame.size = CGSize(width: 250, height: 100)
+        alert.view.tintColor = UIColor.white
+        self.present(alert, animated: true)
+        
+        // duration in seconds
+        let duration: Double = 0.2
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+            alert.dismiss(animated: true)
+        }
     }
     /*
     // MARK: - Navigation

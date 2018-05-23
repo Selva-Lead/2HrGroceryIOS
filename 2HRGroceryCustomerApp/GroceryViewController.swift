@@ -217,12 +217,23 @@ class GroceryViewController: UIViewController,UITableViewDelegate,UITableViewDat
     {
         self.navigationController?.popViewController(animated: true)
     }
-    @objc func tosterView() {
+    @objc func toasterView() {
+        let message = "product added to cart  "
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        alert.view.frame.size = CGSize(width: 250, height: 100)
+        alert.view.tintColor = UIColor.black
+        alert.view.tintAdjustmentMode = .normal
+        self.present(alert, animated: false)
         
+        // duration in seconds
+        let duration: Double = 0.3
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+            alert.dismiss(animated: false)
+        }
     }
     @objc func addToCart(sender: UIButton) {
         if useruid != "" {
-            var timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(tosterView), userInfo: nil, repeats: false)
+            toasterView()
             
             if strCheckout == nil {
                 var strValues = [String : AnyObject]()

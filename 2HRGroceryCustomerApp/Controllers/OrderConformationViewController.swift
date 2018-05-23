@@ -43,19 +43,26 @@ class OrderConformationViewController: UIViewController {
     */
     @objc func placeOrder() {
         strCheckout = nil
-        print(selectedDateandTime)
-        let sepratedString = selectedDateandTime?.split(separator: .init(" ") )
+        print(seleDateWithYear)
+        let sepratedString = seleDateWithYear?.split(separator: .init(" ") )
+        let strDate = sepratedString![0].appending(" ")
+        let strStartTime = sepratedString![4].appending(":00")
+        let strEndTime = sepratedString![6].appending(":00")
       //  let sepratedString = selectedDateandTime?.split(separator: "-") //(in: .alphanumerics)
         var strtimes = [String:AnyObject]()
-        strtimes["startTime"] = "2018-05-25 12:00" as AnyObject//sepratedString?[3] as AnyObject
-        strtimes["endTime"] = "2018-05-25 14:00" as AnyObject//sepratedString?[5] as AnyObject
+        strtimes["startTime"] = strDate.appending(" ").appending(strStartTime) as AnyObject//"2018-05-25 12:00" as AnyObject
+        strtimes["endTime"] = strDate.appending(" ").appending(strEndTime) as AnyObject//"2018-05-25 14:00" as AnyObject
         strCompleted = "complete"
        // var customaddress = [str]()
         //customaddres = customAddressList[0]
         
         strDeliveryDetails["address"] = customAddressList[0].toJSON() as AnyObject
         strDeliveryDetails["deliveryTime"] = strtimes as AnyObject
-        strDeliveryDetails["deliveryType"] = "Delivery" as AnyObject
+        if deliveryOption == 1 {
+            strDeliveryDetails["deliveryType"] = "Delivery" as AnyObject
+        }else {
+            strDeliveryDetails["deliveryType"] = "Pickup" as AnyObject
+        }
         var strValues = [String : AnyObject]()
         strValues["token"] = (savedCardsKey[selectedCard]) as AnyObject
         strValues["total"] = totalCheckOutPrice as AnyObject
