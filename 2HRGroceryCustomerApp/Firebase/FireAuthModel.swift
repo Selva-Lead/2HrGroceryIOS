@@ -223,29 +223,38 @@ class FireAuthModel: NSObject {
     func setDeliveryDetails(status: [String:AnyObject]) {
         FIRUtils.cartMove().child("deliveryDetails").setValue(strDeliveryDetails)
     }
+    
     func cartMoveToBendingCart() {
         // self.ref.child("users").child(user1).child(nodeA).child(nodeToBeMoved).observe(.value, with: {
-       
-            FIRUtils.cartMove().observe(.value, with: {snapshot in
-                let value = snapshot.value as? [String: AnyObject]
-                if let actualvalue = value {
-                    if strCompleted != nil {
-                        // self.ref.child(users).child(user1).child(nodeA).child(nodeToBeMoved).removeValue()
-                
+        
+        FIRUtils.cartMove().observe(.value, with: {snapshot in
+            let value = snapshot.value as? [String: AnyObject]
+            if let actualvalue = value {
+                if strCompleted != nil {
+                    // self.ref.child(users).child(user1).child(nodeA).child(nodeToBeMoved).removeValue()
+                    
                     FIRUtils.pendingCartPath().setValue(actualvalue ) { (error, ref) in
                         
                         FIRUtils.cartMove().setValue(nil)
                     }//setValue(actualvalue as! [String:AnyObject])
                     
-//                        FIRUtils.pendingCartPath().child("product").setValue(actualvalue["product"] as! [String : AnyObject])
-//                        FIRUtils.pendingCartPath().child("order").setValue(actualvalue["order"] as! [String : AnyObject])
-//                    FIRUtils.pendingCartPath().child("deliveryDetails").setValue(actualvalue["deliveryDetails"] as! [String : AnyObject])
-                        //self.ref.child(users).child(user2).child(nodeB).child(nodeToBeMoved).child(date).setValue(actualvalue["date"] as Any)
-                        
-                    }
+                    //                        FIRUtils.pendingCartPath().child("product").setValue(actualvalue["product"] as! [String : AnyObject])
+                    //                        FIRUtils.pendingCartPath().child("order").setValue(actualvalue["order"] as! [String : AnyObject])
+                    //                    FIRUtils.pendingCartPath().child("deliveryDetails").setValue(actualvalue["deliveryDetails"] as! [String : AnyObject])
+                    //self.ref.child(users).child(user2).child(nodeB).child(nodeToBeMoved).child(date).setValue(actualvalue["date"] as Any)
+                    
                 }
-            }) { (error) in
-                print(error.localizedDescription)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
         }
-        }
+    }
+    
+    func storeSetting() {
+        FIRUtils.getStoreSettingDBRef().observeSingleEvent(of: .value, with: {(snapshot) in
+            if let value = snapshot.value as? [String:AnyObject] {
+                storeSettingarr = value
+            }
+        })
+    }
 }

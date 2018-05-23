@@ -8,6 +8,27 @@
 
 import UIKit
 
+func getWeekday(weekday:Int) -> String {
+    switch weekday {
+    case 0:
+        return "Sunday"
+    case 1:
+        return "Monday"
+    case 2:
+        return "Tuesday"
+    case 3:
+        return "Wednesday"
+    case 4:
+        return "Thursday"
+    case 5:
+        return "Friday"
+    case 6:
+        return "Saturday"
+    default:
+        return ""
+    }
+}
+
 class DeliveryDateTimeViewController: UIViewController {
 
 
@@ -22,7 +43,7 @@ class DeliveryDateTimeViewController: UIViewController {
             static let identifier = "cellDateAndTime"
         }
     }
-        
+    
    
      @ IBOutlet weak var deliTopView: UIView!
     @IBOutlet weak var tblView: UITableView!
@@ -38,8 +59,20 @@ class DeliveryDateTimeViewController: UIViewController {
        // UIImage.init(cgImage: #imageLiteral(resourceName: "uncheck.png") as! CGImage)
         super.viewDidLoad()
         imgChange = #imageLiteral(resourceName: "uncheck.png")
+        deliTopView.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
+        deliTopView.layer.borderWidth = 0.5
+        deliTopView.layer.shadowColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
+        deliTopView.layer.shadowOffset = CGSize(width: 1, height: 2.0)
+        deliTopView.layer.shadowOpacity = 1.0
+        deliTopView.layer.shadowRadius = 10.0
         let nib = UINib(nibName: "View", bundle: nil)
         self.tblView.register(nib, forHeaderFooterViewReuseIdentifier: "PaymentHeader")
+        if deliveryOption == 1 {
+          deliveryToDelivery()
+        }
+    }
+    
+    func deliveryToDelivery() {
         var calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier(rawValue: NSGregorianCalendar))
         let dateComponent = NSDateComponents()
         let currentDate = getCurrentDate()
@@ -54,12 +87,7 @@ class DeliveryDateTimeViewController: UIViewController {
             print(newDate)
         }
         
-        deliTopView.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
-        deliTopView.layer.borderWidth = 0.5
-        deliTopView.layer.shadowColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
-        deliTopView.layer.shadowOffset = CGSize(width: 1, height: 2.0)
-        deliTopView.layer.shadowOpacity = 1.0
-        deliTopView.layer.shadowRadius = 10.0
+        
         
         let weekday = Calendar.current.component(.weekday, from: Date())
         var intWeakday: Int = weekday - 1
@@ -95,26 +123,6 @@ class DeliveryDateTimeViewController: UIViewController {
                 intWeakday += 1
             }
             intcount = intcount + 1
-        }
-    }
-    func getWeekday(weekday:Int) -> String {
-        switch weekday {
-        case 0:
-            return "Sunday"
-        case 1:
-            return "Monday"
-        case 2:
-            return "Tuesday"
-        case 3:
-            return "Wednesday"
-        case 4:
-            return "Thursday"
-        case 5:
-            return "Friday"
-        case 6:
-            return "Saturday"
-        default:
-            return ""
         }
     }
     
@@ -160,6 +168,8 @@ class DeliveryDateTimeViewController: UIViewController {
         return now as! Date
         
     }
+    
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -225,7 +235,11 @@ extension DeliveryDateTimeViewController: UITableViewDelegate, UITableViewDataSo
             cell.btnChange.isHidden = true
             cell.lblTitle.text = "CUSTOMER NAME"
         }else if section == 1 {
-            cell.btnChange.isHidden = false
+            if deliveryOption == 1 {
+                cell.btnChange.isHidden = false
+            }else {
+                cell.btnChange.isHidden = true
+            }
             cell.btnChange.addTarget(self, action: #selector(addressChange(sender:)), for: .touchUpInside)
             cell.lblTitle.text = "DELIVERY ADDRESS"
         }else {

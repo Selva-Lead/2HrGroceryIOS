@@ -68,6 +68,11 @@ class DeliveryOptionsViewController: UIViewController {
     
     @IBAction func storePickup(_ sender: Any) {
         deliveryOption = 2
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentDetailsViewController") as! PaymentDetailsViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
     }
     /*
     // MARK: - Navigation

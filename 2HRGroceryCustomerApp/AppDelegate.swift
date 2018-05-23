@@ -37,6 +37,8 @@ var strCompleted : String?
 var strDeliveryDetails: [String:AnyObject] = [String:AnyObject]()
 var deliveryOption: Int?
 var seleDateWithYear: String?
+var storeSettingarr:[String:AnyObject] = [String:AnyObject]()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

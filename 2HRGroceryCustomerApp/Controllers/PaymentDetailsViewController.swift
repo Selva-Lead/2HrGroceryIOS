@@ -14,7 +14,8 @@ class PaymentDetailsViewController: UIViewController {
 
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var payTopView: UIView!
-    
+    var pickupAddress :String?
+    var strfull :String?
     override func viewDidLoad() {
         super.viewDidLoad()
        // let nib = UINib(nibName: "PaymentHeader", bundle: Bundle.main)
@@ -28,8 +29,39 @@ class PaymentDetailsViewController: UIViewController {
         payTopView.layer.shadowOpacity = 1.0
         payTopView.layer.shadowRadius = 10.0
         // Do any additional setup after loading the view.
+        if deliveryOption == 2 {
+            pickupAddressAndTime()
+        }
     }
-
+    func pickupAddressAndTime() {
+        let pickAddress: [String:AnyObject] = storeSettingarr["storePickupAddress"] as! [String:AnyObject]
+        print(pickAddress)
+        let state = pickAddress["state"] as! String
+        let city = pickAddress["city"] as! String
+        let addressLine1 = pickAddress["addressLine1"] as! String
+        let zipCode = pickAddress["zipcode"] as! Int
+        let add1 = addressLine1.appending("\n").appending(city)
+        let add2 = add1.appending("\n").appending(state)
+        pickupAddress = add2.appending("\n").appending(String(zipCode))
+        let pickuptime :[String:AnyObject] = storeSettingarr["storeTime"] as! [String:AnyObject]
+        let PickstartTime = pickuptime["openTime"] as! String
+        let pStart = PickstartTime.split(separator: ":")
+        let pstartVa = Int(pStart[0])
+        let PickStartDteinNormalTime =  normalTimeArr[pstartVa!]
+        let PickEndTime = pickuptime["closingTime"] as! String
+        let pEnd = PickEndTime.split(separator: ":")
+        let pEndVa = Int(pEnd[0])
+        let PickEndDteinNormalTime =  normalTimeArr[pEndVa!]
+        let now = Date()
+        //nowComponents.year = Calendar.current.component(.year, from: now!)
+        let month = Calendar.current.component(.month, from: now)
+        let day = Calendar.current.component(.day, from: now)
+        let iweekday = Calendar.current.component(.weekday, from: now)
+        let Weekday = getWeekday(weekday: iweekday)
+        let str = "-"
+        strfull = "\(month)/\(day) \(Weekday) \(PickStartDteinNormalTime) \(str) \(PickEndDteinNormalTime)"
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -137,12 +169,22 @@ extension PaymentDetailsViewController: UITableViewDelegate,UITableViewDataSourc
             cell.btnChange.isHidden = true
             cell.lblTitle.text = "CUSTOMER NAME"
         }else if section == 1 {
-            cell.btnChange.isHidden = false
+            if deliveryOption == 1 {
+                cell.btnChange.isHidden = false
+            }else {
+                cell.btnChange.isHidden = true
+            }
+           // cell.btnChange.isHidden = false
             cell.btnChange.tag = section
             cell.lblTitle.text = "DELIVERY ADDRESS"
             cell.btnChange.addTarget(self, action: #selector(addressChange(sender:)), for: .touchUpInside)
         }else if section == 2 {
-            cell.btnChange.isHidden = false
+            if deliveryOption == 1 {
+                cell.btnChange.isHidden = false
+            }else {
+                cell.btnChange.isHidden = true
+            }
+            //cell.btnChange.isHidden = false
             cell.btnChange.tag = section
             cell.btnChange.addTarget(self, action: #selector(dataAndTimeChange(sender:)), for:.touchUpInside)
              cell.lblTitle.text = "DELIVERY DATE& TIME"
@@ -172,11 +214,19 @@ extension PaymentDetailsViewController: UITableViewDelegate,UITableViewDataSourc
         }else if indexPath.section == 1 {
             celldetail.lbladdrDetail.layer.borderColor = UIColor(red:0.112, green:0.112, blue:0.112, alpha:0.21).cgColor
             celldetail.lbladdrDetail.layer.borderWidth = 1.0
-            celldetail.lbladdrDetail.text = customAddressList[0].strFullAddress
+            if deliveryOption == 1 {
+                celldetail.lbladdrDetail.text = customAddressList[0].strFullAddress
+            }else {
+               celldetail.lbladdrDetail.text = pickupAddress
+            }
             return celldetail
         }else if indexPath.section == 2 {
             let selectedDate = selectedDateandTime //UserDefaults.standard.object(forKey: "DeliveryDateAndTime") as! String
-            cellPaymentDateAndTime.txtPaymentDate.text = selectedDate
+            if deliveryOption == 1 {
+                cellPaymentDateAndTime.txtPaymentDate.text = selectedDate
+            }else {
+                cellPaymentDateAndTime.txtPaymentDate.text = strfull
+            }
             return cellPaymentDateAndTime
         }else if indexPath.section == 3 {
             cellPayment.btnCreditcard.addTarget(self, action: #selector(PaymentCreditCard(_:)), for: .touchUpInside)

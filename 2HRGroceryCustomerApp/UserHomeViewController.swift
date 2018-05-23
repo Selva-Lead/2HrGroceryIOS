@@ -58,6 +58,7 @@ class UserHomeViewController: UIViewController,UICollectionViewDataSource,UIColl
             FireAuthModel().getAvaialbility()
             FireAuthModel().getAddressList()
             FireAuthModel().getCards()
+            FireAuthModel().storeSetting()
         }
         
         appDelegate = UIApplication.shared.delegate as! AppDelegate

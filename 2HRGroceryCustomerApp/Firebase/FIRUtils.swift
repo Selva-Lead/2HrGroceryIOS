@@ -20,6 +20,7 @@ class FIRUtils: NSObject {
         static let address = "/address/"
         static let availabitity = "/Availability/regularHours"
         static let orderStatus = "order"
+        static let storeSetting = "/storeSetting/2HRGroceryLLC/"
         
     }
     
@@ -55,5 +56,8 @@ class FIRUtils: NSObject {
     }
     class func pendingCartPath () -> DatabaseReference {
         return Database.database().reference().child(FBPath.customerList).child(useruid).child("pendingCart")
+    }
+    class func getStoreSettingDBRef() -> DatabaseReference {
+        return Database.database().reference().child(FBPath.storeSetting)
     }
 }
