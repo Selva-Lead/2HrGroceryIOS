@@ -42,18 +42,23 @@ class OrderConformationViewController: UIViewController {
     }
     */
     @objc func placeOrder() {
+        if deliveryOption == 1 {
+            
+        }
+    }
+    func deliveryPlaceOrder() {
         strCheckout = nil
         print(seleDateWithYear)
         let sepratedString = seleDateWithYear?.split(separator: .init(" ") )
         let strDate = sepratedString![0].appending(" ")
         let strStartTime = sepratedString![4].appending(":00")
         let strEndTime = sepratedString![6].appending(":00")
-      //  let sepratedString = selectedDateandTime?.split(separator: "-") //(in: .alphanumerics)
+        //  let sepratedString = selectedDateandTime?.split(separator: "-") //(in: .alphanumerics)
         var strtimes = [String:AnyObject]()
         strtimes["startTime"] = strDate.appending(" ").appending(strStartTime) as AnyObject//"2018-05-25 12:00" as AnyObject
         strtimes["endTime"] = strDate.appending(" ").appending(strEndTime) as AnyObject//"2018-05-25 14:00" as AnyObject
         strCompleted = "complete"
-       // var customaddress = [str]()
+        // var customaddress = [str]()
         //customaddres = customAddressList[0]
         
         strDeliveryDetails["address"] = customAddressList[0].toJSON() as AnyObject
@@ -78,7 +83,7 @@ class OrderConformationViewController: UIViewController {
         
         
         
-         FireAuthModel().setOrderStatus(status: strValues)
+        FireAuthModel().setOrderStatus(status: strValues)
         FireAuthModel().setDeliveryDetails(status: strDeliveryDetails)
         FireAuthModel().cartMoveToBendingCart()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
