@@ -1804,15 +1804,21 @@
                                             <constraint firstAttribute="height" constant="30" id="k7j-s9-wpa"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K5Q-Be-VaP">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VpA-8D-tkf">
                                         <rect key="frame" x="0.0" y="145" width="375" height="522"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LnU-Vp-GoE">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
                                         <connections>
-                                            <outlet property="dataSource" destination="oyd-uU-ZmB" id="s2g-L2-fM3"/>
-                                            <outlet property="delegate" destination="oyd-uU-ZmB" id="a9C-CE-ctw"/>
+                                            <outlet property="dataSource" destination="oyd-uU-ZmB" id="Ibh-6P-LNu"/>
+                                            <outlet property="delegate" destination="oyd-uU-ZmB" id="eas-fu-9p6"/>
                                         </connections>
-                                    </tableView>
+                                    </collectionView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Fpi-R2-2Vd" secondAttribute="trailing" id="54W-Ju-KTk"/>
@@ -1820,16 +1826,16 @@
                                     <constraint firstItem="Fpi-R2-2Vd" firstAttribute="top" secondItem="b0S-MH-00n" secondAttribute="bottom" constant="5" id="AR9-QU-wWa"/>
                                     <constraint firstItem="c34-su-Mek" firstAttribute="leading" secondItem="1QG-Zz-KP1" secondAttribute="leading" id="JFO-AL-HEt"/>
                                     <constraint firstAttribute="bottom" secondItem="Fpi-R2-2Vd" secondAttribute="bottom" constant="522" id="KH1-6A-LOu"/>
-                                    <constraint firstAttribute="trailing" secondItem="K5Q-Be-VaP" secondAttribute="trailing" id="MEg-lo-tfd"/>
                                     <constraint firstAttribute="trailing" secondItem="c34-su-Mek" secondAttribute="trailing" id="NOi-zx-grd"/>
                                     <constraint firstItem="c34-su-Mek" firstAttribute="top" secondItem="1QG-Zz-KP1" secondAttribute="top" id="Qa1-nt-fkA"/>
-                                    <constraint firstItem="K5Q-Be-VaP" firstAttribute="leading" secondItem="1QG-Zz-KP1" secondAttribute="leading" id="SCV-FO-Fk3"/>
+                                    <constraint firstAttribute="bottom" secondItem="VpA-8D-tkf" secondAttribute="bottom" id="QiH-e2-YJT"/>
+                                    <constraint firstItem="VpA-8D-tkf" firstAttribute="top" secondItem="Fpi-R2-2Vd" secondAttribute="bottom" id="UfO-ce-xdE"/>
+                                    <constraint firstItem="VpA-8D-tkf" firstAttribute="leading" secondItem="1QG-Zz-KP1" secondAttribute="leading" id="Y22-U5-ktS"/>
                                     <constraint firstItem="Fpi-R2-2Vd" firstAttribute="top" secondItem="b0S-MH-00n" secondAttribute="bottom" constant="5" id="Z4h-mx-P0o"/>
+                                    <constraint firstAttribute="trailing" secondItem="VpA-8D-tkf" secondAttribute="trailing" id="bx0-nS-9fv"/>
                                     <constraint firstAttribute="trailing" secondItem="b0S-MH-00n" secondAttribute="trailing" constant="20" id="dKn-uA-Zjt"/>
                                     <constraint firstItem="b0S-MH-00n" firstAttribute="leading" secondItem="1QG-Zz-KP1" secondAttribute="leading" constant="20" id="eCd-Nq-q9I"/>
                                     <constraint firstItem="b0S-MH-00n" firstAttribute="top" secondItem="c34-su-Mek" secondAttribute="bottom" constant="10" id="nrB-Ge-KMN"/>
-                                    <constraint firstItem="K5Q-Be-VaP" firstAttribute="top" secondItem="Fpi-R2-2Vd" secondAttribute="bottom" id="nyV-Q5-9Ie"/>
-                                    <constraint firstAttribute="bottom" secondItem="K5Q-Be-VaP" secondAttribute="bottom" id="oOB-Ht-lFi"/>
                                     <constraint firstItem="b0S-MH-00n" firstAttribute="top" secondItem="c34-su-Mek" secondAttribute="bottom" constant="10" id="pu6-DU-tfp"/>
                                     <constraint firstItem="Fpi-R2-2Vd" firstAttribute="leading" secondItem="1QG-Zz-KP1" secondAttribute="leading" id="xE4-Ny-C5V"/>
                                 </constraints>
@@ -1846,15 +1852,15 @@
                     </view>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="grocerylist" destination="VpA-8D-tkf" id="Rsg-At-gyp"/>
                         <outlet property="searchTF" destination="sB5-8u-5f7" id="3EX-Wi-Nmq"/>
                         <outlet property="searchview" destination="b0S-MH-00n" id="pO0-aA-3vU"/>
-                        <outlet property="table" destination="K5Q-Be-VaP" id="0b1-oq-ftu"/>
                         <outlet property="titleview" destination="c34-su-Mek" id="eeF-40-PFd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQG-SP-2du" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5463" y="-1281"/>
+            <point key="canvasLocation" x="-5463.1999999999998" y="-1281.4092953523239"/>
         </scene>
         <!--Grocery Detail View-->
         <scene sceneID="3z8-qe-hDc">

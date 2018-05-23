@@ -31,6 +31,8 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var DataProductsArray = [RecentOrders]()
     var RecentVarientArray : [String] = []
     var RecentitemsDropDown = NSMutableArray()
+    var selectedint: Int!
+    var selecteditemvalue: String!
     
     let varientdropDown = DropDown()
     
@@ -166,7 +168,6 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
                     print("Popularitems count \(self.AvailableProductsArray.count)")
                     
                 }
-                
                 self.collectionview2.reloadData()
             }
         })
@@ -205,7 +206,6 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
                     
                 }
             }
-            
             self.collectionview3.reloadData()
             
         })
@@ -375,7 +375,20 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
             cell.bgview.layer.shadowOpacity = 1.0
             cell.bgview.layer.masksToBounds = false;
             
-           // cell.varientButton.addTarget(self, action: #selector(Availablevareintaction(sender:)), for: .touchUpInside)
+            let filterarr = (self.AvailProductsDropDown.object(at: indexPath.item) as! NSArray)
+            print(filterarr)
+            cell.varientlbl.text = String(format:"%@.  $%d",((filterarr.object(at: 0) as! NSDictionary).value(forKey: "unit") as! String),((filterarr.object(at: 0) as! NSDictionary).value(forKey: "regularPrice") as! Int))
+            cell.varientlbl.tag = indexPath.item
+            
+            print(selectedint)
+            if selectedint != nil
+            {
+                if cell.varientlbl.tag == selectedint
+                {
+                    cell.varientlbl.text = selecteditemvalue
+                }
+            }
+            cell.varientButton.addTarget(self, action: #selector(Availablevareintaction(sender:)), for: .touchUpInside)
             
             return cell
         }
@@ -402,7 +415,21 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
             cell.bgview.layer.shadowOpacity = 1.0
             cell.bgview.layer.masksToBounds = false;
             
-           // cell.varientButton.addTarget(self, action: #selector(Popularvareintaction(sender:)), for: .touchUpInside)
+            let filterarr = (self.PopularitemsDropDown.object(at: indexPath.item) as! NSArray)
+            print(filterarr)
+            cell.varientlbl.text = String(format:"%@.  $%d",((filterarr.object(at: 0) as! NSDictionary).value(forKey: "unit") as! String),((filterarr.object(at: 0) as! NSDictionary).value(forKey: "regularPrice") as! Int))
+            cell.varientlbl.tag = indexPath.item
+            
+            print(selectedint)
+            if selectedint != nil
+            {
+                if cell.varientlbl.tag == selectedint
+                {
+                    cell.varientlbl.text = selecteditemvalue
+                }
+            }
+            
+            cell.varientButton.addTarget(self, action: #selector(Popularvareintaction(sender:)), for: .touchUpInside)
             
             return cell
         }
@@ -410,19 +437,23 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     @objc func Popularvareintaction(sender: UIButton) {
         
+        self.collectionview3.reloadData()
+        
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
         let buttonPosition:CGPoint = sender.convert(.zero, to:self.collectionview3)
         let indexPath = self.collectionview3.indexPathForItem(at: buttonPosition)
         
         let cell : HomeViewCell = self.collectionview3.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as! IndexPath) as! HomeViewCell
         
-        // varientdropDown.anchorView = cell.varientButton
-        //  varientdropDown.bottomOffset = CGPoint(x: cell.frame.width-cell.dropview.frame.width, y: self.collectionview1.frame.height-cell.dropview.frame.width)
+        selectedint = indexPath!.item
         
-        varientdropDown.anchorView = cell.varientButton
-        varientdropDown.width = 120
-        varientdropDown.direction = .any
-        varientdropDown.bottomOffset = CGPoint(x: cell.frame.origin.x-90, y: buttonPosition.y)
-        
+        varientdropDown.anchorView = cell.dropview
+        varientdropDown.width = 130
+        varientdropDown.direction = .top
+        varientdropDown.bottomOffset = CGPoint(x: buttonPosition.x, y: (screenHeight-buttonPosition.y))
         
         let filterrecentvarientarr = (self.PopularitemsDropDown.object(at: indexPath!.item) as! NSArray)
         print(filterrecentvarientarr)
@@ -444,25 +475,35 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
         varientdropDown.show()
         self.collectionview3.reloadData()
         
-        varientdropDown.selectionAction = { [weak self] (index, item) in
-            cell.varientButton.setTitle(item, for: .normal)
+        varientdropDown.selectionAction = { [weak self] (index, selecteditem) in
+            
+            cell.varientlbl.text = selecteditem
+            self!.selecteditemvalue = selecteditem
+           // NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:0];
+            let indexpath1 = IndexPath(row: indexPath!.item, section: 0)
+            self!.collectionview3.reloadItems(at: [indexpath1])//reloadItems(at: [indexPath!])
         }
     }
     
     @objc func Availablevareintaction(sender: UIButton) {
+        
+        self.collectionview2.reloadData()
+        
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
         
         let buttonPosition:CGPoint = sender.convert(.zero, to:self.collectionview2)
         let indexPath = self.collectionview2.indexPathForItem(at: buttonPosition)
         
         let cell : HomeViewCell = self.collectionview2.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as! IndexPath) as! HomeViewCell
         
-        // varientdropDown.anchorView = cell.varientButton
-        //  varientdropDown.bottomOffset = CGPoint(x: cell.frame.width-cell.dropview.frame.width, y: self.collectionview1.frame.height-cell.dropview.frame.width)
+        selectedint = indexPath!.item
         
-        varientdropDown.anchorView = cell.varientButton
-        varientdropDown.width = 120
+        varientdropDown.anchorView = cell.dropview
+        varientdropDown.width = 130
         varientdropDown.direction = .any
-        varientdropDown.bottomOffset = CGPoint(x: cell.frame.origin.x-90, y: buttonPosition.y)
+        varientdropDown.bottomOffset = CGPoint(x: buttonPosition.x, y: (screenHeight-buttonPosition.y))
         
         
         let filterrecentvarientarr = (self.AvailProductsDropDown.object(at: indexPath!.item) as! NSArray)
@@ -477,7 +518,6 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
             let dropdownstr = String(format:"%@.  $%d",((filterrecentvarientarr.object(at: varientindex) as! NSDictionary).value(forKey: "unit") as! String),((filterrecentvarientarr.object(at: varientindex) as! NSDictionary).value(forKey: "regularPrice") as! Int))
             print(dropdownstr)
             self.RecentVarientArray.append(dropdownstr)
-            
         }
         
         varientdropDown.dataSource = self.RecentVarientArray
@@ -485,10 +525,16 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
         varientdropDown.show()
         self.collectionview2.reloadData()
         
-        varientdropDown.selectionAction = { [weak self] (index, item) in
-            cell.varientButton.setTitle(item, for: .normal)
+        varientdropDown.selectionAction = { [weak self] (index, selecteditem) in
+            
+            cell.varientlbl.text = selecteditem
+            self!.selecteditemvalue = selecteditem
+            // NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:0];
+            let indexpath1 = IndexPath(row: indexPath!.item, section: 0)
+            self!.collectionview2.reloadItems(at: [indexpath1])//reloadItems(at: [indexPath!])
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         if collectionView == self.collectionview2
