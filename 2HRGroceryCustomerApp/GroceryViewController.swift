@@ -36,6 +36,8 @@ class GroceryViewController: UIViewController,UICollectionViewDataSource,UIColle
     
     var ProductVarientArray : [String] = []
     
+    let progressHUD = ProgressHUD(text: "Loading...")
+    
     let productdropDown = DropDown()
     
     lazy var dropDowns: [DropDown] = {
@@ -110,6 +112,28 @@ class GroceryViewController: UIViewController,UICollectionViewDataSource,UIColle
         
         grocerylist.backgroundColor = UIColor.clear
         
+        if currentReachabilityStatus != .notReachable
+        {
+            DispatchQueue.global(qos: .userInitiated).async
+            {
+                DispatchQueue.main.async
+                {
+                    self.view.addSubview(self.progressHUD)
+                    self.groceries()
+                    self.view.isUserInteractionEnabled=false
+                }
+            }
+        }
+        else
+        {
+            let alert = UIAlertController(title: "Alert", message: "No Internet Connection.Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func groceries()
+    {
         Products = Database.database().reference().child("productsForSale")
         
         Products.observe(DataEventType.value, with: { (snapshot) in
@@ -129,16 +153,21 @@ class GroceryViewController: UIViewController,UICollectionViewDataSource,UIColle
                     let Productimage = Productallimages.value(forKey: "128") as! String
                     
                     let varientarr = ProductObject?.value(forKey: "productVariant") as! NSArray
-
-                   let productsar = GroceryVarients(ProductId: ProductId as? String, ProductDesc: ProductDesc as? String, ProductName: ProductName as? String, Productbrand: Productbrand as? String, Productimage: Productimage as? String, ProductVarient: varientarr as NSArray)
+                    
+                    let productsar = GroceryVarients(ProductId: ProductId as? String, ProductDesc: ProductDesc as? String, ProductName: ProductName as? String, Productbrand: Productbrand as? String, Productimage: Productimage as? String, ProductVarient: varientarr as NSArray)
                     self.Productarray.append(productsar)
                     
                 }
+                //self.grocerylist.reloadData()
+            }
+            self.progressHUD.hide()
+            self.view.isUserInteractionEnabled = true
+            DispatchQueue.main.async {
                 self.grocerylist.reloadData()
             }
         })
     }
-
+    
     @objc func handleSingleTap(_ sender: UITapGestureRecognizer)
     {
         searchTF.resignFirstResponder()

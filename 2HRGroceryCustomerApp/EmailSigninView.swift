@@ -18,6 +18,8 @@ class EmailSigninView: UIViewController {
     @IBOutlet weak var topview: UIView!
     var UserDetails: DatabaseReference!
 
+    let progressHUD = ProgressHUD(text: "Loading...")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -123,78 +125,85 @@ class EmailSigninView: UIViewController {
         }
         else
         {
-            Auth.auth().signIn(withEmail: self.usernameTF.text!, password: self.passwordTF.text!) { (user, error) in
-                
-                if error == nil
+            if currentReachabilityStatus != .notReachable
+            {
+                DispatchQueue.global(qos: .userInitiated).async
                 {
-                    //Print into the console if successfully logged in
-                    print("You have successfully logged in")
-                    print(user?.uid as Any)
-                    useruid = user!.uid
+                    DispatchQueue.main.async
+                    {
+                        self.view.addSubview(self.progressHUD)
+                        self.signin()
+                        self.view.isUserInteractionEnabled=false
+                    }
+                }
+            }
+            else
+            {
+                let alert = UIAlertController(title: "Alert", message: "No Internet Connection.Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+        }
+    }
+    
+    func signin()
+    {
+        Auth.auth().signIn(withEmail: self.usernameTF.text!, password: self.passwordTF.text!) { (user, error) in
+            
+            if error == nil
+            {
+                //Print into the console if successfully logged in
+                print("You have successfully logged in")
+                print(user?.uid as Any)
+                useruid = user!.uid
+                
+                self.UserDetails = Database.database().reference().child("Customer-List").child(useruid)
+                
+                self.UserDetails.observe(.value, with: { snapshot in
                     
-                    self.UserDetails = Database.database().reference().child("Customer-List").child(useruid)
-                    
-                    self.UserDetails.observe(.value, with: { snapshot in
+                    for item in snapshot.children.allObjects as! [DataSnapshot]
+                    {
+                        print(item)
+                        let dict = snapshot.value as! NSDictionary
                         
-                        for item in snapshot.children.allObjects as! [DataSnapshot]
-                        {
-                            print(item)
-                            let dict = snapshot.value as! NSDictionary
-                            
-                            print(dict.value(forKey: "email") as! String)
-                            
-                            UserEmailID = dict.value(forKey: "email") as! String
-                            UserFirstName = dict.value(forKey: "firstName") as! String
-                            UserLastName = dict.value(forKey: "lastName") as! String
-                            UserMobileNumber = dict.value(forKey: "phone") as! String
-                            
-                            let userdefault = UserDefaults.standard
-                            userdefault.set(UserFirstName, forKey: "firstName")
-                            userdefault.set(UserLastName, forKey: "lastName")
-                            userdefault.set(UserEmailID, forKey: "email")
-                            userdefault.set(UserMobileNumber, forKey: "phone")
-                            userdefault.set(useruid, forKey: "uid")
-                            userdefault.synchronize()
-                            
-                        }
-                    })
-                    
-                    /* let userdefault = UserDefaults.standard
-                     userdefault.set(self.usernameTF.text!, forKey: "firstName")
-                     userdefault.set(self.LastnameTF.text!, forKey: "lastName")
-                     userdefault.set(self.EmailTF.text!, forKey: "email")
-                     userdefault.set(useruid, forKey: "uid")
-                     userdefault.synchronize() */
+                        print(dict.value(forKey: "email") as! String)
+                        
+                        UserEmailID = dict.value(forKey: "email") as! String
+                        UserFirstName = dict.value(forKey: "firstName") as! String
+                        UserLastName = dict.value(forKey: "lastName") as! String
+                        UserMobileNumber = dict.value(forKey: "phone") as! String
+                        
+                        let userdefault = UserDefaults.standard
+                        userdefault.set(UserFirstName, forKey: "firstName")
+                        userdefault.set(UserLastName, forKey: "lastName")
+                        userdefault.set(UserEmailID, forKey: "email")
+                        userdefault.set(UserMobileNumber, forKey: "phone")
+                        userdefault.set(useruid, forKey: "uid")
+                        userdefault.synchronize()
+                        
+                    }
+                })
+                
+                self.progressHUD.hide()
+                self.view.isUserInteractionEnabled = true
+                DispatchQueue.main.async {
                     
                     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                     
                     let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeWithSignin") as! UserHomeViewController
                     
                     self.navigationController?.pushViewController(nextViewController, animated: true)
-                    
-                    /* for controller in self.navigationController!.viewControllers as Array
-                     {
-                     if controller.isKind(of: UserHomeViewController.self)
-                     {
-                     self.navigationController!.popToViewController(controller, animated: true)
-                     break
-                     }
-                     else
-                     {
-                     self.navigationController?.popToRootViewController(animated: true)
-                     }
-                     } */
-                    
                 }
-                else
-                {
-                    let alertController = UIAlertController(title: "Alert", message: error?.localizedDescription, preferredStyle: .alert)
-                    
-                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
-                }
+            }
+            else
+            {
+                let alertController = UIAlertController(title: "Alert", message: error?.localizedDescription, preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }

@@ -39,6 +39,8 @@ class UserHomeViewController: UIViewController,UICollectionViewDataSource,UIColl
     
     let varientdropDown = DropDown()
     
+    let progressHUD = ProgressHUD(text: "Loading...")
+    
     lazy var dropDowns: [DropDown] = {
         return [
             self.varientdropDown
@@ -143,10 +145,26 @@ class UserHomeViewController: UIViewController,UICollectionViewDataSource,UIColl
         self.usercollectionview2.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         self.usercollectionview3.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        self.productforsale()
-        self.popularitems()
-        self.resentorders()
-
+        if currentReachabilityStatus != .notReachable
+        {
+            DispatchQueue.global(qos: .userInitiated).async
+            {
+                DispatchQueue.main.async
+                {
+                    self.view.addSubview(self.progressHUD)
+                    self.productforsale()
+                    self.popularitems()
+                    self.resentorders()
+                    self.view.isUserInteractionEnabled=false
+                }
+            }
+        }
+        else
+        {
+            let alert = UIAlertController(title: "Alert", message: "No Internet Connection.Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -185,7 +203,11 @@ class UserHomeViewController: UIViewController,UICollectionViewDataSource,UIColl
                     self.AvailProductsDropDown.add(productdropdownarr)
                     print("Popularitems count \(self.AvailableProductsArray.count)")
                 }
-                
+            }
+            
+            self.progressHUD.hide()
+            self.view.isUserInteractionEnabled = true
+            DispatchQueue.main.async {
                 self.usercollectionview2.reloadData()
             }
         })
@@ -224,8 +246,11 @@ class UserHomeViewController: UIViewController,UICollectionViewDataSource,UIColl
                 }
             }
             
-            self.usercollectionview3.reloadData()
-            
+            self.progressHUD.hide()
+            self.view.isUserInteractionEnabled = true
+            DispatchQueue.main.async {
+                self.usercollectionview3.reloadData()
+            }
         })
     }
     
@@ -316,7 +341,11 @@ class UserHomeViewController: UIViewController,UICollectionViewDataSource,UIColl
                      self.RecentVarientArray.append(dropdownstr)
                      
                      } */
-                    self.usercollectionview1.reloadData()
+                    self.progressHUD.hide()
+                    self.view.isUserInteractionEnabled = true
+                    DispatchQueue.main.async {
+                        self.usercollectionview1.reloadData()
+                    }
                 })
             }
         }

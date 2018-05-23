@@ -34,6 +34,8 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var selectedint: Int!
     var selecteditemvalue: String!
     
+    let progressHUD = ProgressHUD(text: "Loading...")
+    
     let varientdropDown = DropDown()
     
     lazy var dropDowns: [DropDown] = {
@@ -130,9 +132,25 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
         self.collectionview2.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         self.collectionview3.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        self.productforsale()
-        self.popularitems()
-       
+        if currentReachabilityStatus != .notReachable
+        {
+            DispatchQueue.global(qos: .userInitiated).async
+            {
+                DispatchQueue.main.async
+                {
+                    self.view.addSubview(self.progressHUD)
+                    self.productforsale()
+                    self.popularitems()
+                    self.view.isUserInteractionEnabled=false
+                }
+            }
+        }
+        else
+        {
+            let alert = UIAlertController(title: "Alert", message: "No Internet Connection.Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func productforsale()
@@ -168,7 +186,11 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
                     print("Popularitems count \(self.AvailableProductsArray.count)")
                     
                 }
-                self.collectionview2.reloadData()
+                self.progressHUD.hide()
+                self.view.isUserInteractionEnabled = true
+                DispatchQueue.main.async {
+                    self.collectionview2.reloadData()
+                }
             }
         })
     }
@@ -206,8 +228,11 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
                     
                 }
             }
-            self.collectionview3.reloadData()
-            
+            self.progressHUD.hide()
+            self.view.isUserInteractionEnabled = true
+            DispatchQueue.main.async {
+                self.collectionview3.reloadData()
+            }
         })
     }
     
