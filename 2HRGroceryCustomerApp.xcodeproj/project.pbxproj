@@ -646,7 +646,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-2HRGroceryCustomerApp/Pods-2HRGroceryCustomerApp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-2HRGroceryCustomerApp/Pods-2HRGroceryCustomerApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
@@ -679,7 +679,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-2HRGroceryCustomerApp/Pods-2HRGroceryCustomerApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-2HRGroceryCustomerApp/Pods-2HRGroceryCustomerApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AF4BD8FC85724D8D860B4C41 /* [CP] Check Pods Manifest.lock */ = {

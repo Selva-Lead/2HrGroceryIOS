@@ -402,7 +402,7 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
             
             let filterarr = (self.AvailProductsDropDown.object(at: indexPath.item) as! NSArray)
             print(filterarr)
-            cell.varientlbl.text = String(format:"%@.  $%d",((filterarr.object(at: 0) as! NSDictionary).value(forKey: "unit") as! String),((filterarr.object(at: 0) as! NSDictionary).value(forKey: "regularPrice") as! Int))
+        //    cell.varientlbl.text = String(format:"%@.  $%d",((filterarr.object(at: 0) as! NSDictionary).value(forKey: "unit") as! String),((filterarr.object(at: 0) as! NSDictionary).value(forKey: "regularPrice") as! Int))
             cell.varientlbl.tag = indexPath.item
             
             print(selectedint)
@@ -442,7 +442,7 @@ class HomeViewController: UIViewController,UICollectionViewDataSource,UICollecti
             
             let filterarr = (self.PopularitemsDropDown.object(at: indexPath.item) as! NSArray)
             print(filterarr)
-            cell.varientlbl.text = String(format:"%@.  $%d",((filterarr.object(at: 0) as! NSDictionary).value(forKey: "unit") as! String),((filterarr.object(at: 0) as! NSDictionary).value(forKey: "regularPrice") as! Int))
+         //   cell.varientlbl.text = String(format:"%@.  $%d",((filterarr.object(at: 0) as! NSDictionary).value(forKey: "unit") as! String),((filterarr.object(at: 0) as! NSDictionary).value(forKey: "regularPrice") as! Int))
             cell.varientlbl.tag = indexPath.item
             
             print(selectedint)

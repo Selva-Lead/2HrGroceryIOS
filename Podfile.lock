@@ -76,7 +76,7 @@ DEPENDENCIES:
   - Stripe
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - Bolts
     - DropDown
@@ -120,4 +120,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1b4dd451eacd731e4f9b8d98edd8cbe708a685cc
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.6.0.beta.2
